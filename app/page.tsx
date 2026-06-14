@@ -10,7 +10,7 @@ export default function Home() {
       <Nav />
       <section className="relative flex min-h-screen items-center px-6 pt-24">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.78)_45%,rgba(15,15,15,.38)_100%)]" />
-        <div className="absolute inset-0 -z-10 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1800')] bg-cover bg-center opacity-30" />
+        <div className="absolute inset-0 -z-10 bg-[url('/star-and-shield-png.svg')] bg-cover bg-center opacity-30" />
         <div className="relative mx-auto max-w-7xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[.4em] text-gold">Pi Kappa Phi · Arizona State</p>
           <h1 className="max-w-4xl text-6xl font-black tracking-tight md:text-8xl">Rush Pi Kapp</h1>
