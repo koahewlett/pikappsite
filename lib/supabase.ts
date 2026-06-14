@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://example.supabase.co';
-const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'demo-key';
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://kjkrjsslaonxfvxzxjac.supabase.co';
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_IU2GQjW2kumQWWDJbkVceA_iXU18dKR';
 
 if (typeof window !== 'undefined') {
 	// Warn in the browser console if env vars look like defaults.
