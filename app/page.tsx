@@ -2,7 +2,6 @@ import { Nav } from '@/components/Nav';
 import { ApplicationForm } from '@/components/ApplicationForm';
 import { Countdown } from '@/components/Countdown';
 import { RoseDivider } from '@/components/RoseDivider';
-import { SupabaseConnectionTest } from '@/components/SupabaseConnectionTest';
 import { stats, why, gallery, faqs } from '@/lib/data';
 
 export default function Home() {
@@ -45,10 +44,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="px-6 py-16">
-        <SupabaseConnectionTest />
       </section>
 
       <section className="px-6 py-16">

@@ -20,35 +20,39 @@ export function ApplicationForm() {
 	async function submit() {
 		setStatus('Submitting...');
 
-		// Insert into rush_applications (primary expected table)
 		const { error } = await supabase.from('rush_applications').insert([{ ...form, status: 'new' }]);
 		if (error) {
 			setStatus(error.message);
 			return;
 		}
 
-		// Also attempt to create a lightweight `users` record so signups are available
-		// in a users table if one exists. This is non-fatal: if the table doesn't
-		// exist or insertion is restricted, ignore the error so the application still succeeds.
+		// Persist the same submission in the new signups table as a secondary write.
+		// This is non-fatal so the main application flow remains intact.
 		try {
-			const signupPayload: Record<string, string> = {};
-			if (form.email) signupPayload.email = form.email;
-			if (form.first_name) signupPayload.first_name = form.first_name;
-			if (form.last_name) signupPayload.last_name = form.last_name;
-			if (form.phone) signupPayload.phone = form.phone;
-			if (form.major) signupPayload.major = form.major;
-			if (form.graduation_year) signupPayload.graduation_year = form.graduation_year;
-			if (form.hometown) signupPayload.hometown = form.hometown;
-			if (form.sports) signupPayload.sports = form.sports;
-			if (form.clubs) signupPayload.clubs = form.clubs;
-			if (form.leadership_positions) signupPayload.leadership_positions = form.leadership_positions;
-			if (form.instagram) signupPayload.instagram = form.instagram;
-			if (form.linkedin) signupPayload.linkedin = form.linkedin;
+			const signupFields = [
+				'first_name',
+				'last_name',
+				'phone',
+				'email',
+				'major',
+				'graduation_year',
+				'hometown',
+				'sports',
+				'clubs',
+				'leadership_positions',
+				'instagram',
+				'linkedin'
+			];
+			const signupPayload = signupFields.reduce<Record<string, string>>((acc, key) => {
+				if (form[key]) acc[key] = form[key];
+				return acc;
+			}, {});
+
 			if (Object.keys(signupPayload).length > 0) {
 				await supabase.from('signups').insert([signupPayload]);
 			}
-		} catch (e) {
-			// ignore: insertion might fail due to missing table or RLS; primary insert already succeeded
+		} catch {
+			// Ignore failures to write the secondary signups record.
 		}
 
 		setStatus('Application submitted. Our rush team will reach out soon.');
