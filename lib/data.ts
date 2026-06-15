@@ -45,12 +45,10 @@ export const events = [
 
 export const gallery = [
   'Rush',
-  'Brotherhood',
-  'Formal',
   'Tailgates',
-  'Philanthropy',
-  'Intramurals',
   'Tempe Nights',
+  'Brotherhood',
+  'Philanthropy',
   'Chapter Life'
 ];
 
@@ -60,11 +58,11 @@ export const faqs = [
     'Rush is just the process of meeting the brothers, coming to events, and seeing if Pi Kapp is a good fit for you.'
   ],
   [
-    'What kind of guys are you looking for?',
+    'What kind of guys are we looking for?',
     'Guys who are social, driven, respectful, and willing to contribute. You do not need to know anyone already — you just need to be someone the chapter would want around.'
   ],
   [
-    'Do I have to be a certain “type” of guy?',
+    'Do I need to fit a certain mold?',
     'No. Our chapter has athletes, business guys, engineers, gym rats, DJs, bookworms, and everything in between. The main thing is whether you fit with the brotherhood.'
   ],
   [
