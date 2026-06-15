@@ -1,6 +1,82 @@
-export const nav = ['Why Pi Kapp','Events','Gallery','Alumni','FAQ'];
-export const stats = [['150+','Active Members'],['3.5+','Average GPA'],['500+','Alumni Network'],['$100,000+','Raised For Philanthropy']];
-export const why = [ ['Brotherhood','Build friendships that last beyond college.'], ['Leadership','Develop real leadership experience.'], ['Networking','Connect with successful alumni nationwide.'], ['Service','Participate in philanthropy and community impact.'] ];
-export const events = ['Rush Events','Brotherhood Events','Philanthropy Events','Intramurals','Social Events'];
-export const gallery = ['Brotherhood','Formal','Tailgates','Philanthropy','Travel','Intramurals','Campus Life','Executive Retreat'];
-export const faqs = [['What is rush?','Rush is the process of meeting brothers, attending events, and deciding whether Pi Kappa Phi is the right fit.'],['Do I need prior experience?','No. We look for character, ambition, social awareness, and willingness to contribute.'],['How much does membership cost?','Dues vary by semester. Submit the rush form and our team can walk you through current costs clearly.'],['What is the time commitment?','Expect weekly chapter activity, brotherhood events, service opportunities, and rush events during recruitment.'],['What makes Pi Kappa Phi different?','A balance of brotherhood, leadership, philanthropy, campus involvement, and alumni connections.']];
+export const nav = [
+  'Why Pi Kapp',
+  'Rush Events',
+  'Brotherhood',
+  'Gallery',
+  'FAQ'
+];
+
+export const stats = [
+  ['ASU', 'Tempe Chapter'],
+  ['150+', 'Brothers On Campus'],
+  ['The Ability Experience', 'Our Philanthropy'],
+  ['$100,000+', 'Raised Through Chapter Efforts']
+];
+
+export const why = [
+  [
+    'Real Brotherhood',
+    'Not just names in a group chat. Pi Kapp is built on the guys you study with, live with, compete with, and show up for.'
+  ],
+  [
+    'Campus Presence',
+    'From rush events to intramurals, philanthropy, tailgates, and nights out in Tempe, our chapter is active year-round.'
+  ],
+  [
+    'The Ability Experience',
+    'Pi Kappa Phi is the only fraternity to create and operate its own national philanthropy, supporting people with disabilities.'
+  ],
+  [
+    'A Chapter You Can Build',
+    'We want guys who bring something to the table — socially, academically, athletically, creatively, or through leadership.'
+  ]
+];
+
+export const events = [
+  'Rush Week',
+  'Brotherhood Nights',
+  'Ability Experience Events',
+  'Intramurals',
+  'Tailgates',
+  'Formals',
+  'Date Parties',
+  'Chapter Retreats'
+];
+
+export const gallery = [
+  'Rush',
+  'Brotherhood',
+  'Formal',
+  'Tailgates',
+  'Philanthropy',
+  'Intramurals',
+  'Tempe Nights',
+  'Chapter Life'
+];
+
+export const faqs = [
+  [
+    'What is rush?',
+    'Rush is how you meet the brothers, come to events, and see if Pi Kapp actually feels like your group. No pressure, no weird formal interview energy — just show up and meet the chapter.'
+  ],
+  [
+    'What kind of guys are you looking for?',
+    'Guys who are social, driven, respectful, and willing to contribute. You do not need to know anyone already — you just need to be someone the chapter would actually want around.'
+  ],
+  [
+    'Do I have to be a certain “type” of guy?',
+    'No. Our chapter has athletes, DJs, business guys, engineers, gym rats, party guys, academic weapons, and everything in between. The main thing is whether you fit with the brotherhood.'
+  ],
+  [
+    'How much does it cost?',
+    'Dues depend on the semester and what is included. If you rush, we will walk you through the current cost clearly before you make any decision.'
+  ],
+  [
+    'What is the time commitment?',
+    'During rush, it is mostly showing up to events and meeting the guys. Once you join, expect chapter, brotherhood events, philanthropy, and whatever else you choose to get involved in.'
+  ],
+  [
+    'What makes Pi Kapp different?',
+    'Pi Kapp has the national tradition — the Star & Lamp, the rose, and The Ability Experience — but the real difference is the chapter culture here at ASU.'
+  ]
+];
