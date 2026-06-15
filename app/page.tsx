@@ -20,7 +20,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.92)_34%,rgba(15,15,15,.62)_58%,rgba(15,15,15,.30)_100%)]" />
 
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="mb-4 text-sm font-bold uppercase tracking-[.4em] text-gold">Pi Kappa Phi · Arizona State</p>
+          <p className="mb-4 text-sm font-bold uppercase tracking-[.4em] text-gold">Pi Kappa Phi · Theta Xi · Arizona State</p>
           <h1 className="max-w-4xl text-6xl font-black tracking-tight md:text-8xl">Rush Pi Kapp</h1>
           <p className="mt-6 max-w-2xl text-xl text-white/70 md:text-2xl">Exceptional leaders. Uncommon opportunities.</p>
           <div className="mt-8 flex flex-wrap gap-4">
