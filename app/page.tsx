@@ -8,10 +8,18 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
       <Nav />
-      <section className="relative flex min-h-screen items-center px-6 pt-24">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.78)_45%,rgba(15,15,15,.38)_100%)]" />
-        <div className="absolute inset-0 -z-10 bg-[url('/star-and-shield-png.svg')] bg-cover bg-center opacity-30" />
-        <div className="relative mx-auto max-w-7xl">
+
+      <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24">
+        {/* Star and shield background */}
+        <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/star-and-shield-png.svg')] bg-[length:90%] bg-no-repeat opacity-70 [background-position:right_-6rem_center] [filter:contrast(1.25)_brightness(1.12)]" />
+
+        {/* Subtle gold glow to make the stars feel intentional */}
+        <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_72%_45%,rgba(212,175,55,.16),transparent_34%)]" />
+
+        {/* Dark overlay for readability */}
+        <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.92)_34%,rgba(15,15,15,.62)_58%,rgba(15,15,15,.30)_100%)]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[.4em] text-gold">Pi Kappa Phi · Arizona State</p>
           <h1 className="max-w-4xl text-6xl font-black tracking-tight md:text-8xl">Rush Pi Kapp</h1>
           <p className="mt-6 max-w-2xl text-xl text-white/70 md:text-2xl">Exceptional leaders. Uncommon opportunities.</p>
