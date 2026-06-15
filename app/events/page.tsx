@@ -1,2 +1,17 @@
-import { Nav } from '@/components/Nav';import { events } from '@/lib/data';
-export default function Events(){return <main className="min-h-screen bg-ink px-6 py-28 rose"><Nav/><section className="mx-auto max-w-7xl"><h1 className="text-5xl font-black">Events</h1><p className="mt-4 text-white/60">RSVP cards for recruitment, brotherhood, service, intramurals, and social life.</p><div className="mt-10 grid gap-5 md:grid-cols-3">{events.map(e=><div className="glass rounded-[2rem] p-6" key={e}><h2 className="text-2xl font-black text-gold">{e}</h2><p className="mt-4 text-white/65">Reserve your spot and meet the chapter.</p><button className="mt-6 rounded-full bg-gold px-5 py-3 font-bold text-ink">RSVP</button></div>)}</div></section></main>}
+import { Nav } from '@/components/Nav';
+import { RsvpSection } from '@/components/RsvpSection';
+
+export default function Events() {
+  return (
+    <main className="min-h-screen bg-ink px-6 py-28 rose">
+      <Nav />
+      <section className="mx-auto max-w-7xl">
+        <div className="mb-10 max-w-3xl">
+          <h1 className="text-5xl font-black">RSVP for Fall Rush</h1>
+          <p className="mt-4 text-white/60">Drop your info below and we’ll send you event details, rush times, and next steps.</p>
+        </div>
+        <RsvpSection />
+      </section>
+    </main>
+  );
+}

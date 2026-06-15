@@ -54,3 +54,26 @@ drop policy if exists "Authenticated members can view signups" on public.signups
 create policy "Authenticated members can view signups" on public.signups for select using (auth.role() = 'authenticated');
 drop policy if exists "Authenticated members can update signups" on public.signups;
 create policy "Authenticated members can update signups" on public.signups for update using (auth.role() = 'authenticated');
+
+create table if not exists public.rush_rsvps (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz default now(),
+  full_name text,
+  email text,
+  phone text,
+  instagram text,
+  message text,
+  consent_to_contact boolean default false,
+  normalized_email text,
+  normalized_phone text,
+  matched_rush_application_id uuid references public.rush_applications(id),
+  has_full_application boolean default false
+);
+alter table public.rush_rsvps enable row level security;
+-- Idempotent policy creation for rush_rsvps
+drop policy if exists "Anyone can insert rush_rsvps" on public.rush_rsvps;
+create policy "Anyone can insert rush_rsvps" on public.rush_rsvps for insert with check (true);
+drop policy if exists "Authenticated members can view rush_rsvps" on public.rush_rsvps;
+create policy "Authenticated members can view rush_rsvps" on public.rush_rsvps for select using (auth.role() = 'authenticated');
+drop policy if exists "Authenticated members can update rush_rsvps" on public.rush_rsvps;
+create policy "Authenticated members can update rush_rsvps" on public.rush_rsvps for update using (auth.role() = 'authenticated');
