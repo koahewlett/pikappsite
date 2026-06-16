@@ -33,26 +33,26 @@ export function Countdown() {
             {days} days until fall rush
           </span>
 
-          <div className="countdown-screen flex flex-nowrap items-center justify-center gap-3 rounded-[1.75rem] bg-[#060606]/90 px-5 py-4 shadow-inner shadow-black/50 ring-1 ring-white/10 sm:px-6">
-            <span className="font-alarm text-4xl font-black tracking-[0.12em] text-gold drop-shadow-[0_0_24px_rgba(212,175,55,0.22)] tabular-nums sm:text-5xl">
+          <div className="countdown-screen font-alarm flex flex-nowrap items-center justify-center gap-3 rounded-[1.75rem] bg-[#060606]/90 px-5 py-4 shadow-inner shadow-black/50 ring-1 ring-white/10 sm:px-6">
+            <span className="text-4xl text-gold drop-shadow-[0_0_24px_rgba(212,175,55,0.22)] tabular-nums sm:text-5xl">
               {hoursLabel}
             </span>
 
-            <span className="font-alarm blink-colon text-4xl font-black tracking-[0.12em] text-gold/80 drop-shadow-[0_0_18px_rgba(212,175,55,0.14)] sm:text-5xl">
+            <span className="blink-colon text-4xl text-gold/80 drop-shadow-[0_0_18px_rgba(212,175,55,0.14)] sm:text-5xl">
               :
             </span>
 
-            <span className="font-alarm text-4xl font-black tracking-[0.12em] text-gold drop-shadow-[0_0_24px_rgba(212,175,55,0.22)] tabular-nums sm:text-5xl">
+            <span className="text-4xl text-gold drop-shadow-[0_0_24px_rgba(212,175,55,0.22)] tabular-nums sm:text-5xl">
               {minsLabel}
             </span>
 
-            <span className="font-alarm blink-colon text-4xl font-black tracking-[0.12em] text-gold/80 drop-shadow-[0_0_18px_rgba(212,175,55,0.14)] sm:text-5xl">
+            <span className="blink-colon text-4xl text-gold/80 drop-shadow-[0_0_18px_rgba(212,175,55,0.14)] sm:text-5xl">
               :
             </span>
 
             <span
               key={secsLabel}
-              className="font-alarm countdown-second text-4xl font-black tracking-[0.12em] text-gold drop-shadow-[0_0_26px_rgba(212,175,55,0.24)] tabular-nums sm:text-5xl"
+              className="countdown-second text-4xl text-gold drop-shadow-[0_0_26px_rgba(212,175,55,0.24)] tabular-nums sm:text-5xl"
             >
               {secsLabel}
             </span>
