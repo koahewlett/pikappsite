@@ -8,7 +8,7 @@ export function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowBottomApply(window.scrollY > window.innerHeight * 0.85);
+      setShowBottomApply(window.scrollY > window.innerHeight * 0.9);
     };
 
     handleScroll();
@@ -20,13 +20,41 @@ export function Nav() {
   return (
     <>
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-ink/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <Link href="/" className="font-black tracking-[.18em] text-gold">
-            <span className="md:hidden">Π Κ Φ</span>
-            <span className="hidden md:inline">Π Κ Φ | Theta Xi Chapter</span>
+        {/* Mobile header */}
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 md:hidden">
+          <Link href="/" className="shrink-0 text-lg font-black tracking-[.16em] text-gold">
+            Π Κ Φ
           </Link>
 
-          <nav className="hidden gap-6 text-sm text-white/70 md:flex">
+          <nav className="flex min-w-0 flex-1 justify-center">
+            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1">
+              <a href="/#why" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+                Why
+              </a>
+              <a href="/events" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+                Events
+              </a>
+              <a href="/login" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+                Members
+              </a>
+            </div>
+          </nav>
+
+          <a
+            href="/#apply"
+            className="shrink-0 rounded-full bg-gold px-4 py-2 text-sm font-black text-ink"
+          >
+            Apply
+          </a>
+        </div>
+
+        {/* Desktop header */}
+        <div className="mx-auto hidden max-w-7xl items-center justify-between px-5 py-4 md:flex">
+          <Link href="/" className="font-black tracking-[.18em] text-gold">
+            Π Κ Φ | Theta Xi Chapter
+          </Link>
+
+          <nav className="flex gap-6 text-sm text-white/70">
             <a href="/#why" className="transition hover:text-gold">
               Why
             </a>
@@ -48,31 +76,10 @@ export function Nav() {
             Apply
           </a>
         </div>
-
-        <nav className="flex justify-center gap-2 border-t border-white/10 px-4 pb-3 md:hidden">
-          <a
-            href="/#why"
-            className="rounded-full bg-white/5 px-4 py-2 text-xs font-bold text-white/75"
-          >
-            Why
-          </a>
-          <a
-            href="/events"
-            className="rounded-full bg-white/5 px-4 py-2 text-xs font-bold text-white/75"
-          >
-            Events
-          </a>
-          <a
-            href="/login"
-            className="rounded-full bg-white/5 px-4 py-2 text-xs font-bold text-white/75"
-          >
-            Members
-          </a>
-        </nav>
       </header>
 
       {showBottomApply && (
-        <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
+        <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-4 right-4 z-50 md:hidden">
           <a
             href="/#apply"
             className="block rounded-2xl bg-gold py-4 text-center font-black text-ink shadow-glow"

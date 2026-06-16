@@ -11,8 +11,8 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
       <Nav />
 
-<section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-36 md:min-h-screen md:px-6 md:pt-24">        {/* Star and shield background */}
-        <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/star-and-shield-png.svg')] bg-[length:155%] bg-no-repeat opacity-30 [background-position:center_top_5rem] [filter:contrast(1.25)_brightness(1.12)] md:bg-[length:90%] md:opacity-70 md:[background-position:right_-6rem_center]" />
+<section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-6 md:pt-24">
+          <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/star-and-shield-png.svg')] bg-[length:155%] bg-no-repeat opacity-30 [background-position:center_top_5rem] [filter:contrast(1.25)_brightness(1.12)] md:bg-[length:90%] md:opacity-70 md:[background-position:right_-6rem_center]" />
 
         {/* Subtle gold glow */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_72%_45%,rgba(212,175,55,.16),transparent_34%)]" />
@@ -20,14 +20,14 @@ export default function Home() {
         {/* Dark overlay for readability */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.94)_38%,rgba(15,15,15,.72)_65%,rgba(15,15,15,.45)_100%)]" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[.28em] text-gold sm:text-sm md:tracking-[.4em]">
+<div className="relative z-10 mx-auto w-full max-w-6xl">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[.28em] text-gold sm:text-sm md:tracking-[.4em]">
             Pi Kappa Phi · Theta Xi · Arizona State
           </p>
 
-          <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl md:text-8xl">
-            Rush Pi Kapp
-          </h1>
+         <h1 className="max-w-4xl text-5xl font-black italic leading-[0.95] tracking-tight sm:text-6xl md:text-8xl">
+  Rush Pi Kapp
+</h1>
 
           <p className="mt-5 max-w-xl text-lg text-white/70 sm:text-xl md:mt-6 md:max-w-2xl md:text-2xl">
             Exceptional leaders. Uncommon opportunities.
