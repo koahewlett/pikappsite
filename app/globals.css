@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,7 +30,12 @@ h3,
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-
+.font-alarm {
+  font-family: "Doto", var(--font-oswald), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-variation-settings: "ROND" 0;
+}
 /* Subtle auxiliary blue atmosphere across the site */
 .royal-atmosphere {
   position: relative;
