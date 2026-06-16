@@ -251,7 +251,7 @@ h3,
   top: 36%;
   width: 32vw;
   height: 32vw;
-  opacity: 0.42;
+  opacity: 0.58;
   animation: crestLeftMove 2s ease-in-out infinite alternate;
 }
 
@@ -260,7 +260,7 @@ h3,
   top: -7vw;
   width: 66vw;
   height: 66vw;
-  opacity: 0.38;
+  opacity: 0.54;
   animation: crestRightMove 2s ease-in-out infinite alternate;
 }
 
@@ -285,13 +285,13 @@ h3,
   background:
     linear-gradient(
       135deg,
-      #f7fbff 0%,
-      #8fb4ff 12%,
-      #315fca 26%,
-      #f4f8ff 38%,
-      #1f3f91 52%,
-      #0c1635 64%,
-      #6f96ff 78%,
+      #ffffff 0%,
+      #b9d0ff 10%,
+      #4f7cff 22%,
+      #f6f9ff 36%,
+      #2d5ed3 50%,
+      #102c75 63%,
+      #7da4ff 78%,
       #ffffff 100%
     );
   background-size: 210% 210%;
@@ -308,10 +308,10 @@ h3,
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(135deg, #071127, #315fca, #05070f);
+  background: linear-gradient(135deg, #081536, #3f6fed, #05070f);
   transform: translate3d(16px, 14px, -1px);
-  opacity: 0.95;
-  filter: brightness(0.72);
+  opacity: 0.98;
+  filter: brightness(0.78);
 }
 
 .chrome-crest::after {
@@ -323,12 +323,12 @@ h3,
       45deg,
       transparent 0%,
       transparent 30%,
-      rgba(255, 255, 255, 0.62) 43%,
-      rgba(148, 183, 255, 0.34) 51%,
+      rgba(255, 255, 255, 0.7) 43%,
+      rgba(160, 193, 255, 0.42) 51%,
       transparent 66%,
       transparent 100%
     );
-  opacity: 0.5;
+  opacity: 0.56;
   mix-blend-mode: screen;
   animation: chromeGlint 2s ease-in-out infinite alternate;
 }
@@ -400,7 +400,7 @@ h3,
     top: 43%;
     width: 76vw;
     height: 76vw;
-    opacity: 0.2;
+    opacity: 0.32;
   }
 
   .hero-crest-right {
@@ -408,7 +408,7 @@ h3,
     top: 12%;
     width: 122vw;
     height: 122vw;
-    opacity: 0.24;
+    opacity: 0.36;
   }
 
   .chrome-crest {
