@@ -1,3 +1,4 @@
+import { HeroCrests } from '@/components/HeroCrests';
 import { Nav } from '@/components/Nav';
 import { ApplicationForm } from '@/components/ApplicationForm';
 import { Countdown } from '@/components/Countdown';
@@ -12,8 +13,7 @@ export default function Home() {
       <Nav />
 
 <section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-6 md:pt-24">
-          <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/star-and-shield-png.svg')] bg-[length:155%] bg-no-repeat opacity-30 [background-position:center_top_5rem] [filter:contrast(1.25)_brightness(1.12)] md:bg-[length:90%] md:opacity-70 md:[background-position:right_-6rem_center]" />
-
+<HeroCrests />
         {/* Subtle gold glow */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_72%_45%,rgba(212,175,55,.16),transparent_34%)]" />
 
