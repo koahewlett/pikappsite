@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background: #0F0F0F;
+  background: #0f0f0f;
   color: white;
   font-family: var(--font-inter), system-ui, sans-serif;
 }
@@ -30,7 +30,7 @@ h3,
   text-transform: uppercase;
 }
 
-/* Subtle blue atmosphere */
+/* Subtle auxiliary blue atmosphere across the site */
 .royal-atmosphere {
   position: relative;
 }
@@ -50,7 +50,7 @@ h3,
 /* Glass cards */
 .glass {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
     radial-gradient(circle at 100% 0%, rgba(58, 95, 205, 0.08), transparent 34%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
@@ -138,7 +138,7 @@ h3,
   }
 }
 
-/* Background pattern */
+/* Subtle background pattern */
 .rose::before {
   content: "";
   position: absolute;
@@ -206,7 +206,7 @@ h3,
   }
 }
 
-/* Hero chrome crests */
+/* Hero blue chrome crests */
 .hero-crests {
   pointer-events: none;
   position: absolute;
@@ -224,7 +224,7 @@ h3,
   width: 40vw;
   height: 40vw;
   border-radius: 999px;
-  background: rgba(58, 95, 205, 0.08);
+  background: rgba(58, 95, 205, 0.1);
   filter: blur(80px);
 }
 
@@ -236,7 +236,7 @@ h3,
   width: 26vw;
   height: 26vw;
   border-radius: 999px;
-  background: rgba(212, 175, 55, 0.07);
+  background: rgba(212, 175, 55, 0.06);
   filter: blur(70px);
 }
 
@@ -260,7 +260,7 @@ h3,
   top: -7vw;
   width: 66vw;
   height: 66vw;
-  opacity: 0.36;
+  opacity: 0.38;
   animation: crestRightMove 2s ease-in-out infinite alternate;
 }
 
@@ -285,18 +285,20 @@ h3,
   background:
     linear-gradient(
       135deg,
-      #f8f8f8 0%,
-      #9b9b9b 18%,
-      #eeeeee 34%,
-      #4b4b4b 52%,
-      #bdbdbd 72%,
+      #f7fbff 0%,
+      #8fb4ff 12%,
+      #315fca 26%,
+      #f4f8ff 38%,
+      #1f3f91 52%,
+      #0c1635 64%,
+      #6f96ff 78%,
       #ffffff 100%
     );
-  background-size: 190% 190%;
+  background-size: 210% 210%;
   filter:
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.2))
-    drop-shadow(0 0 24px rgba(212, 175, 55, 0.08))
-    drop-shadow(0 0 30px rgba(58, 95, 205, 0.12))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.18))
+    drop-shadow(0 0 22px rgba(58, 95, 205, 0.22))
+    drop-shadow(0 0 34px rgba(58, 95, 205, 0.14))
     drop-shadow(14px 14px 0 rgba(0, 0, 0, 0.55));
   animation: chromeSweep 2.8s ease-in-out infinite alternate;
 }
@@ -306,10 +308,10 @@ h3,
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(135deg, #1f1f1f, #777, #111);
+  background: linear-gradient(135deg, #071127, #315fca, #05070f);
   transform: translate3d(16px, 14px, -1px);
   opacity: 0.95;
-  filter: brightness(0.7);
+  filter: brightness(0.72);
 }
 
 .chrome-crest::after {
@@ -320,13 +322,13 @@ h3,
     linear-gradient(
       45deg,
       transparent 0%,
-      transparent 35%,
-      rgba(255, 255, 255, 0.52) 48%,
-      rgba(58, 95, 205, 0.14) 55%,
+      transparent 30%,
+      rgba(255, 255, 255, 0.62) 43%,
+      rgba(148, 183, 255, 0.34) 51%,
       transparent 66%,
       transparent 100%
     );
-  opacity: 0.44;
+  opacity: 0.5;
   mix-blend-mode: screen;
   animation: chromeGlint 2s ease-in-out infinite alternate;
 }
@@ -411,9 +413,9 @@ h3,
 
   .chrome-crest {
     filter:
-      drop-shadow(0 0 8px rgba(255, 255, 255, 0.16))
-      drop-shadow(0 0 18px rgba(212, 175, 55, 0.08))
-      drop-shadow(0 0 24px rgba(58, 95, 205, 0.11))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.14))
+      drop-shadow(0 0 18px rgba(58, 95, 205, 0.18))
+      drop-shadow(0 0 26px rgba(58, 95, 205, 0.1))
       drop-shadow(9px 9px 0 rgba(0, 0, 0, 0.5));
   }
 
