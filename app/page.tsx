@@ -9,8 +9,8 @@ const SHOW_ALUMNI = false;
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
-      <Nav />
+<main className="royal-atmosphere relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
+        <Nav />
 
 <section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-6 md:pt-24">
 <HeroCrests />

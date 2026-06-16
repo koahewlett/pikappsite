@@ -3,6 +3,16 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+function GreekLogo() {
+  return (
+    <span className="greek-logo" aria-label="Pi Kappa Phi">
+      <span>Π</span>
+      <span>Κ</span>
+      <span>Φ</span>
+    </span>
+  );
+}
+
 export function Nav() {
   const [showBottomApply, setShowBottomApply] = useState(false);
 
@@ -22,19 +32,19 @@ export function Nav() {
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-ink/85 backdrop-blur-xl">
         {/* Mobile header */}
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 md:hidden">
-          <Link href="/" className="font-display font-black tracking-[.18em] text-gold">
-  Π Κ Φ 
-</Link>
+          <Link href="/" className="font-display shrink-0 font-black tracking-[.18em] text-gold">
+            <GreekLogo />
+          </Link>
 
           <nav className="flex min-w-0 flex-1 justify-center">
-            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1">
-              <a href="/#why" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1 shadow-[0_0_24px_rgba(58,95,205,0.08)]">
+              <a href="/#why" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75 transition hover:text-gold">
                 Why
               </a>
-              <a href="/events" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+              <a href="/events" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75 transition hover:text-gold">
                 Events
               </a>
-              <a href="/login" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75">
+              <a href="/login" className="rounded-full px-3 py-2 text-[11px] font-bold text-white/75 transition hover:text-gold">
                 Members
               </a>
             </div>
@@ -50,8 +60,8 @@ export function Nav() {
 
         {/* Desktop header */}
         <div className="mx-auto hidden max-w-7xl items-center justify-between px-5 py-4 md:flex">
-          <Link href="/" className="font-black tracking-[.18em] text-gold">
-            Π Κ Φ 
+          <Link href="/" className="font-display font-black tracking-[.18em] text-gold">
+            <GreekLogo />
           </Link>
 
           <nav className="flex gap-6 text-sm text-white/70">
