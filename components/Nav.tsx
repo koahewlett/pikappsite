@@ -51,7 +51,7 @@ export function Nav() {
         {/* Desktop header */}
         <div className="mx-auto hidden max-w-7xl items-center justify-between px-5 py-4 md:flex">
           <Link href="/" className="font-black tracking-[.18em] text-gold">
-            Π Κ Φ Theta Xi Chapter
+            Π Κ Φ 
           </Link>
 
           <nav className="flex gap-6 text-sm text-white/70">
