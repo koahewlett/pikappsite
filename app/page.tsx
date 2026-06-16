@@ -11,8 +11,7 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
       <Nav />
 
-      <section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-6 md:pt-24">
-        {/* Star and shield background */}
+<section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-36 md:min-h-screen md:px-6 md:pt-24">        {/* Star and shield background */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/star-and-shield-png.svg')] bg-[length:155%] bg-no-repeat opacity-30 [background-position:center_top_5rem] [filter:contrast(1.25)_brightness(1.12)] md:bg-[length:90%] md:opacity-70 md:[background-position:right_-6rem_center]" />
 
         {/* Subtle gold glow */}
@@ -87,8 +86,8 @@ export default function Home() {
         <ApplicationForm />
       </section>
 
-      <section id="gallery" className="mx-auto max-w-7xl px-5 py-10 md:px-6 md:py-16">
-        <h2 className="text-4xl font-black">Gallery</h2>
+<section id="gallery" className="mx-auto hidden max-w-7xl px-6 py-16 md:block">
+          <h2 className="text-4xl font-black">Gallery</h2>
 
         <div className="masonry mt-8">
           {gallery.map((g) => (
