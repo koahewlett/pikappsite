@@ -25,7 +25,7 @@ export default function Home() {
             Pi Kappa Phi · Theta Xi · Arizona State
           </p>
 
-         <h1 className="max-w-4xl text-5xl font-black italic leading-[0.95] tracking-tight sm:text-6xl md:text-8xl">
+         <h1 className="font-display max-w-4xl text-5xl font-black italic leading-[0.95] sm:text-6xl md:text-8xl">
   Rush Pi Kapp
 </h1>
 

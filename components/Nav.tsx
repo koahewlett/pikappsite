@@ -22,9 +22,9 @@ export function Nav() {
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-ink/85 backdrop-blur-xl">
         {/* Mobile header */}
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 md:hidden">
-          <Link href="/" className="shrink-0 text-lg font-black tracking-[.16em] text-gold">
-            Π Κ Φ
-          </Link>
+          <Link href="/" className="font-display font-black tracking-[.18em] text-gold">
+  Π Κ Φ | Theta Xi Chapter
+</Link>
 
           <nav className="flex min-w-0 flex-1 justify-center">
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1">
