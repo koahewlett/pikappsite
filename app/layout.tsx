@@ -1,57 +1,101 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Oswald } from 'next/font/google';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const oswald = Oswald({
-  subsets: ['latin'],
-  variable: '--font-oswald',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pikapp-asu.com'),
+
   title: {
-    default: 'Pi Kappa Phi ASU | Pi Kapp Theta Xi Chapter',
+    default: 'Pi Kappa Phi ASU | Rush Pi Kapp at Arizona State',
     template: '%s | Pi Kappa Phi ASU',
   },
+
   description:
-    'Rush Pi Kappa Phi at Arizona State University. Learn about Pi Kapp Theta Xi Chapter, ASU fraternity rush, events, brotherhood, and membership.',
+    'Rush Pi Kappa Phi at Arizona State University. Pi Kapp ASU, Theta Xi Chapter, is a fraternity at ASU in Tempe focused on brotherhood, leadership, events, and campus involvement.',
+
   keywords: [
-    'Pi Kappa Phi ASU',
-    'Pi Kapp ASU',
-    'Pikapp ASU',
-    'PiKapp ASU',
-    'Pi Kappa Phi Arizona State',
-    'Theta Xi Chapter',
-    'ASU fraternity rush',
-    'Arizona State fraternity',
-    'Pi Kapp rush',
+    'pikapp',
+    'pikapp asu',
+    'rush pikapp',
+    'pi kapp asu',
+    'pi kappa phi asu',
+    'pi kappa phi arizona state',
+    'asu rush',
+    'arizona state rush',
+    'asu fraternity rush',
+    'arizona state fraternity',
+    'theta xi chapter',
+    'pi kapp tempe',
   ],
-  icons: {
-    icon: '/favicon.ico',
+
+  alternates: {
+    canonical: 'https://pikapp-asu.com',
   },
+
   openGraph: {
-    title: 'Pi Kappa Phi ASU | Pi Kapp Theta Xi Chapter',
+    title: 'Pi Kappa Phi ASU | Rush Pi Kapp at Arizona State',
     description:
-      'Rush Pi Kappa Phi at Arizona State University. Learn about events, brotherhood, and membership.',
+      'Rush Pi Kappa Phi at Arizona State University. Learn about Pi Kapp ASU, events, brotherhood, and membership.',
     url: 'https://pikapp-asu.com',
     siteName: 'Pi Kappa Phi ASU',
     type: 'website',
+    locale: 'en_US',
   },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pi Kappa Phi ASU | Rush Pi Kapp at Arizona State',
+    description:
+      'Rush Pi Kappa Phi at Arizona State University. Learn about Pi Kapp ASU, events, brotherhood, and membership.',
+  },
+
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+    },
+  },
+
+  icons: {
+    icon: '/favicon.ico',
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Pi Kappa Phi ASU',
+    alternateName: [
+      'Pi Kapp ASU',
+      'Pikapp ASU',
+      'Pi Kappa Phi Theta Xi Chapter',
+      'Rush Pi Kapp',
+    ],
+    url: 'https://pikapp-asu.com',
+    description:
+      'Pi Kappa Phi at Arizona State University, Theta Xi Chapter. Rush Pi Kapp at ASU in Tempe, Arizona.',
+    areaServed: {
+      '@type': 'Place',
+      name: 'Arizona State University, Tempe, Arizona',
+    },
+    memberOf: {
+      '@type': 'Organization',
+      name: 'Pi Kappa Phi',
+    },
+  };
+
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${oswald.variable} antialiased`}>
+      <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>
