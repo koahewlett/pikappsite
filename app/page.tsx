@@ -28,7 +28,7 @@ export default function Home() {
             </p>
 
             <h1 className="hero-title max-w-5xl text-5xl leading-[0.9] sm:text-6xl md:text-8xl">
-              Exceptional leaders. Uncommon opportunities.
+              Rush Pi Kapp
             </h1>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
