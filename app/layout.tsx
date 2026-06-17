@@ -1,9 +1,10 @@
 import './globals.css';
 import './premium.css';
 import './ui-updates.css';
+import './intro-loader.css';
 import type { Metadata } from 'next';
 import { Syne } from 'next/font/google';
-import { LoadingScreen } from '@/components/LoadingScreen';
+import { IntroLoader } from '@/components/IntroLoader';
 
 const syne = Syne({
   subsets: ['latin'],
@@ -103,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${syne.variable} font-sans antialiased`}>
-        <LoadingScreen />
+        <IntroLoader />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
