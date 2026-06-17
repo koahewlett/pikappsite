@@ -42,7 +42,7 @@ export function Nav() {
                 Why
               </a>
               <a href="/events" className="rounded-full px-2.5 py-2 text-[10px] font-bold text-white/75 transition hover:text-gold">
-                Events
+                Rush Events
               </a>
               <a href="/#faq" className="rounded-full px-2.5 py-2 text-[10px] font-bold text-white/75 transition hover:text-gold">
                 FAQ
@@ -72,10 +72,7 @@ export function Nav() {
               Why
             </a>
             <a href="/events" className="transition hover:text-gold">
-              Events
-            </a>
-            <a href="/#gallery" className="transition hover:text-gold">
-              Gallery
+              Rush Events
             </a>
             <a href="/#faq" className="transition hover:text-gold">
               FAQ
