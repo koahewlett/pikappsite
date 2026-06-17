@@ -112,9 +112,7 @@ export function RsvpSection() {
   return (
     <div className="glass mx-auto max-w-4xl rounded-[2rem] p-6 md:p-10">
       <div className="mx-auto max-w-3xl">
-        <p className="text-white/70">Drop your info and we’ll send you rush details, event times, and next steps.</p>
-
-        <div className="mt-10 grid gap-5">
+        <div className="grid gap-5">
           <div className="rounded-[1.75rem] border border-white/10 bg-black/50 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,.06)]">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="text-sm text-white/70">
