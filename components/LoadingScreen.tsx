@@ -7,7 +7,7 @@ export function LoadingScreen() {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timeout = window.setTimeout(() => setHidden(true), reduceMotion ? 250 : 1650);
+    const timeout = window.setTimeout(() => setHidden(true), reduceMotion ? 120 : 950);
     return () => window.clearTimeout(timeout);
   }, []);
 
