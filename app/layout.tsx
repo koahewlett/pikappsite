@@ -2,6 +2,7 @@ import './globals.css';
 import './premium.css';
 import './ui-updates.css';
 import './intro-loader.css';
+import './mobile-text-fixes.css';
 import type { Metadata } from 'next';
 import { Syne } from 'next/font/google';
 import { IntroLoader } from '@/components/IntroLoader';
