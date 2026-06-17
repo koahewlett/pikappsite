@@ -22,8 +22,8 @@ function MarqueeWords({ words }: { words: string[] }) {
 export function RushMarquee() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
-  const leftX = useTransform(scrollYProgress, [0, 0.24], ['-7%', '0%']);
-  const rightX = useTransform(scrollYProgress, [0, 0.24], ['7%', '0%']);
+  const leftX = useTransform(scrollYProgress, [0, 0.28], ['-14%', '5%']);
+  const rightX = useTransform(scrollYProgress, [0, 0.28], ['14%', '-5%']);
 
   return (
     <div className="rush-marquee" aria-hidden="true">
