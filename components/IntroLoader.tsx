@@ -23,15 +23,26 @@ const INTRO_TIMING = {
 };
 
 function AnimatedText({ text }: { text: string }) {
+  let characterIndex = 0;
+
   return (
     <span className="intro-loader-line-text" aria-hidden="true">
-      {Array.from(text).map((character, index) => (
-        <span
-          className="intro-loader-char"
-          key={`${character}-${index}`}
-          style={{ animationDelay: `${index * 30}ms` }}
-        >
-          {character === ' ' ? '\u00a0' : character}
+      {text.split(' ').map((word, wordIndex) => (
+        <span className="intro-loader-word" key={`${word}-${wordIndex}`}>
+          {Array.from(word).map((character) => {
+            const delay = characterIndex * 30;
+            characterIndex += 1;
+
+            return (
+              <span
+                className="intro-loader-char"
+                key={`${word}-${character}-${characterIndex}`}
+                style={{ animationDelay: `${delay}ms` }}
+              >
+                {character}
+              </span>
+            );
+          })}
         </span>
       ))}
     </span>
