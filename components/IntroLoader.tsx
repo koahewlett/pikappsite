@@ -9,10 +9,10 @@ type IntroPhase = 'checking' | 'line-one' | 'line-two' | 'flash' | 'exiting' | '
 
 const INTRO_TIMING = {
   full: {
-    lineTwo: 1250,
-    flash: 2550,
-    exit: 3350,
-    hidden: 3850,
+    lineTwo: 1700,
+    flash: 3350,
+    exit: 4600,
+    hidden: 4980,
   },
   reduced: {
     lineTwo: 520,
@@ -29,7 +29,7 @@ function AnimatedText({ text }: { text: string }) {
         <span
           className="intro-loader-char"
           key={`${character}-${index}`}
-          style={{ animationDelay: `${index * 24}ms` }}
+          style={{ animationDelay: `${index * 30}ms` }}
         >
           {character === ' ' ? '\u00a0' : character}
         </span>
