@@ -3,102 +3,159 @@ import { Nav } from '@/components/Nav';
 import { ApplicationForm } from '@/components/ApplicationForm';
 import { Countdown } from '@/components/Countdown';
 import { RoseDivider } from '@/components/RoseDivider';
-import { stats, why, gallery, faqs } from '@/lib/data';
+import { RushMarquee } from '@/components/RushMarquee';
+import { ScrollReveal } from '@/components/ScrollReveal';
+import { stats, why, gallery, faqs, events } from '@/lib/data';
 
 const SHOW_ALUMNI = false;
 
 export default function Home() {
   return (
-<main className="royal-atmosphere relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
-        <Nav />
+    <main className="royal-atmosphere premium-page relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
+      <Nav />
 
-<section className="relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-6 md:pt-24">
-<HeroCrests />
-        {/* Subtle gold glow */}
+      <section className="hero-section relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-16 pt-28 md:min-h-screen md:px-6 md:pb-20 md:pt-24">
+        <HeroCrests />
+        <div className="hero-light hero-light-gold" />
+        <div className="hero-light hero-light-blue" />
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_72%_45%,rgba(212,175,55,.16),transparent_34%)]" />
-
-        {/* Dark overlay for readability */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,#0F0F0F_0%,rgba(15,15,15,.94)_38%,rgba(15,15,15,.72)_65%,rgba(15,15,15,.45)_100%)]" />
 
-<div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <ScrollReveal>
             <p className="mb-4 text-xs font-bold uppercase tracking-[.28em] text-gold sm:text-sm md:tracking-[.4em]">
-            Pi Kappa Phi · Theta Xi · Arizona State
-          </p>
+              Pi Kappa Phi · Theta Xi · Arizona State
+            </p>
 
-         <h1 className="font-display max-w-4xl text-5xl font-black italic leading-[0.95] sm:text-6xl md:text-8xl">
-  Rush Pi Kapp
-</h1>
+            <h1 className="font-display max-w-4xl text-5xl font-black italic leading-[0.9] sm:text-6xl md:text-8xl">
+              Rush Pi Kapp
+            </h1>
 
-          <p className="mt-5 max-w-xl text-lg text-white/70 sm:text-xl md:mt-6 md:max-w-2xl md:text-2xl">
-            Exceptional leaders. Uncommon opportunities.
-          </p>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70 sm:text-xl md:mt-6 md:max-w-2xl md:text-2xl">
+              Exceptional leaders. Uncommon opportunities.
+            </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href="#apply"
-              className="w-full rounded-full bg-gold px-7 py-4 text-center font-black text-ink sm:w-auto"
-            >
-              Apply for Rush
-            </a>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a href="#apply" className="premium-button premium-button-primary w-full sm:w-auto">
+                Apply for Rush
+              </a>
 
-            <a
-              href="#why"
-              className="w-full rounded-full border border-white/15 px-7 py-4 text-center font-bold sm:w-auto"
-            >
-              Learn More
-            </a>
-          </div>
+              <a href="#why" className="premium-button premium-button-secondary w-full sm:w-auto">
+                Learn More
+              </a>
+            </div>
+          </ScrollReveal>
 
-          <div className="mt-8 max-w-full">
+          <ScrollReveal className="mt-8 max-w-full" delay={0.12}>
             <Countdown />
-          </div>
+          </ScrollReveal>
         </div>
+
+        <a href="#why" className="scroll-hint">
+          <span />
+          Scroll to rush
+        </a>
       </section>
 
-      <section className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-5 py-10 md:grid-cols-4 md:gap-4 md:px-6 md:py-16">
-        {stats.map(([n, l]) => (
-          <div className="glass rounded-3xl p-5 md:p-6" key={l}>
-            <div className="text-3xl font-black text-gold md:text-4xl">{n}</div>
-            <div className="mt-2 text-sm text-white/60 md:text-base">{l}</div>
-          </div>
+      <RushMarquee />
+
+      <section className="section-shell grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        {stats.map(([n, l], index) => (
+          <ScrollReveal key={l} delay={index * 0.06}>
+            <div className="stat-tile">
+              <div className="text-3xl font-black text-gold md:text-4xl">{n}</div>
+              <div className="mt-2 text-sm leading-relaxed text-white/60 md:text-base">{l}</div>
+            </div>
+          </ScrollReveal>
         ))}
       </section>
 
       <RoseDivider />
 
-      <section id="why" className="mx-auto max-w-7xl px-5 py-10 md:px-6 md:py-16">
-        <h2 className="text-4xl font-black md:text-6xl">Why Pi Kappa Phi</h2>
+      <section id="why" className="section-shell why-story">
+        <div className="why-sticky">
+          <ScrollReveal>
+            <p className="section-kicker">Why Pi Kapp</p>
+            <h2 className="section-title">Built for guys who want more out of ASU.</h2>
+            <p className="section-copy">
+              Brotherhood, campus presence, philanthropy, and leadership are not separate lanes here. They stack into a college experience with momentum.
+            </p>
+          </ScrollReveal>
+        </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-5">
-          {why.map(([t, d]) => (
-            <div
-              className="glass rounded-[2rem] p-6 transition hover:-translate-y-2"
-              key={t}
-            >
-              <h3 className="text-xl font-black text-gold">{t}</h3>
-              <p className="mt-4 text-white/65">{d}</p>
-            </div>
+        <div className="why-list">
+          {why.map(([t, d], index) => (
+            <ScrollReveal key={t} delay={index * 0.08}>
+              <article className="story-row">
+                <span className="story-number">0{index + 1}</span>
+                <div>
+                  <h3>{t}</h3>
+                  <p>{d}</p>
+                </div>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <section id="apply" className="px-5 py-10 md:px-6 md:py-16">
-        <ApplicationForm />
+      <section id="apply" className="apply-story px-5 py-16 md:px-6 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <ScrollReveal className="lg:sticky lg:top-32">
+            <p className="section-kicker">Fall Rush</p>
+            <h2 className="section-title">Start the conversation.</h2>
+            <p className="section-copy">
+              Send the rush team your details and we will reach out with the next step. The form, routing, and submission flow are unchanged.
+            </p>
+            <div className="mt-8 grid gap-3 text-sm text-white/60 sm:grid-cols-2 lg:grid-cols-1">
+              {events.slice(0, 4).map((event) => (
+                <div key={event} className="event-line">
+                  <span />
+                  {event}
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1}>
+            <ApplicationForm />
+          </ScrollReveal>
+        </div>
       </section>
 
-<section id="gallery" className="mx-auto hidden max-w-7xl px-6 py-16 md:block">
-          <h2 className="text-4xl font-black">Gallery</h2>
+      <section className="section-shell highlight-band">
+        <ScrollReveal>
+          <p className="section-kicker">Chapter Life</p>
+          <h2 className="section-title max-w-4xl">A rush process that shows the full picture.</h2>
+        </ScrollReveal>
 
-        <div className="masonry mt-8">
-          {gallery.map((g) => (
-            <div
-              key={g}
-              className="glass group h-44 overflow-hidden rounded-[2rem] p-4 transition hover:scale-[1.02] sm:h-56 md:h-72 md:p-6"
-            >
-              <div className="flex h-full items-end rounded-3xl bg-gradient-to-br from-gold/20 to-royal/20 p-5">
-                <h3 className="text-2xl font-black">{g}</h3>
+        <div className="mt-10 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 md:grid-cols-4">
+          {events.map((event, index) => (
+            <ScrollReveal key={event} delay={index * 0.04}>
+              <div className="highlight-cell">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{event}</h3>
               </div>
-            </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      <section id="gallery" className="section-shell hidden md:block">
+        <ScrollReveal>
+          <p className="section-kicker">Gallery</p>
+          <h2 className="section-title">Chapter moments, framed cleaner.</h2>
+        </ScrollReveal>
+
+        <div className="gallery-grid mt-10">
+          {gallery.map((g, index) => (
+            <ScrollReveal key={g} delay={index * 0.06}>
+              <div className="gallery-panel group">
+                <div>
+                  <span>Pi Kapp ASU</span>
+                  <h3>{g}</h3>
+                </div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -125,15 +182,41 @@ export default function Home() {
         </section>
       )}
 
-      <section id="faq" className="mx-auto max-w-4xl px-5 py-10 pb-32 md:px-6 md:py-16">
-        <h2 className="text-4xl font-black">FAQ</h2>
+      <section id="faq" className="section-shell max-w-4xl pb-20 md:pb-28">
+        <ScrollReveal>
+          <p className="section-kicker">FAQ</p>
+          <h2 className="section-title">Questions before rush?</h2>
+        </ScrollReveal>
 
-        {faqs.map(([q, a]) => (
-          <details key={q} className="mt-4 rounded-3xl bg-white/5 p-5">
-            <summary className="cursor-pointer font-bold text-gold">{q}</summary>
-            <p className="mt-3 text-white/65">{a}</p>
-          </details>
-        ))}
+        <div className="mt-8 space-y-3">
+          {faqs.map(([q, a], index) => (
+            <ScrollReveal key={q} delay={index * 0.04}>
+              <details className="faq-item">
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="final-cta px-5 pb-32 md:px-6 md:pb-36">
+        <ScrollReveal>
+          <div className="mx-auto max-w-6xl border-t border-white/10 pt-10 md:pt-14">
+            <p className="section-kicker">Theta Xi · Arizona State</p>
+            <div className="mt-4 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+              <h2 className="section-title max-w-3xl">Ready to see where you fit?</h2>
+              <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+                <a href="#apply" className="premium-button premium-button-primary">
+                  Apply for Rush
+                </a>
+                <a href="/events" className="premium-button premium-button-secondary">
+                  RSVP
+                </a>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </main>
   );
