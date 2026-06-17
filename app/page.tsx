@@ -11,7 +11,7 @@ const SHOW_ALUMNI = false;
 
 export default function Home() {
   return (
-    <main className="royal-atmosphere premium-page relative min-h-screen overflow-hidden bg-ink bg-rose-grid rose">
+    <main className="royal-atmosphere premium-page relative min-h-screen overflow-hidden bg-ink">
       <Nav />
 
       <section className="hero-section relative isolate flex min-h-[92svh] items-center overflow-hidden px-5 pb-16 pt-28 md:min-h-screen md:px-6 md:pb-20 md:pt-24">
@@ -27,7 +27,7 @@ export default function Home() {
               Pi Kappa Phi · Theta Xi · Arizona State
             </p>
 
-            <h1 className="font-display max-w-4xl text-5xl font-black italic leading-[0.9] sm:text-6xl md:text-8xl">
+            <h1 className="hero-title max-w-4xl text-5xl leading-[0.9] sm:text-6xl md:text-8xl">
               Rush Pi Kapp
             </h1>
 
@@ -77,9 +77,7 @@ export default function Home() {
           <ScrollReveal>
             <p className="section-kicker">Why Pi Kapp</p>
             <h2 className="section-title">Built for guys who want more out of ASU.</h2>
-            <p className="section-copy">
-              Brotherhood, campus presence, philanthropy, and leadership are not separate lanes here. They stack into a college experience with momentum.
-            </p>
+            <p className="section-copy">Meet the guys. Feel the standard.</p>
           </ScrollReveal>
         </div>
 
