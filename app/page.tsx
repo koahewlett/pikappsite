@@ -53,7 +53,7 @@ export default function Home() {
 
         <a href="#why" className="scroll-hint">
           <span />
-          Scroll to rush
+          Scroll
         </a>
       </section>
 
@@ -106,14 +106,6 @@ export default function Home() {
             <p className="section-copy">
               Send the rush team your details and we will reach out with the next step. The form, routing, and submission flow are unchanged.
             </p>
-            <div className="mt-8 grid gap-3 text-sm text-white/60 sm:grid-cols-2 lg:grid-cols-1">
-              {events.slice(0, 4).map((event) => (
-                <div key={event} className="event-line">
-                  <span />
-                  {event}
-                </div>
-              ))}
-            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
