@@ -1,0 +1,67 @@
+body,
+button,
+input,
+textarea,
+select,
+a,
+summary {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display,
+.font-accent,
+.section-title,
+.rush-marquee span {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.font-alarm {
+  font-family: "Doto", sans-serif !important;
+}
+
+.rush-marquee {
+  overflow-x: clip;
+  padding-block: 0.35rem;
+}
+
+.rush-marquee-row {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  gap: 2.5rem;
+  padding-block: 0.55rem;
+  will-change: transform;
+}
+
+.rush-marquee-row + .rush-marquee-row {
+  border-top: 1px solid rgb(255 255 255 / 0.055);
+}
+
+.rush-marquee-row-reverse {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.rush-marquee span {
+  font-size: clamp(1.15rem, 3vw, 2.2rem);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 767px) {
+  .rush-marquee {
+    overflow-x: hidden;
+  }
+
+  .rush-marquee-row {
+    gap: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rush-marquee-row {
+    transform: none !important;
+  }
+}
