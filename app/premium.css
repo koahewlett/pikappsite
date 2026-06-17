@@ -10,6 +10,40 @@
   letter-spacing: 0;
 }
 
+header a {
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+header nav a {
+  position: relative;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(212 175 55 / 0.8), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+header nav a:hover::after {
+  transform: scaleX(1);
+}
+
+header a[href="/#apply"]:hover {
+  box-shadow: 0 12px 34px rgb(212 175 55 / 0.2);
+  transform: translateY(-1px);
+}
+
+.premium-page .greek-logo span {
+  animation-duration: 3.4s;
+}
+
 .hero-section {
   isolation: isolate;
 }
@@ -480,7 +514,9 @@
   .gallery-panel,
   .highlight-cell,
   .premium-button,
-  .premium-button::after {
+  .premium-button::after,
+  header a,
+  header nav a::after {
     animation: none !important;
     transition: none !important;
     transform: none !important;
