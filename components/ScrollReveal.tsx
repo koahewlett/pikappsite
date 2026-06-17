@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -11,6 +11,11 @@ type ScrollRevealProps = {
 
 type RevealEntry = {
   setVisible: (visible: boolean) => void;
+};
+
+type RevealStyle = CSSProperties & {
+  '--reveal-delay': string;
+  '--reveal-y': string;
 };
 
 const revealEntries = new WeakMap<Element, RevealEntry>();
@@ -57,11 +62,16 @@ export function ScrollReveal({ children, className = '', delay = 0, y = 20 }: Sc
     };
   }, []);
 
+  const revealStyle: RevealStyle = {
+    '--reveal-delay': `${delay}s`,
+    '--reveal-y': `${y}px`,
+  };
+
   return (
     <div
       ref={ref}
       className={`scroll-reveal ${visible ? 'scroll-reveal-visible' : ''} ${className}`}
-      style={{ '--reveal-delay': `${delay}s`, '--reveal-y': `${y}px` } as React.CSSProperties}
+      style={revealStyle}
     >
       {children}
     </div>
