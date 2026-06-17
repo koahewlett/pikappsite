@@ -63,7 +63,7 @@
 .intro-loader-content {
   position: relative;
   display: grid;
-  width: min(88vw, 72rem);
+  width: min(92vw, 72rem);
   min-height: clamp(9rem, 20vw, 16rem);
   place-items: center;
   padding: 2rem;
@@ -72,22 +72,36 @@
 
 .intro-loader-line {
   overflow: hidden;
-  padding: 0.2em 0 0.42em;
-  line-height: 1.32;
+  padding: 0.26em 0 0.58em;
+  line-height: 1.4;
 }
 
 .intro-loader-line-text {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  column-gap: 0.22em;
+  row-gap: 0.02em;
   max-width: 100%;
   font-family: var(--font-syne), Syne, system-ui, sans-serif;
   font-size: clamp(2.1rem, 6.8vw, 7.6rem);
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  line-height: 1.22;
-  padding-bottom: 0.12em;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.28;
+  padding-bottom: 0.18em;
   color: rgba(255, 255, 255, 0.9);
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.intro-loader-word {
+  display: inline-flex;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .intro-loader-char {
@@ -104,8 +118,8 @@
   font-size: clamp(3rem, 9vw, 9rem);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: 1.14;
-  padding-bottom: 0.14em;
+  line-height: 1.18;
+  padding-bottom: 0.18em;
   color: transparent;
   background: linear-gradient(92deg, #ffffff 0%, #f4df86 38%, #d4af37 52%, #7f9dff 78%, #ffffff 100%);
   -webkit-background-clip: text;
@@ -177,28 +191,31 @@
 @media (max-width: 767px) {
   .intro-loader-content {
     width: 100%;
-    min-height: 14rem;
-    padding-inline: 1.15rem;
+    min-height: 15rem;
+    padding-inline: 1rem;
   }
 
   .intro-loader-line {
-    padding-top: 0.26em;
-    padding-bottom: 0.5em;
-    line-height: 1.38;
+    padding-top: 0.34em;
+    padding-bottom: 0.7em;
+    line-height: 1.48;
   }
 
   .intro-loader-line-text {
-    font-size: clamp(2rem, 11vw, 4.35rem);
-    letter-spacing: -0.028em;
-    line-height: 1.28;
-    padding-bottom: 0.18em;
+    column-gap: 0.24em;
+    row-gap: 0.04em;
+    font-size: clamp(1.8rem, 9.8vw, 3.9rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.36;
+    padding-bottom: 0.26em;
   }
 
   .intro-loader-mark {
     font-size: clamp(2.95rem, 14vw, 5.5rem);
     letter-spacing: -0.04em;
-    line-height: 1.16;
-    padding-bottom: 0.18em;
+    line-height: 1.22;
+    padding-bottom: 0.24em;
   }
 
   .intro-loader-light {
