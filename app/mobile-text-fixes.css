@@ -9,7 +9,7 @@
   a,
   p,
   li {
-    line-height: 1.38;
+    line-height: 1.42;
   }
 
   header,
@@ -17,29 +17,33 @@
   header a,
   .greek-logo,
   .greek-logo span {
-    line-height: 1.35;
+    line-height: 1.4;
     overflow: visible;
   }
 
   header a,
   header button,
   .greek-logo {
-    padding-bottom: 0.08em;
+    font-weight: 600 !important;
+    padding-bottom: 0.1em;
   }
 
   .hero-title {
-    line-height: 1.12;
-    padding-bottom: 0.16em;
+    font-weight: 700;
+    line-height: 1.16;
+    padding-bottom: 0.22em;
   }
 
   .section-title {
-    line-height: 1.18;
-    padding-bottom: 0.14em;
+    font-weight: 650;
+    line-height: 1.22;
+    padding-bottom: 0.18em;
   }
 
   .section-kicker {
-    line-height: 1.65;
-    padding-bottom: 0.08em;
+    font-weight: 600;
+    line-height: 1.72;
+    padding-bottom: 0.1em;
   }
 
   .section-copy,
@@ -48,7 +52,7 @@
   .stat-tile,
   .highlight-cell,
   .gallery-panel {
-    line-height: 1.72;
+    line-height: 1.76;
   }
 
   .premium-button,
@@ -56,22 +60,23 @@
   .apply-story a {
     min-height: auto;
     overflow: visible;
-    line-height: 1.32;
+    font-weight: 600;
+    line-height: 1.38;
     padding-top: 1rem;
-    padding-bottom: 1.08rem;
+    padding-bottom: 1.16rem;
   }
 
   .rush-marquee {
-    padding-block: 1.15rem;
+    padding-block: 1.28rem;
   }
 
   .rush-marquee-row {
-    padding-block: 0.32rem;
+    padding-block: 0.38rem;
   }
 
   .rush-marquee span {
-    line-height: 1.22;
-    padding-bottom: 0.14em;
+    line-height: 1.28;
+    padding-bottom: 0.2em;
   }
 
   .story-row h3,
@@ -79,20 +84,21 @@
   .gallery-panel h3,
   .faq-item summary {
     overflow: visible;
-    line-height: 1.28;
-    padding-bottom: 0.14em;
+    font-weight: 600;
+    line-height: 1.32;
+    padding-bottom: 0.18em;
   }
 
   .story-number,
   .highlight-cell span,
   .gallery-panel span {
-    line-height: 1.45;
-    padding-bottom: 0.08em;
+    line-height: 1.5;
+    padding-bottom: 0.1em;
   }
 
   .faq-item {
     overflow: visible;
-    padding-bottom: 1.25rem;
+    padding-bottom: 1.3rem;
   }
 
   .faq-item summary {
@@ -109,31 +115,39 @@
 
   .apply-story label {
     display: inline-block;
-    line-height: 1.42;
-    padding-bottom: 0.08em;
+    font-weight: 500;
+    line-height: 1.48;
+    padding-bottom: 0.12em;
   }
 
   .apply-story input,
   .apply-story textarea,
   input,
   textarea {
-    line-height: 1.42;
-    padding-top: 0.95rem;
-    padding-bottom: 1rem;
+    line-height: 1.48;
+    padding-top: 0.98rem;
+    padding-bottom: 1.08rem;
   }
 
   .scroll-hint {
-    line-height: 1.45;
-    padding-bottom: 0.08em;
+    line-height: 1.5;
+    padding-bottom: 0.1em;
   }
 
   .intro-loader-line {
-    padding-bottom: 0.56em;
+    padding-bottom: 0.72em;
   }
 
   .intro-loader-line-text,
   .intro-loader-mark {
-    line-height: 1.3;
-    padding-bottom: 0.22em;
+    line-height: 1.36;
+    padding-bottom: 0.28em;
+  }
+
+  .intro-loader-line-text,
+  .intro-loader-word {
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 }
