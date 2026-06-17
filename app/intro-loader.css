@@ -14,9 +14,9 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 520ms ease,
-    transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 520ms ease;
+    opacity 560ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 560ms ease;
 }
 
 .intro-loader::before {
@@ -64,7 +64,7 @@
   position: relative;
   display: grid;
   width: min(88vw, 72rem);
-  min-height: clamp(8rem, 18vw, 15rem);
+  min-height: clamp(9rem, 20vw, 16rem);
   place-items: center;
   padding: 2rem;
   text-align: center;
@@ -72,8 +72,8 @@
 
 .intro-loader-line {
   overflow: hidden;
-  padding: 0.14em 0 0.24em;
-  line-height: 1.18;
+  padding: 0.2em 0 0.42em;
+  line-height: 1.32;
 }
 
 .intro-loader-line-text {
@@ -84,17 +84,18 @@
   font-family: var(--font-syne), Syne, system-ui, sans-serif;
   font-size: clamp(2.1rem, 6.8vw, 7.6rem);
   font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 1.12;
+  letter-spacing: -0.04em;
+  line-height: 1.22;
+  padding-bottom: 0.12em;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .intro-loader-char {
   display: inline-block;
   opacity: 0;
-  transform: translate3d(0, 1.12em, 0) rotateX(24deg);
+  transform: translate3d(0, 1.08em, 0) rotateX(22deg);
   transform-origin: 50% 100%;
-  animation: introCharRoll 720ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: introCharRoll 860ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   will-change: transform, opacity;
 }
 
@@ -102,16 +103,16 @@
   font-family: var(--font-syne), Syne, system-ui, sans-serif;
   font-size: clamp(3rem, 9vw, 9rem);
   font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 1.08;
-  padding-bottom: 0.08em;
+  letter-spacing: -0.05em;
+  line-height: 1.14;
+  padding-bottom: 0.14em;
   color: transparent;
   background: linear-gradient(92deg, #ffffff 0%, #f4df86 38%, #d4af37 52%, #7f9dff 78%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   opacity: 0;
   transform: translate3d(0, 0.7rem, 0) scale(0.985);
-  animation: introMarkFlash 780ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: introMarkFlash 880ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .intro-loader-skip {
@@ -126,8 +127,8 @@
   cursor: pointer;
   font-family: var(--font-syne), Syne, system-ui, sans-serif;
   font-size: 0.72rem;
-  line-height: 1;
-  padding: 0.65rem 0.85rem 0.72rem;
+  line-height: 1.25;
+  padding: 0.65rem 0.85rem 0.78rem;
   transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
@@ -143,7 +144,7 @@
 @keyframes introCharRoll {
   0% {
     opacity: 0;
-    transform: translate3d(0, 1.12em, 0) rotateX(24deg);
+    transform: translate3d(0, 1.08em, 0) rotateX(22deg);
   }
 
   72% {
@@ -162,7 +163,7 @@
     transform: translate3d(0, 0.7rem, 0) scale(0.985);
   }
 
-  34% {
+  30% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1.01);
   }
@@ -176,18 +177,28 @@
 @media (max-width: 767px) {
   .intro-loader-content {
     width: 100%;
-    min-height: 12rem;
+    min-height: 14rem;
     padding-inline: 1.15rem;
   }
 
+  .intro-loader-line {
+    padding-top: 0.26em;
+    padding-bottom: 0.5em;
+    line-height: 1.38;
+  }
+
   .intro-loader-line-text {
-    font-size: clamp(2.15rem, 12vw, 4.6rem);
-    letter-spacing: -0.04em;
+    font-size: clamp(2rem, 11vw, 4.35rem);
+    letter-spacing: -0.028em;
+    line-height: 1.28;
+    padding-bottom: 0.18em;
   }
 
   .intro-loader-mark {
-    font-size: clamp(3rem, 15vw, 5.7rem);
-    letter-spacing: -0.05em;
+    font-size: clamp(2.95rem, 14vw, 5.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1.16;
+    padding-bottom: 0.18em;
   }
 
   .intro-loader-light {
