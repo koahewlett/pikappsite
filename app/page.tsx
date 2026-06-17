@@ -5,7 +5,7 @@ import { Countdown } from '@/components/Countdown';
 import { RoseDivider } from '@/components/RoseDivider';
 import { RushMarquee } from '@/components/RushMarquee';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { stats, why, gallery, faqs, events } from '@/lib/data';
+import { stats, why, faqs } from '@/lib/data';
 
 const SHOW_ALUMNI = false;
 
@@ -73,7 +73,6 @@ export default function Home() {
           <ScrollReveal>
             <p className="section-kicker">Why Pi Kapp</p>
             <h2 className="section-title">Built for guys who want more out of ASU.</h2>
-            <p className="section-copy">Meet the guys. Feel the standard.</p>
           </ScrollReveal>
         </div>
 
@@ -98,51 +97,13 @@ export default function Home() {
             <p className="section-kicker">Fall Rush</p>
             <h2 className="section-title">Start the conversation.</h2>
             <p className="section-copy">
-              Send the rush team your details and we will reach out with the next step. The form, routing, and submission flow are unchanged.
+              Send the rush committee your details and we will reach out with the next step.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
             <ApplicationForm />
           </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="section-shell highlight-band">
-        <ScrollReveal>
-          <p className="section-kicker">Chapter Life</p>
-          <h2 className="section-title max-w-4xl">A rush process that shows the full picture.</h2>
-        </ScrollReveal>
-
-        <div className="mt-10 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 md:grid-cols-4">
-          {events.map((event, index) => (
-            <ScrollReveal key={event} delay={index * 0.04}>
-              <div className="highlight-cell">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <h3>{event}</h3>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section id="gallery" className="section-shell hidden md:block">
-        <ScrollReveal>
-          <p className="section-kicker">Gallery</p>
-          <h2 className="section-title">Chapter moments, framed cleaner.</h2>
-        </ScrollReveal>
-
-        <div className="gallery-grid mt-10">
-          {gallery.map((g, index) => (
-            <ScrollReveal key={g} delay={index * 0.06}>
-              <div className="gallery-panel group">
-                <div>
-                  <span>Pi Kapp ASU</span>
-                  <h3>{g}</h3>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
         </div>
       </section>
 
