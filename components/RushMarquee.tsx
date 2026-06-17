@@ -2,8 +2,9 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
-const topWords = ['Brotherhood', 'Rush', 'Tailgates', 'Philanthropy', 'Leadership'];
-const bottomWords = ['ASU', 'Theta Xi', 'Pi Kapp', 'Fall Rush', 'Chapter Life'];
+const marqueePhrase = 'Exceptional leaders. Uncommon opportunities.';
+const topWords = [marqueePhrase, marqueePhrase, marqueePhrase];
+const bottomWords = [marqueePhrase, marqueePhrase, marqueePhrase];
 
 function MarqueeWords({ words }: { words: string[] }) {
   const track = [...words, ...words];
