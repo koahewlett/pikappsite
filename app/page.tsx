@@ -27,13 +27,9 @@ export default function Home() {
               Pi Kappa Phi · Theta Xi · Arizona State
             </p>
 
-            <h1 className="hero-title max-w-4xl text-5xl leading-[0.9] sm:text-6xl md:text-8xl">
-              Rush Pi Kapp
-            </h1>
-
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/70 sm:text-xl md:mt-6 md:max-w-2xl md:text-2xl">
+            <h1 className="hero-title max-w-5xl text-5xl leading-[0.9] sm:text-6xl md:text-8xl">
               Exceptional leaders. Uncommon opportunities.
-            </p>
+            </h1>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a href="#apply" className="premium-button premium-button-primary w-full sm:w-auto">
