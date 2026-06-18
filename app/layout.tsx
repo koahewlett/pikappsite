@@ -6,7 +6,7 @@ import './mobile-text-fixes.css';
 import './descender-fix.css';
 import './inter-tight.css';
 import type { Metadata } from 'next';
-import { Inter_Tight, Syne } from 'next/font/google';
+import { Inter_Tight } from 'next/font/google';
 import { IntroLoader } from '@/components/IntroLoader';
 
 const interTight = Inter_Tight({
@@ -15,13 +15,6 @@ const interTight = Inter_Tight({
   style: ['normal', 'italic'],
   display: 'swap',
   variable: '--font-inter-tight',
-});
-
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-  variable: '--font-syne',
 });
 
 export const metadata: Metadata = {
@@ -114,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={`${interTight.variable} ${syne.variable} font-sans antialiased`}>
+      <body className={`${interTight.variable} font-sans antialiased`}>
         <IntroLoader />
         <script
           type="application/ld+json"
