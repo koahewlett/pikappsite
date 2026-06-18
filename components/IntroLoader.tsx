@@ -95,7 +95,7 @@ export function IntroLoader() {
 
   if (phase === 'checking' || phase === 'hidden') return null;
 
-  const activeText = phase === 'line-one' ? 'Everyone knows about it.' : 'Few get to experience it';
+  const activeText = phase === 'line-one' ? 'Everyone knows about it.' : 'Few get to experience it.';
   const ariaText = phase === 'flash' ? 'Rush. Pi Kapp.' : activeText;
 
   return (
