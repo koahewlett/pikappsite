@@ -4,9 +4,18 @@ import './ui-updates.css';
 import './intro-loader.css';
 import './mobile-text-fixes.css';
 import './descender-fix.css';
+import './inter-tight.css';
 import type { Metadata } from 'next';
-import { Syne } from 'next/font/google';
+import { Inter_Tight, Syne } from 'next/font/google';
 import { IntroLoader } from '@/components/IntroLoader';
+
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-inter-tight',
+});
 
 const syne = Syne({
   subsets: ['latin'],
@@ -105,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={`${syne.variable} font-sans antialiased`}>
+      <body className={`${interTight.variable} ${syne.variable} font-sans antialiased`}>
         <IntroLoader />
         <script
           type="application/ld+json"
