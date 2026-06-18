@@ -96,7 +96,7 @@ export function IntroLoader() {
   if (phase === 'checking' || phase === 'hidden') return null;
 
   const activeText = phase === 'line-one' ? 'Everyone knows about it.' : 'Few get to experience it';
-  const ariaText = phase === 'flash' ? 'Rush. Pi Kapp' : activeText;
+  const ariaText = phase === 'flash' ? 'Rush. Pi Kapp.' : activeText;
 
   return (
     <div className={`intro-loader intro-loader-${phase}`} role="status" aria-live="polite" aria-label={ariaText}>
@@ -105,7 +105,7 @@ export function IntroLoader() {
 
       <div className="intro-loader-content">
         {phase === 'flash' || phase === 'exiting' ? (
-          <div className="intro-loader-mark">Rush. Pi Kapp</div>
+          <div className="intro-loader-mark">Rush. Pi Kapp.</div>
         ) : (
           <div className="intro-loader-line" key={phase}>
             <AnimatedText text={activeText} />
