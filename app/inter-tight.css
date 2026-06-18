@@ -29,31 +29,32 @@ h3,
 }
 
 .font-semibold {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .font-bold {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .font-extrabold,
 .font-black {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .hero-title {
-  font-weight: 800;
+  font-style: italic;
+  font-weight: 700;
 }
 
 .section-title {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .section-kicker,
 .story-number,
 .highlight-cell span,
 .gallery-panel span {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .section-copy,
@@ -75,8 +76,11 @@ h3,
 header nav a,
 header a[href="/#apply"],
 header button,
+.apply-story label {
+  font-weight: 500 !important;
+}
+
 .premium-button,
-.apply-story label,
 .apply-story button {
   font-weight: 600 !important;
 }
@@ -88,7 +92,17 @@ header button,
 
 .intro-loader,
 .intro-loader * {
-  font-family: var(--font-syne), Syne, system-ui, sans-serif !important;
+  font-family: var(--font-inter-tight), "Inter Tight", Arial, sans-serif !important;
+}
+
+.intro-loader-line-text,
+.intro-loader-word,
+.intro-loader-char {
+  font-weight: 500;
+}
+
+.intro-loader-mark {
+  font-weight: 600;
 }
 
 .font-alarm,
@@ -99,20 +113,17 @@ header button,
 
 @media (max-width: 767px) {
   body,
-  button,
   input,
   textarea,
   select,
-  label,
-  summary,
-  a,
   p,
   li {
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .hero-title {
-    font-weight: 800;
+    font-style: italic;
+    font-weight: 700;
   }
 
   .section-title,
@@ -128,9 +139,16 @@ header button,
     font-weight: 600 !important;
   }
 
+  header nav a,
+  header a[href="/#apply"],
+  header button,
+  .apply-story label {
+    font-weight: 500 !important;
+  }
+
   .intro-loader,
   .intro-loader * {
-    font-family: var(--font-syne), Syne, system-ui, sans-serif !important;
+    font-family: var(--font-inter-tight), "Inter Tight", Arial, sans-serif !important;
   }
 
   .font-alarm,
