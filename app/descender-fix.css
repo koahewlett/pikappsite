@@ -1,4 +1,4 @@
-/* Allow Syne glyphs to extend beyond their line boxes without being cropped. */
+/* Allow Inter Tight glyphs to extend beyond their line boxes without cropping. */
 .hero-title,
 .section-title,
 .section-kicker,
@@ -87,8 +87,9 @@ header button,
 .intro-loader-line {
   box-sizing: content-box;
   min-height: auto;
-  overflow: hidden;
-  padding: 0.06em 0.08em 0.18em;
+  overflow: visible;
+  clip-path: inset(-0.06em -0.08em -0.16em -0.08em);
+  padding: 0.04em 0.08em 0.1em;
 }
 
 .intro-loader-line-text,
@@ -121,7 +122,7 @@ header button,
   }
 
   .intro-loader-line {
-    padding-bottom: 0.2em;
+    padding-bottom: 0.1em;
   }
 
   .intro-loader-line-text,
