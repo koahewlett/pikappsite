@@ -38,7 +38,7 @@ export function Nav() {
 
           <nav className="flex min-w-0 flex-1 justify-center">
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1 shadow-[0_0_24px_rgba(58,95,205,0.08)]">
-              <a href="/#why" className="rounded-full px-2.5 py-2 text-[10px] font-bold text-white/75 transition hover:text-gold">
+              <a href="/#why" className="hidden rounded-full px-2.5 py-2 text-[10px] font-bold text-white/75 transition hover:text-gold md:inline-flex">
                 Why
               </a>
               <a href="/events" className="rounded-full px-2.5 py-2 text-[10px] font-bold text-white/75 transition hover:text-gold">
