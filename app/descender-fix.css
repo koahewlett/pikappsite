@@ -1,0 +1,63 @@
+/* Allow Syne glyphs to extend beyond their line boxes without being cropped. */
+.hero-title,
+.section-title,
+.section-kicker,
+.section-copy,
+.story-row h3,
+.story-row p,
+.highlight-cell h3,
+.gallery-panel h3,
+.faq-item summary,
+.faq-item p,
+.premium-button,
+header a,
+header button,
+.greek-logo,
+.greek-logo span,
+.apply-story label,
+.apply-story input,
+.apply-story textarea,
+.scroll-hint,
+.site-loader-mark {
+  overflow: visible;
+}
+
+/* Clip the moving tracks horizontally, but never crop their glyphs vertically. */
+.rush-marquee {
+  overflow-x: clip;
+  overflow-y: visible;
+  contain: none;
+}
+
+.rush-marquee-row,
+.rush-marquee span {
+  overflow: visible;
+}
+
+.rush-marquee-row {
+  padding-block: 0.5rem;
+}
+
+/* Keep the rolling reveal mask, but make its line box tall enough for descenders. */
+.intro-loader-content,
+.intro-loader-line-text,
+.intro-loader-word,
+.intro-loader-char,
+.intro-loader-mark {
+  overflow: visible;
+}
+
+.intro-loader-line {
+  box-sizing: content-box;
+  min-height: 2em;
+  overflow: hidden;
+  padding-top: 0.4em;
+  padding-bottom: 1.2em;
+}
+
+@media (max-width: 767px) {
+  .intro-loader-line {
+    min-height: 2.2em;
+    padding-bottom: 1.3em;
+  }
+}
