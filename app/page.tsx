@@ -68,7 +68,7 @@ export default function Home() {
 
       <RoseDivider />
 
-      <section id="why" className="section-shell why-story">
+      <section id="why" className="section-shell why-story max-md:!hidden">
         <div className="why-sticky">
           <ScrollReveal>
             <p className="section-kicker">Why Pi Kapp</p>
