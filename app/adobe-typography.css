@@ -2,6 +2,7 @@
   --font-intro: "baka", "Archivo Black", Impact, sans-serif;
   --font-display: "archivo", "Arial Black", Impact, sans-serif;
   --font-body: "archivo", Arial, sans-serif;
+  --font-alarm: "overtime-lcd-pro", "Doto", sans-serif;
   --font-syne: var(--font-body);
   --font-inter: var(--font-body);
   --font-inter-tight: var(--font-body);
@@ -123,8 +124,8 @@ header button,
 
 .font-alarm,
 .font-alarm * {
-  font-family: "Doto", sans-serif !important;
-  font-weight: 900;
+  font-family: var(--font-alarm) !important;
+  font-weight: 300;
 }
 
 @media (max-width: 767px) {
