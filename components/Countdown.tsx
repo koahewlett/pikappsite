@@ -34,10 +34,6 @@ export function Countdown({ variant = 'hero' }: CountdownProps) {
         <div className="countdown-shine pointer-events-none absolute inset-x-6 top-0 h-20 rounded-b-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,.18),transparent_40%)] opacity-20" />
 
         <div className="relative flex flex-col items-center gap-4 text-center">
-          <span className="countdown-label text-xs font-semibold uppercase tracking-[0.35em] text-gold/70 sm:text-sm">
-            {days} days until fall rush
-          </span>
-
           <div className="countdown-screen font-alarm flex flex-nowrap items-center justify-center gap-3 rounded-[1.75rem] bg-[#060606]/90 px-5 py-4 shadow-inner shadow-black/50 ring-1 ring-white/10 sm:px-6">
             <span className="countdown-digit text-4xl text-gold drop-shadow-[0_0_24px_rgba(212,175,55,0.22)] tabular-nums sm:text-5xl">
               {hoursLabel}
@@ -62,6 +58,10 @@ export function Countdown({ variant = 'hero' }: CountdownProps) {
               {secsLabel}
             </span>
           </div>
+
+          <span className="countdown-label text-xs font-semibold uppercase tracking-[0.35em] text-gold/70 sm:text-sm">
+            {days} days until fall rush
+          </span>
         </div>
       </div>
     </div>
