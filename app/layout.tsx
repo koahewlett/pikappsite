@@ -5,6 +5,7 @@ import './intro-loader.css';
 import './mobile-text-fixes.css';
 import './descender-fix.css';
 import './inter-tight.css';
+import './hero-cleanup.css';
 import type { Metadata } from 'next';
 import { Inter_Tight } from 'next/font/google';
 import { IntroLoader } from '@/components/IntroLoader';
