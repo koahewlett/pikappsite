@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { Countdown } from '@/components/Countdown';
 
 function GreekLogo() {
   return (
@@ -14,19 +14,6 @@ function GreekLogo() {
 }
 
 export function Nav() {
-  const [showBottomApply, setShowBottomApply] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBottomApply(window.scrollY > window.innerHeight * 0.9);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <>
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-ink/85 backdrop-blur-xl">
@@ -91,16 +78,9 @@ export function Nav() {
         </div>
       </header>
 
-      {showBottomApply && (
-        <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-4 right-4 z-50 md:hidden">
-          <a
-            href="/#apply"
-            className="block rounded-2xl bg-gold py-4 text-center font-black text-ink shadow-glow"
-          >
-            Apply for Rush
-          </a>
-        </div>
-      )}
+      <div className="sticky-countdown-bar" aria-label="Fall rush countdown">
+        <Countdown variant="sticky" />
+      </div>
     </>
   );
 }
