@@ -27,7 +27,7 @@
 }
 
 .display-tone-blue {
-  color: #6f91ff;
+  color: var(--color-pikapp-blue);
 }
 
 .display-tone-muted {
@@ -57,14 +57,92 @@
 .hero-display {
   width: min-content;
   max-width: 100%;
-  font-size: clamp(5rem, 14vw, 13.5rem);
-  line-height: 0.86;
+  font-size: clamp(4.8rem, 12.4vw, 11.8rem);
+  line-height: 0.88;
   letter-spacing: -0.085em;
   padding-bottom: 0.08em;
 }
 
 .hero-display .display-line-text {
-  line-height: 0.86;
+  line-height: 0.88;
+}
+
+.sticky-countdown-bar {
+  display: none;
+}
+
+.countdown-root-sticky .countdown-shell {
+  border-radius: 1rem;
+  padding: 0.45rem 0.62rem;
+  border-color: rgba(255, 255, 255, 0.095);
+  background:
+    linear-gradient(180deg, rgba(8, 8, 8, 0.91), rgba(5, 5, 5, 0.84)),
+    radial-gradient(circle at 84% 0%, rgba(58, 95, 205, 0.1), transparent 48%);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.countdown-root-sticky .countdown-shine {
+  opacity: 0.12;
+}
+
+.countdown-root-sticky .countdown-shell .relative {
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.countdown-root-sticky .countdown-label {
+  max-width: 6rem;
+  font-size: 0.52rem;
+  letter-spacing: 0.16em;
+  line-height: 1.18;
+  text-align: right;
+}
+
+.countdown-root-sticky .countdown-screen {
+  gap: 0.3rem;
+  border-radius: 0.76rem;
+  padding: 0.28rem 0.46rem 0.32rem;
+}
+
+.countdown-root-sticky .countdown-digit,
+.countdown-root-sticky .countdown-colon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.events-page {
+  position: relative;
+  overflow-x: clip;
+  padding-top: clamp(8.75rem, 12vw, 10rem);
+}
+
+.events-page > section {
+  position: relative;
+  z-index: 1;
+}
+
+.events-rsvp-layout {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.rsvp-punch-block {
+  min-width: 0;
+  overflow: visible;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.rsvp-punch-display {
+  font-size: clamp(3.2rem, 7.2vw, 7.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.075em;
 }
 
 .punch-section {
@@ -308,6 +386,10 @@
 }
 
 @media (min-width: 768px) {
+  .events-rsvp-layout {
+    grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+  }
+
   .punch-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -328,21 +410,67 @@
 
 @media (max-width: 767px) {
   .hero-display {
-    font-size: clamp(4.8rem, 23vw, 7.8rem);
-    letter-spacing: -0.09em;
-    line-height: 0.88;
+    font-size: clamp(4.35rem, 20vw, 6.9rem);
+    letter-spacing: -0.08em;
+    line-height: 0.9;
   }
 
-  .punch-section {
-    padding-block: 4rem;
+  .hero-display .display-line-text {
+    line-height: 0.9;
   }
 
+  .sticky-countdown-bar {
+    position: fixed;
+    top: 4.65rem;
+    left: 0;
+    right: 0;
+    z-index: 49;
+    display: block;
+    padding-inline: 0.72rem;
+    pointer-events: none;
+  }
+
+  .sticky-countdown-bar .countdown-root {
+    max-width: min(24rem, calc(100vw - 1.44rem));
+    padding-inline: 0;
+    pointer-events: auto;
+  }
+
+  .countdown-root-sticky .countdown-label {
+    max-width: 5.45rem;
+    font-size: 0.48rem;
+    letter-spacing: 0.13em;
+  }
+
+  .countdown-root-sticky .countdown-screen {
+    gap: 0.24rem;
+    padding-inline: 0.4rem;
+  }
+
+  .countdown-root-sticky .countdown-digit,
+  .countdown-root-sticky .countdown-colon {
+    font-size: 1rem;
+  }
+
+  .events-page {
+    padding-top: 9.6rem;
+  }
+
+  .events-hero {
+    margin-bottom: 2rem;
+  }
+
+  .rsvp-punch-display,
   .punch-display,
   .rush-chairmen-heading .display-stack,
   .apply-display-title .display-stack {
     font-size: clamp(2.35rem, 10vw, 3.15rem);
     letter-spacing: -0.055em;
     line-height: 0.95;
+  }
+
+  .punch-section {
+    padding-block: 4rem;
   }
 
   .punch-block:nth-child(2) {
