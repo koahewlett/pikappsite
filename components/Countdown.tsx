@@ -8,7 +8,7 @@ type CountdownProps = {
 
 export function Countdown({ variant = 'hero' }: CountdownProps) {
   const target = new Date('2026-08-31T17:00:00-07:00').getTime();
-  const [t, setT] = useState(() => target - Date.now());
+  const [t, setT] = useState<number | null>(null);
   const isSticky = variant === 'sticky';
 
   useEffect(() => {
@@ -18,15 +18,16 @@ export function Countdown({ variant = 'hero' }: CountdownProps) {
     return () => clearInterval(id);
   }, [target]);
 
-  const d = Math.max(0, t);
+  const d = Math.max(0, t ?? 0);
   const days = Math.floor(d / 86400000);
   const hours = Math.floor((d % 86400000) / 3600000);
   const mins = Math.floor((d % 3600000) / 60000);
   const secs = Math.floor((d % 60000) / 1000);
 
-  const hoursLabel = String(hours).padStart(2, '0');
-  const minsLabel = String(mins).padStart(2, '0');
-  const secsLabel = String(secs).padStart(2, '0');
+  const hoursLabel = t === null ? '--' : String(hours).padStart(2, '0');
+  const minsLabel = t === null ? '--' : String(mins).padStart(2, '0');
+  const secsLabel = t === null ? '--' : String(secs).padStart(2, '0');
+  const daysLabel = t === null ? '--' : String(days);
 
   return (
     <div className={`countdown-root ${isSticky ? 'countdown-root-sticky' : ''} mx-auto w-full max-w-3xl px-1`}>
@@ -60,7 +61,7 @@ export function Countdown({ variant = 'hero' }: CountdownProps) {
           </div>
 
           <span className="countdown-label text-xs font-semibold uppercase tracking-[0.35em] text-gold/70 sm:text-sm">
-            {days} days until fall rush
+            {daysLabel} days until fall rush
           </span>
         </div>
       </div>
