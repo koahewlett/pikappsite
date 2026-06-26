@@ -1,0 +1,167 @@
+:root {
+  --font-intro: "baka", "Archivo Black", Impact, sans-serif;
+  --font-display: "archivo", "Arial Black", Impact, sans-serif;
+  --font-body: "archivo", Arial, sans-serif;
+  --font-syne: var(--font-body);
+  --font-inter: var(--font-body);
+  --font-inter-tight: var(--font-body);
+  --font-oswald: var(--font-display);
+  --color-pikapp-ink: #080808;
+  --color-pikapp-charcoal: #101010;
+  --color-pikapp-gold: #d4af37;
+  --color-pikapp-blue: #3a5fcd;
+  --color-pikapp-muted: rgba(255, 255, 255, 0.34);
+}
+
+html,
+body,
+.font-sans,
+button,
+input,
+textarea,
+select,
+a,
+summary,
+label,
+p,
+li,
+details {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+body {
+  font-synthesis: none;
+}
+
+h1,
+h2,
+h3,
+.font-display,
+.font-accent,
+.hero-title,
+.section-title,
+.rush-marquee span,
+.display-stack,
+.story-row h3,
+.highlight-cell h3,
+.gallery-panel h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+.font-light:not(.font-alarm) {
+  font-weight: 300;
+}
+
+.font-medium:not(.font-alarm) {
+  font-weight: 500;
+}
+
+.font-semibold:not(.hero-title):not(.font-alarm) {
+  font-weight: 600;
+}
+
+.font-bold:not(.hero-title):not(.font-alarm) {
+  font-weight: 700;
+}
+
+.font-extrabold:not(.hero-title):not(.font-alarm),
+.font-black:not(.hero-title):not(.font-alarm) {
+  font-weight: 900;
+}
+
+.hero-title {
+  font-weight: 900;
+}
+
+.section-title,
+.final-cta .section-title {
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.section-kicker,
+.story-number,
+.highlight-cell span,
+.gallery-panel span,
+.faq-item summary {
+  font-family: var(--font-body);
+  font-weight: 800;
+}
+
+.section-copy,
+.story-row p,
+.faq-item p,
+.stat-tile,
+.apply-story input,
+.apply-story textarea {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+header nav a,
+header a[href="/#apply"],
+header button,
+.apply-story label {
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+}
+
+.premium-button,
+.apply-story button {
+  font-family: var(--font-body) !important;
+  font-weight: 800 !important;
+}
+
+.intro-loader,
+.intro-loader * {
+  font-family: var(--font-intro) !important;
+}
+
+.font-alarm,
+.font-alarm * {
+  font-family: "Doto", sans-serif !important;
+  font-weight: 900;
+}
+
+@media (max-width: 767px) {
+  html,
+  body,
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  summary,
+  a,
+  p,
+  li {
+    line-height: 1.4;
+  }
+
+  .hero-title,
+  .section-title,
+  .story-row h3,
+  .highlight-cell h3,
+  .gallery-panel h3,
+  .faq-item summary,
+  header nav a,
+  header a[href="/#apply"],
+  header button,
+  .premium-button,
+  .apply-story button {
+    font-weight: 900 !important;
+  }
+
+  .section-copy,
+  .story-row p,
+  .faq-item p,
+  .apply-story label,
+  .apply-story input,
+  .apply-story textarea {
+    font-weight: 400;
+  }
+}
