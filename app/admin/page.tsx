@@ -31,7 +31,7 @@ export default function Admin() {
     a.click();
   }
 
-  return <main className="min-h-screen bg-ink px-6 py-28">
+  return <main className="member-page min-h-screen bg-ink px-6 py-28">
     <Nav />
     <section className="mx-auto max-w-7xl">
       <p className="text-sm font-bold uppercase tracking-[.35em] text-gold">Admin only</p>
