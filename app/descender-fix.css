@@ -68,7 +68,7 @@ header button,
   padding-bottom: 0.06em;
 }
 
-/* Keep the rolling reveal mask, but make its line box tall enough for descenders. */
+/* Keep the rolling reveal mask feeling, but make it tall enough for Baka descenders. */
 .intro-loader-content,
 .intro-loader-line-text,
 .intro-loader-word,
@@ -88,24 +88,28 @@ header button,
   box-sizing: content-box;
   min-height: auto;
   overflow: visible;
-  clip-path: inset(-0.06em -0.08em -0.16em -0.08em);
-  padding: 0.04em 0.08em 0.1em;
+  clip-path: inset(-0.12em -0.12em -0.36em -0.12em);
+  padding: 0.14em 0.12em 0.46em;
 }
 
-.intro-loader-line-text,
+.intro-loader-line-text {
+  line-height: 1.44;
+  padding-bottom: 0.34em;
+}
+
 .intro-loader-word,
 .intro-loader-char {
-  line-height: 1.18;
-  padding-bottom: 0.06em;
+  line-height: 1.44;
+  padding-bottom: 0.22em;
 }
 
 .intro-loader-mark {
   box-sizing: border-box;
   max-width: 100%;
-  padding: 0.04em 0.12em 0.08em;
+  padding: 0.08em 0.12em 0.24em;
   font-size: clamp(2.6rem, 8.5vw, 8rem);
   letter-spacing: -0.035em;
-  line-height: 1.08;
+  line-height: 1.18;
   overflow-wrap: normal;
   text-wrap: balance;
 }
@@ -122,19 +126,22 @@ header button,
   }
 
   .intro-loader-line {
-    padding-bottom: 0.1em;
+    clip-path: inset(-0.14em -0.14em -0.42em -0.14em);
+    padding-top: 0.2em;
+    padding-bottom: 0.58em;
   }
 
   .intro-loader-line-text,
   .intro-loader-word,
   .intro-loader-char {
-    line-height: 1.2;
-    padding-bottom: 0.07em;
+    line-height: 1.5;
+    padding-bottom: 0.26em;
   }
 
   .intro-loader-mark {
     font-size: clamp(2.2rem, 11.2vw, 4.6rem);
     letter-spacing: -0.03em;
-    line-height: 1.08;
+    line-height: 1.2;
+    padding-bottom: 0.26em;
   }
 }
