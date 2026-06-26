@@ -4,19 +4,12 @@ import './ui-updates.css';
 import './intro-loader.css';
 import './mobile-text-fixes.css';
 import './descender-fix.css';
-import './inter-tight.css';
+import './adobe-typography.css';
+import './rush-sections.css';
 import './hero-cleanup.css';
 import type { Metadata } from 'next';
-import { Inter_Tight } from 'next/font/google';
 import { IntroLoader } from '@/components/IntroLoader';
-
-const interTight = Inter_Tight({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-  variable: '--font-inter-tight',
-});
+import { adobeFontsKitUrl } from '@/lib/data';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pikapp-asu.com'),
@@ -108,7 +101,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={`${interTight.variable} font-sans antialiased`}>
+      <head>
+        <link rel="stylesheet" href={adobeFontsKitUrl} />
+      </head>
+      <body className="font-sans antialiased">
         <IntroLoader />
         <script
           type="application/ld+json"
