@@ -88,19 +88,19 @@ header button,
   box-sizing: content-box;
   min-height: auto;
   overflow: visible;
-  clip-path: inset(-0.12em -0.12em -0.36em -0.12em);
-  padding: 0.14em 0.12em 0.46em;
+  clip-path: inset(-0.12em -0.12em -0.52em -0.12em);
+  padding: 0.14em 0.12em 0.62em;
 }
 
 .intro-loader-line-text {
   line-height: 1.44;
-  padding-bottom: 0.34em;
+  padding-bottom: 0.38em;
 }
 
 .intro-loader-word,
 .intro-loader-char {
   line-height: 1.44;
-  padding-bottom: 0.22em;
+  padding-bottom: 0.26em;
 }
 
 .intro-loader-mark {
@@ -126,16 +126,16 @@ header button,
   }
 
   .intro-loader-line {
-    clip-path: inset(-0.14em -0.14em -0.42em -0.14em);
+    clip-path: inset(-0.14em -0.14em -0.78em -0.14em);
     padding-top: 0.2em;
-    padding-bottom: 0.58em;
+    padding-bottom: 0.9em;
   }
 
   .intro-loader-line-text,
   .intro-loader-word,
   .intro-loader-char {
     line-height: 1.5;
-    padding-bottom: 0.26em;
+    padding-bottom: 0.34em;
   }
 
   .intro-loader-mark {
