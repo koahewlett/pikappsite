@@ -42,7 +42,7 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal className="mt-8 max-w-full" delay={0.12}>
+          <ScrollReveal className="hero-countdown mt-8 max-w-full" delay={0.12}>
             <Countdown />
           </ScrollReveal>
         </div>
