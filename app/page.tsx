@@ -2,10 +2,22 @@ import { HeroCrests } from '@/components/HeroCrests';
 import { Nav } from '@/components/Nav';
 import { ApplicationForm } from '@/components/ApplicationForm';
 import { Countdown } from '@/components/Countdown';
+import { DisplayStack } from '@/components/DisplayStack';
 import { RoseDivider } from '@/components/RoseDivider';
+import { RushChairmen } from '@/components/RushChairmen';
 import { RushMarquee } from '@/components/RushMarquee';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { stats, why, faqs } from '@/lib/data';
+import { SiteFooter } from '@/components/SiteFooter';
+import {
+  applyDisplay,
+  chairmenDisplay,
+  heroDisplay,
+  punchStatements,
+  rushChairmen,
+  stats,
+  why,
+  faqs,
+} from '@/lib/data';
 
 const SHOW_ALUMNI = false;
 
@@ -27,8 +39,8 @@ export default function Home() {
               Pi Kappa Phi · Theta Xi · Arizona State
             </p>
 
-            <h1 className="hero-title max-w-5xl text-5xl leading-[0.9] sm:text-6xl md:text-8xl">
-              Rush Pi Kapp
+            <h1 className="hero-title hero-display max-w-5xl" aria-label="Rush Pi Kapp">
+              <DisplayStack lines={heroDisplay} />
             </h1>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -54,6 +66,23 @@ export default function Home() {
       </section>
 
       <RushMarquee />
+
+      <section className="punch-section">
+        <div className="punch-section-inner">
+          <div className="punch-grid">
+            {punchStatements.map((statement, index) => (
+              <ScrollReveal delay={index * 0.08} key={statement.ariaLabel}>
+                <article className="punch-block">
+                  <p className="section-kicker">{statement.kicker}</p>
+                  <h2 className="punch-display" aria-label={statement.ariaLabel}>
+                    <DisplayStack lines={statement.lines} />
+                  </h2>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section-shell grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         {stats.map(([n, l], index) => (
@@ -95,7 +124,9 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <ScrollReveal className="lg:sticky lg:top-32">
             <p className="section-kicker">Fall Rush</p>
-            <h2 className="section-title">Start the conversation.</h2>
+            <h2 className="section-title apply-display-title" aria-label="Start the conversation.">
+              <DisplayStack lines={applyDisplay} />
+            </h2>
             <p className="section-copy">
               Send the rush committee your details and we will reach out with the next step.
             </p>
@@ -105,6 +136,26 @@ export default function Home() {
             <ApplicationForm />
           </ScrollReveal>
         </div>
+      </section>
+
+      <section id="rush-chairmen" className="section-shell rush-chairmen-section">
+        <ScrollReveal>
+          <div className="rush-chairmen-heading">
+            <div>
+              <p className="section-kicker">Rush Team</p>
+              <h2 aria-label="Meet our rush chairmen">
+                <DisplayStack lines={chairmenDisplay} />
+              </h2>
+            </div>
+            <p className="rush-chairmen-note">
+              Connect with the guys leading rush this semester and get a clear next step before events start.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <RushChairmen chairmen={rushChairmen} />
+        </ScrollReveal>
       </section>
 
       {SHOW_ALUMNI && (
@@ -165,6 +216,8 @@ export default function Home() {
           </div>
         </ScrollReveal>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
