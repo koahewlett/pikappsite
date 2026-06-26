@@ -126,6 +126,7 @@ header button,
 .font-alarm * {
   font-family: var(--font-alarm) !important;
   font-weight: 300;
+  font-variation-settings: normal;
 }
 
 @media (max-width: 767px) {
