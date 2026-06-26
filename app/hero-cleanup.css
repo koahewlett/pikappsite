@@ -130,21 +130,21 @@
   }
 
   .hero-crest-right {
-    right: -72vw;
-    top: 5rem;
-    width: 128vw;
-    height: 128vw;
-    opacity: 0.34;
+    right: -108vw;
+    top: 6.5rem;
+    width: 116vw;
+    height: 116vw;
+    opacity: 0.24;
   }
 
   .hero-crest-right .chrome-crest {
     filter:
-      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.24))
-      drop-shadow(0 9px 16px rgba(0, 0, 0, 0.3))
-      drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.28));
+      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.18))
+      drop-shadow(0 8px 14px rgba(0, 0, 0, 0.24))
+      drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.2));
   }
 
   .hero-crest-right .chrome-crest::before {
-    transform: translate3d(10px, 9px, -1px);
+    transform: translate3d(8px, 7px, -1px);
   }
 }
