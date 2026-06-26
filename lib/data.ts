@@ -27,24 +27,25 @@ export const punchStatements = [
     lines: [
       { text: 'BUILT FOR', tone: 'white' },
       { text: 'GUYS WHO', tone: 'white' },
-      { text: 'WANT MORE', tone: 'muted', italic: true, shadow: true },
+      { text: 'WANT MORE', tone: 'blue', italic: true, shadow: true },
       { text: 'OUT OF ASU.', tone: 'white' }
-    ]
-  },
-  {
-    kicker: 'Rush Standard',
-    ariaLabel: 'Show up. Get seen. Get connected.',
-    lines: [
-      { text: 'SHOW UP.', tone: 'white' },
-      { text: 'GET SEEN.', tone: 'blue', italic: true, shadow: true },
-      { text: 'GET CONNECTED.', tone: 'white' }
     ]
   }
 ] as const;
 
+export const rsvpPunchStatement = {
+  kicker: 'Rush Standard',
+  ariaLabel: 'Show up. Get seen. Get connected.',
+  lines: [
+    { text: 'SHOW UP.', tone: 'white' },
+    { text: 'GET SEEN.', tone: 'blue', italic: true, shadow: true },
+    { text: 'GET CONNECTED.', tone: 'white' }
+  ]
+} as const;
+
 export const applyDisplay = [
   { text: 'START THE', tone: 'white' },
-  { text: 'CONVERSATION.', tone: 'gold', italic: true, shadow: true }
+  { text: 'CONVERSATION.', tone: 'blue', italic: true, shadow: true }
 ] as const;
 
 export const chairmenDisplay = [
@@ -94,11 +95,11 @@ export const footerLinkGroups = [
     ]
   },
   {
-    title: 'Social / Contact',
+    title: 'Contact',
     links: [
+      { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
       { label: 'Pi Kappa Phi National Instagram', href: 'https://www.instagram.com/pikappaphi/', external: true },
       { label: 'The Ability Experience Instagram', href: 'https://www.instagram.com/abilityexp/', external: true },
-      { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
       { label: 'Rush Form', href: chapterContact.rushHref, external: false },
       { label: 'RSVP', href: chapterContact.rsvpHref, external: false }
     ]
