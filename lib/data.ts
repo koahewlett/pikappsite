@@ -20,17 +20,11 @@ export const heroDisplay = [
   { text: 'PIKAPP', tone: 'gold', italic: true, shadow: true }
 ] as const;
 
-export const punchStatements = [
-  {
-    kicker: 'Why Pi Kapp',
-    ariaLabel: 'Built for guys who want more out of ASU.',
-    lines: [
-      { text: 'BUILT FOR', tone: 'white' },
-      { text: 'GUYS WHO', tone: 'white' },
-      { text: 'WANT MORE', tone: 'blue', italic: true, shadow: true },
-      { text: 'OUT OF ASU.', tone: 'white' }
-    ]
-  }
+export const whyDisplay = [
+  { text: 'BUILT FOR', tone: 'white' },
+  { text: 'GUYS WHO', tone: 'white' },
+  { text: 'WANT MORE', tone: 'blue', italic: true, shadow: true },
+  { text: 'OUT OF ASU.', tone: 'white' }
 ] as const;
 
 export const rsvpPunchStatement = {
