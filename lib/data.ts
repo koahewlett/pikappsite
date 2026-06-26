@@ -1,3 +1,7 @@
+export const adobeFontsKitUrl = '';
+// Paste the Official PiKapp Site Adobe Fonts kit URL above when available.
+// It should look like: https://use.typekit.net/xxxxxxx.css
+
 export const nav = [
   'Why Pi Kapp',
   'Rush Events',
@@ -12,6 +16,96 @@ export const stats = [
   ['1904', 'Nationally Founded'],
   ['20+', 'Majors Represented']
 ];
+
+export const heroDisplay = [
+  { text: 'RUSH', tone: 'white' },
+  { text: 'PIKAPP', tone: 'gold', italic: true, shadow: true }
+] as const;
+
+export const punchStatements = [
+  {
+    kicker: 'Why Pi Kapp',
+    ariaLabel: 'Built for guys who want more out of ASU.',
+    lines: [
+      { text: 'BUILT FOR', tone: 'white' },
+      { text: 'GUYS WHO', tone: 'white' },
+      { text: 'WANT MORE', tone: 'muted', italic: true, shadow: true },
+      { text: 'OUT OF ASU.', tone: 'white' }
+    ]
+  },
+  {
+    kicker: 'Rush Standard',
+    ariaLabel: 'Show up. Get seen. Get connected.',
+    lines: [
+      { text: 'SHOW UP.', tone: 'white' },
+      { text: 'GET SEEN.', tone: 'blue', italic: true, shadow: true },
+      { text: 'GET CONNECTED.', tone: 'white' }
+    ]
+  }
+] as const;
+
+export const applyDisplay = [
+  { text: 'START THE', tone: 'white' },
+  { text: 'CONVERSATION.', tone: 'gold', italic: true, shadow: true }
+] as const;
+
+export const chairmenDisplay = [
+  { text: 'MEET OUR', tone: 'white' },
+  { text: 'RUSH CHAIRMEN', tone: 'gold', shadow: true }
+] as const;
+
+export const rushChairmen = [
+  {
+    id: 'bode-estabrook',
+    name: 'Bode Estabrook',
+    title: 'Rush Chairman',
+    image: '/images/rush-chairman-1.jpg',
+    initials: 'BE',
+    bio: 'Short contact and bio placeholder for the rush chairman.',
+    contact: '@instagram_handle / phone placeholder'
+  },
+  {
+    id: 'tanner-smith',
+    name: 'Tanner Smith',
+    title: 'Vice Rush Chairman',
+    image: '/images/rush-chairman-2.jpg',
+    initials: 'TS',
+    bio: 'Short contact and bio placeholder for the vice rush chairman.',
+    contact: '@instagram_handle / phone placeholder'
+  }
+] as const;
+// Put headshots at:
+// public/images/rush-chairman-1.jpg
+// public/images/rush-chairman-2.jpg
+
+export const chapterContact = {
+  instagram: 'https://www.instagram.com/asupikappaphi/',
+  rushHref: '#apply',
+  rsvpHref: '/events',
+  email: 'email placeholder',
+  phone: 'phone placeholder'
+} as const;
+
+export const footerLinkGroups = [
+  {
+    title: 'Official Links',
+    links: [
+      { label: 'Pi Kappa Phi National Website', href: 'https://www.pikapp.org', external: true },
+      { label: 'The Ability Experience', href: 'https://www.abilityexperience.org', external: true },
+      { label: 'Arizona State University', href: 'https://www.asu.edu', external: true }
+    ]
+  },
+  {
+    title: 'Social / Contact',
+    links: [
+      { label: 'Pi Kappa Phi National Instagram', href: 'https://www.instagram.com/pikappaphi/', external: true },
+      { label: 'The Ability Experience Instagram', href: 'https://www.instagram.com/abilityexp/', external: true },
+      { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
+      { label: 'Rush Form', href: chapterContact.rushHref, external: false },
+      { label: 'RSVP', href: chapterContact.rsvpHref, external: false }
+    ]
+  }
+] as const;
 
 export const why = [
   [
