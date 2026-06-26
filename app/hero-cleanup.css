@@ -8,7 +8,7 @@
 }
 
 .hero-section .scroll-reveal {
-  max-width: min(100%, 44rem);
+  max-width: min(100%, 40rem);
 }
 
 .hero-section .hero-countdown {
@@ -50,28 +50,28 @@
 }
 
 .hero-crest-right {
-  right: -24vw;
+  right: -42vw;
   top: -9vw;
   width: min(72vw, 58rem);
   height: min(72vw, 58rem);
-  opacity: 0.58;
+  opacity: 0.48;
   animation-duration: 3.4s;
 }
 
 .hero-crest-right .chrome-crest {
   filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.34))
-    drop-shadow(0 14px 26px rgba(0, 0, 0, 0.34))
-    drop-shadow(12px 12px 0 rgba(0, 0, 0, 0.34));
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.28))
+    drop-shadow(0 14px 26px rgba(0, 0, 0, 0.28))
+    drop-shadow(10px 10px 0 rgba(0, 0, 0, 0.26));
 }
 
 .hero-crest-right .chrome-crest::before {
   transform: translate3d(18px, 16px, -1px);
-  opacity: 0.82;
+  opacity: 0.76;
 }
 
 .hero-crest-right .chrome-crest::after {
-  opacity: 0.46;
+  opacity: 0.42;
 }
 
 .hero-crests::before {
