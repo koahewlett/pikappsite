@@ -83,9 +83,9 @@
   column-gap: 0.22em;
   row-gap: 0.04em;
   max-width: 100%;
-  font-family: var(--font-syne), Syne, system-ui, sans-serif;
+  font-family: var(--font-intro), sans-serif;
   font-size: clamp(2.1rem, 6.8vw, 7.6rem);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1.36;
   padding-bottom: 0.34em;
@@ -118,9 +118,9 @@
 }
 
 .intro-loader-mark {
-  font-family: var(--font-syne), Syne, system-ui, sans-serif;
+  font-family: var(--font-intro), sans-serif;
   font-size: clamp(3rem, 9vw, 9rem);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -0.05em;
   line-height: 1.22;
   padding-bottom: 0.26em;
@@ -143,7 +143,7 @@
   background: rgba(255, 255, 255, 0.035);
   color: rgba(255, 255, 255, 0.58);
   cursor: pointer;
-  font-family: var(--font-syne), Syne, system-ui, sans-serif;
+  font-family: var(--font-intro), sans-serif;
   font-size: 0.72rem;
   line-height: 1.25;
   padding: 0.65rem 0.85rem 0.78rem;
@@ -209,7 +209,7 @@
     column-gap: 0.24em;
     row-gap: 0.08em;
     font-size: clamp(1.8rem, 9.8vw, 3.9rem);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.44;
     padding-bottom: 0.42em;
