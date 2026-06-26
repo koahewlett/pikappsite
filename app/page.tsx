@@ -1,7 +1,6 @@
 import { HeroCrests } from '@/components/HeroCrests';
 import { Nav } from '@/components/Nav';
 import { ApplicationForm } from '@/components/ApplicationForm';
-import { Countdown } from '@/components/Countdown';
 import { DisplayStack } from '@/components/DisplayStack';
 import { RoseDivider } from '@/components/RoseDivider';
 import { RushChairmen } from '@/components/RushChairmen';
@@ -12,10 +11,10 @@ import {
   applyDisplay,
   chairmenDisplay,
   heroDisplay,
-  punchStatements,
   rushChairmen,
   stats,
   why,
+  whyDisplay,
   faqs,
 } from '@/lib/data';
 
@@ -53,10 +52,6 @@ export default function Home() {
               </a>
             </div>
           </ScrollReveal>
-
-          <ScrollReveal className="hero-countdown mt-8 max-w-full" delay={0.12}>
-            <Countdown />
-          </ScrollReveal>
         </div>
 
         <a href="#why" className="scroll-hint">
@@ -66,23 +61,6 @@ export default function Home() {
       </section>
 
       <RushMarquee />
-
-      <section className="punch-section">
-        <div className="punch-section-inner">
-          <div className="punch-grid">
-            {punchStatements.map((statement, index) => (
-              <ScrollReveal delay={index * 0.08} key={statement.ariaLabel}>
-                <article className="punch-block">
-                  <p className="section-kicker">{statement.kicker}</p>
-                  <h2 className="punch-display" aria-label={statement.ariaLabel}>
-                    <DisplayStack lines={statement.lines} />
-                  </h2>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section-shell grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         {stats.map(([n, l], index) => (
@@ -97,11 +75,13 @@ export default function Home() {
 
       <RoseDivider />
 
-      <section id="why" className="section-shell why-story max-md:!hidden">
+      <section id="why" className="section-shell why-story">
         <div className="why-sticky">
           <ScrollReveal>
             <p className="section-kicker">Why Pi Kapp</p>
-            <h2 className="section-title">Built for guys who want more out of ASU.</h2>
+            <h2 className="section-title why-display-title" aria-label="Built for guys who want more out of ASU.">
+              <DisplayStack lines={whyDisplay} />
+            </h2>
           </ScrollReveal>
         </div>
 
