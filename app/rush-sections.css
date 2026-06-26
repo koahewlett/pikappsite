@@ -105,12 +105,12 @@
 }
 
 .apply-display-title {
-  max-width: 44rem;
+  max-width: min(100%, 35rem);
 }
 
 .apply-display-title .display-stack {
-  font-size: clamp(3.2rem, 7.8vw, 7.1rem);
-  line-height: 0.9;
+  font-size: clamp(3rem, 4.9vw, 4.9rem);
+  line-height: 0.93;
 }
 
 .rush-chairmen-section {
