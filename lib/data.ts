@@ -1,6 +1,4 @@
-export const adobeFontsKitUrl = '';
-// Paste the Official PiKapp Site Adobe Fonts kit URL above when available.
-// It should look like: https://use.typekit.net/xxxxxxx.css
+export const adobeFontsKitUrl = 'https://use.typekit.net/ctq1uoo.css';
 
 export const nav = [
   'Why Pi Kapp',
