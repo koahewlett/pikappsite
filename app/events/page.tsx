@@ -1,7 +1,5 @@
-import { DisplayStack } from '@/components/DisplayStack';
 import { Nav } from '@/components/Nav';
 import { RsvpSection } from '@/components/RsvpSection';
-import { rsvpPunchStatement } from '@/lib/data';
 
 export default function Events() {
   return (
@@ -13,14 +11,7 @@ export default function Events() {
           <p className="mt-4 text-white/60">Drop your info below and we’ll send you event details, rush times, and next steps.</p>
         </div>
 
-        <div className="events-rsvp-layout">
-          <article className="rsvp-punch-block">
-            <p className="section-kicker">{rsvpPunchStatement.kicker}</p>
-            <h2 className="punch-display rsvp-punch-display" aria-label={rsvpPunchStatement.ariaLabel}>
-              <DisplayStack lines={rsvpPunchStatement.lines} />
-            </h2>
-          </article>
-
+        <div className="events-rsvp-layout events-rsvp-layout-single">
           <RsvpSection />
         </div>
       </section>
