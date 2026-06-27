@@ -71,6 +71,80 @@ export const rushChairmen = [
 // public/images/rush-chairman-1.jpg
 // public/images/rush-chairman-2.jpg
 
+export const executiveBoardMembers = [
+  {
+    id: 'archon',
+    name: 'Name Placeholder',
+    role: 'Archon',
+    initials: 'AP',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'vice-archon',
+    name: 'Name Placeholder',
+    role: 'Vice Archon',
+    initials: 'VP',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'treasurer',
+    name: 'Name Placeholder',
+    role: 'Treasurer',
+    initials: 'TR',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'secretary',
+    name: 'Name Placeholder',
+    role: 'Secretary',
+    initials: 'SC',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'warden',
+    name: 'Name Placeholder',
+    role: 'Warden',
+    initials: 'WD',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'historian',
+    name: 'Name Placeholder',
+    role: 'Historian',
+    initials: 'HS',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  }
+] as const;
+// Add executive board photos later by setting each image value to a file in public/images/.
+
+export const abilityExperienceContent = {
+  externalHref: 'https://www.abilityexperience.org',
+  intro:
+    'The Ability Experience is Pi Kappa Phi’s national philanthropy, creating shared experiences that support people with disabilities and build servant leaders inside the fraternity.',
+  highlights: [
+    'Fundraising and awareness events that connect the chapter to a national mission.',
+    'Hands-on service opportunities through Pi Kappa Phi’s lifelong commitment to disability support.',
+    'A way for members to lead with impact beyond campus and Greek life.'
+  ],
+  photos: [
+    { id: 'ability-photo-1', label: 'Ability Experience photo placeholder', image: '' },
+    { id: 'ability-photo-2', label: 'Service event photo placeholder', image: '' },
+    { id: 'ability-photo-3', label: 'Brotherhood philanthropy photo placeholder', image: '' }
+  ]
+} as const;
+
 export const chapterContact = {
   instagram: 'https://www.instagram.com/asupikappaphi/',
   rushHref: '#apply',
@@ -89,12 +163,20 @@ export const footerLinkGroups = [
     ]
   },
   {
+    title: 'Site',
+    links: [
+      { label: 'Executive Board', href: '/executive-board', external: false },
+      { label: 'Ability Experience', href: '/ability-experience', external: false },
+      { label: 'Rush Events', href: chapterContact.rsvpHref, external: false },
+      { label: 'Rush Form', href: chapterContact.rushHref, external: false }
+    ]
+  },
+  {
     title: 'Contact',
     links: [
       { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
       { label: 'Pi Kappa Phi National Instagram', href: 'https://www.instagram.com/pikappaphi/', external: true },
       { label: 'The Ability Experience Instagram', href: 'https://www.instagram.com/abilityexp/', external: true },
-      { label: 'Rush Form', href: chapterContact.rushHref, external: false },
       { label: 'RSVP', href: chapterContact.rsvpHref, external: false }
     ]
   }
@@ -103,19 +185,15 @@ export const footerLinkGroups = [
 export const why = [
   [
     'Real Brotherhood',
-    'Pi Kapp is built on the strong relationships between brothers. We are a tight-knit group that supports each other through college and beyond.'
+    'A tight-knit chapter where guys know each other, show up for each other, and build real relationships through college and beyond.'
   ],
   [
-    'Campus Presence',
-    'From social events to intramurals, philanthropy, tailgates, and nights out in Tempe, our chapter is active year-round.'
+    'Bigger Opportunities',
+    'Leadership, philanthropy, social life, alumni connections, and campus presence give members more ways to grow and make the most of ASU.'
   ],
   [
-    'The Ability Experience',
-    'Pi Kappa Phi is behind The Ability Experience, our national philanthropy supporting people with disabilities.'
-  ],
-  [
-    'A Chapter You Can Build',
-    'We want guys who bring something tangible to the table — socially, academically, athletically, creatively, or through leadership.'
+    'Built Different',
+    'Pi Kapp is for guys who bring something tangible to the table and want to help set the standard for the chapter.'
   ]
 ];
 
