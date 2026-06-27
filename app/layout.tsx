@@ -9,6 +9,7 @@ import './rush-sections.css';
 import './hero-cleanup.css';
 import './latest-refinements.css';
 import './hero-svg-polish.css';
+import './follow-up-fixes.css';
 import type { Metadata } from 'next';
 import { IntroLoader } from '@/components/IntroLoader';
 import { adobeFontsKitUrl } from '@/lib/data';
