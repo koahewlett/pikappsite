@@ -7,6 +7,7 @@ import './descender-fix.css';
 import './adobe-typography.css';
 import './rush-sections.css';
 import './hero-cleanup.css';
+import './latest-refinements.css';
 import type { Metadata } from 'next';
 import { IntroLoader } from '@/components/IntroLoader';
 import { adobeFontsKitUrl } from '@/lib/data';
