@@ -22,6 +22,10 @@ const INTRO_TIMING = {
   },
 };
 
+function markIntroComplete(isComplete: boolean) {
+  document.documentElement.dataset.introComplete = isComplete ? 'true' : 'false';
+}
+
 function AnimatedText({ text }: { text: string }) {
   let characterIndex = 0;
 
@@ -55,6 +59,7 @@ export function IntroLoader() {
 
   useEffect(() => {
     if (!ENABLE_INTRO_LOADER) {
+      markIntroComplete(true);
       setPhase('hidden');
       return;
     }
@@ -62,6 +67,7 @@ export function IntroLoader() {
     const hasSeenIntro = window.sessionStorage.getItem(INTRO_STORAGE_KEY) === 'true';
 
     if (hasSeenIntro) {
+      markIntroComplete(true);
       setPhase('hidden');
       return;
     }
@@ -69,6 +75,7 @@ export function IntroLoader() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const timing = reduceMotion ? INTRO_TIMING.reduced : INTRO_TIMING.full;
 
+    markIntroComplete(false);
     window.sessionStorage.setItem(INTRO_STORAGE_KEY, 'true');
     setPhase('line-one');
 
@@ -76,7 +83,10 @@ export function IntroLoader() {
       window.setTimeout(() => setPhase('line-two'), timing.lineTwo),
       window.setTimeout(() => setPhase('flash'), timing.flash),
       window.setTimeout(() => setPhase('exiting'), timing.exit),
-      window.setTimeout(() => setPhase('hidden'), timing.hidden),
+      window.setTimeout(() => {
+        markIntroComplete(true);
+        setPhase('hidden');
+      }, timing.hidden),
     ];
 
     return () => {
@@ -90,7 +100,10 @@ export function IntroLoader() {
     timers.current = [];
     window.sessionStorage.setItem(INTRO_STORAGE_KEY, 'true');
     setPhase('exiting');
-    window.setTimeout(() => setPhase('hidden'), 260);
+    window.setTimeout(() => {
+      markIntroComplete(true);
+      setPhase('hidden');
+    }, 260);
   };
 
   if (phase === 'checking' || phase === 'hidden') return null;
