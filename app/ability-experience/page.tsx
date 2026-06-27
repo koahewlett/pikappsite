@@ -1,9 +1,11 @@
 import { Nav } from '@/components/Nav';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { SiteFooter } from '@/components/SiteFooter';
-import { abilityExperienceContent } from '@/lib/data';
+import { abilityExperienceContent, executiveBoardMembers } from '@/lib/data';
 
 export default function AbilityExperiencePage() {
+  const chair = executiveBoardMembers.find((member) => member.id === abilityExperienceContent.chairRoleId);
+
   return (
     <main className="royal-atmosphere premium-page content-page min-h-screen overflow-x-clip bg-ink">
       <Nav />
@@ -26,16 +28,35 @@ export default function AbilityExperiencePage() {
 
       <section className="section-shell ability-section pt-0">
         <div className="ability-grid">
-          <ScrollReveal>
-            <div className="ability-panel">
-              <p className="section-kicker">What It Means</p>
-              <ul>
-                {abilityExperienceContent.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
+          <div className="ability-copy-stack">
+            <ScrollReveal>
+              <div className="ability-panel">
+                <p className="section-kicker">What It Means</p>
+                <ul>
+                  {abilityExperienceContent.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
+
+            {chair ? (
+              <ScrollReveal delay={0.06}>
+                <article className="ability-chair-card">
+                  <p className="section-kicker">Chapter Contact</p>
+                  <h2>{chair.role}</h2>
+                  <p className="ability-chair-copy">
+                    Reach out here for Ability Experience and philanthropy questions, events, and chapter involvement.
+                  </p>
+                  <div className="ability-chair-contact">
+                    <span>{chair.name}</span>
+                    <span>{chair.instagram}</span>
+                    <span>{chair.phone}</span>
+                  </div>
+                </article>
+              </ScrollReveal>
+            ) : null}
+          </div>
 
           <div className="ability-photo-grid">
             {abilityExperienceContent.photos.map((photo, index) => (
