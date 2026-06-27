@@ -98,9 +98,15 @@ export function AuthForm() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email);
+      const resetEmail = email.trim().toLowerCase();
+      if (!resetEmail) throw new Error('Enter your email before requesting a password reset.');
+
+      const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+        redirectTo: `${window.location.origin}/update-password`,
+      });
+
       if (error) throw error;
-      setMsg('Password reset email sent.');
+      setMsg('Password reset email sent. Open the link in that email to choose a new password.');
     } catch (error) {
       setMsg(error instanceof Error ? error.message : 'Unable to send password reset email.');
     } finally {
