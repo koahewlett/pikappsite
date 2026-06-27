@@ -73,18 +73,18 @@ export const rushChairmen = [
 
 export const executiveBoardMembers = [
   {
-    id: 'archon',
+    id: 'archon-president',
     name: 'Name Placeholder',
-    role: 'Archon',
+    role: 'Archon / President',
     initials: 'AP',
     image: '',
     instagram: '@instagram_handle',
     phone: 'phone placeholder'
   },
   {
-    id: 'vice-archon',
+    id: 'vice-archon-vice-president',
     name: 'Name Placeholder',
-    role: 'Vice Archon',
+    role: 'Vice Archon / Vice President',
     initials: 'VP',
     image: '',
     instagram: '@instagram_handle',
@@ -118,10 +118,91 @@ export const executiveBoardMembers = [
     phone: 'phone placeholder'
   },
   {
+    id: 'standards-chair',
+    name: 'Name Placeholder',
+    role: 'Standards Chair',
+    initials: 'ST',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'risk-manager',
+    name: 'Name Placeholder',
+    role: 'Risk Manager',
+    initials: 'RM',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'rush-chairman',
+    name: 'Name Placeholder',
+    role: 'Rush Chairman',
+    initials: 'RC',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'vice-rush-chairman',
+    name: 'Name Placeholder',
+    role: 'Vice Rush Chairman',
+    initials: 'VR',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'ability-experience-philanthropy-chair',
+    name: 'Name Placeholder',
+    role: 'Ability Experience / Philanthropy Chair',
+    initials: 'AE',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'social-chair',
+    name: 'Name Placeholder',
+    role: 'Social Chair',
+    initials: 'SO',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'brotherhood-chair',
+    name: 'Name Placeholder',
+    role: 'Brotherhood Chair',
+    initials: 'BH',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'scholarship-chair',
+    name: 'Name Placeholder',
+    role: 'Scholarship Chair',
+    initials: 'SH',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
     id: 'historian',
     name: 'Name Placeholder',
     role: 'Historian',
     initials: 'HS',
+    image: '',
+    instagram: '@instagram_handle',
+    phone: 'phone placeholder'
+  },
+  {
+    id: 'chaplain',
+    name: 'Name Placeholder',
+    role: 'Chaplain',
+    initials: 'CH',
     image: '',
     instagram: '@instagram_handle',
     phone: 'phone placeholder'
@@ -131,6 +212,7 @@ export const executiveBoardMembers = [
 
 export const abilityExperienceContent = {
   externalHref: 'https://www.abilityexperience.org',
+  chairRoleId: 'ability-experience-philanthropy-chair',
   intro:
     'The Ability Experience is Pi Kappa Phi’s national philanthropy, creating shared experiences that support people with disabilities and build servant leaders inside the fraternity.',
   highlights: [
@@ -158,6 +240,7 @@ export const footerLinkGroups = [
     title: 'Official Links',
     links: [
       { label: 'Pi Kappa Phi National Website', href: 'https://www.pikapp.org', external: true },
+      { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
       { label: 'The Ability Experience', href: 'https://www.abilityexperience.org', external: true },
       { label: 'Arizona State University', href: 'https://www.asu.edu', external: true }
     ]
@@ -169,15 +252,6 @@ export const footerLinkGroups = [
       { label: 'Ability Experience', href: '/ability-experience', external: false },
       { label: 'Rush Events', href: chapterContact.rsvpHref, external: false },
       { label: 'Rush Form', href: chapterContact.rushHref, external: false }
-    ]
-  },
-  {
-    title: 'Contact',
-    links: [
-      { label: 'Chapter Instagram', href: chapterContact.instagram, external: true },
-      { label: 'Pi Kappa Phi National Instagram', href: 'https://www.instagram.com/pikappaphi/', external: true },
-      { label: 'The Ability Experience Instagram', href: 'https://www.instagram.com/abilityexp/', external: true },
-      { label: 'RSVP', href: chapterContact.rsvpHref, external: false }
     ]
   }
 ] as const;
