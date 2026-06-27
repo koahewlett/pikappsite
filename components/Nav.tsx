@@ -81,7 +81,7 @@ export function Nav() {
           </Link>
 
           <nav className="relative flex min-w-0 flex-1 justify-center" aria-label="Mobile navigation">
-            <div className="flex max-w-full items-center rounded-full border border-white/10 bg-white/5 p-1 shadow-[0_0_24px_rgba(58,95,205,0.08)]">
+            <div className="flex max-w-full items-center rounded-full border border-white/10 bg-white/5 p-1 shadow-[0_0_24px_rgba(0,85,150,0.1)]">
               <a href="/events" className="rounded-full px-2.5 py-2 text-[10px] font-bold leading-[1.2] text-white/75 transition hover:text-gold">
                 Rush Events
               </a>
