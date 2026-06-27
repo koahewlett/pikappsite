@@ -1,0 +1,9 @@
+.pi-kapp-hero-shield {
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-kapp-hero-shield {
+    mix-blend-mode: normal;
+  }
+}
