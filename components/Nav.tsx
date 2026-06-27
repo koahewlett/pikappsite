@@ -104,7 +104,7 @@ export function Nav() {
                 {mobileMoreLinks.map((item) => (
                   <a
                     href={item.href}
-                    className="rounded-xl px-3 py-2.5 text-left text-xs font-bold leading-[1.25] text-white/72 transition hover:bg-white/8 hover:text-gold"
+                    className="rounded-xl px-3 py-2.5 text-left text-xs font-bold leading-[1.25] text-white/72 transition hover:bg-white/10 hover:text-gold"
                     key={item.href}
                     onClick={() => setMoreOpen(false)}
                   >
