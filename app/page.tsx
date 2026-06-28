@@ -11,6 +11,7 @@ import {
   applyDisplay,
   chairmenDisplay,
   heroDisplay,
+  missionVisionValues,
   rushChairmen,
   stats,
   why,
@@ -195,6 +196,19 @@ export default function Home() {
             </div>
           </div>
         </ScrollReveal>
+      </section>
+
+      <section className="mvv-section px-5 pb-16 md:px-6 md:pb-20" aria-label="Mission, vision, and values">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
+          {missionVisionValues.map((item, index) => (
+            <ScrollReveal key={item.title} delay={index * 0.06}>
+              <article className="mvv-card">
+                <h2>{item.title}</h2>
+                <p>{item.text}</p>
+              </article>
+            </ScrollReveal>
+          ))}
+        </div>
       </section>
 
       <SiteFooter />

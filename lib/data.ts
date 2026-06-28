@@ -172,24 +172,6 @@ export const executiveBoardMembers = [
     phone: 'phone placeholder'
   },
   {
-    id: 'brotherhood-chair',
-    name: 'Name Placeholder',
-    role: 'Brotherhood Chair',
-    initials: 'BH',
-    image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
-  },
-  {
-    id: 'scholarship-chair',
-    name: 'Name Placeholder',
-    role: 'Scholarship Chair',
-    initials: 'SH',
-    image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
-  },
-  {
     id: 'historian',
     name: 'Name Placeholder',
     role: 'Historian',
@@ -209,6 +191,21 @@ export const executiveBoardMembers = [
   }
 ] as const;
 // Add executive board photos later by setting each image value to a file in public/images/.
+
+export const missionVisionValues = [
+  {
+    title: 'Our Mission',
+    text: 'To create an uncommon and lifelong brotherhood that develops leaders and encourages service to others for the betterment of our communities.'
+  },
+  {
+    title: 'Our Vision',
+    text: 'A future where every Pi Kappa Phi embraces his role as a leader, puts service before self and improves the world around him.'
+  },
+  {
+    title: 'Our Values',
+    text: 'Common Loyalty, Personal Responsibility, Achievement, Accountability, Campus Involvement, Responsible Citizenship, Lifelong Commitment'
+  }
+] as const;
 
 export const abilityExperienceContent = {
   externalHref: 'https://www.abilityexperience.org',
