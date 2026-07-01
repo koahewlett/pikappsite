@@ -410,11 +410,17 @@ body {
 }
 
 .pnm-list-heading {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  display: grid;
+  gap: 1rem;
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
   padding-bottom: 1rem;
+}
+
+.pnm-list-heading-main {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
 .pnm-list-heading h2 {
@@ -425,6 +431,69 @@ body {
   letter-spacing: -0.04em;
   line-height: 1.08;
   padding-bottom: 0.06em;
+}
+
+.pnm-list-actions {
+  display: grid;
+  min-width: 0;
+  gap: 0.7rem;
+}
+
+.pnm-view-toggle {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.24);
+  padding: 0.28rem;
+}
+
+.pnm-view-toggle button {
+  min-height: 2.3rem;
+  border-radius: 999px;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.pnm-view-toggle button:hover,
+.pnm-view-toggle-active {
+  background: rgb(212 175 55 / 0.13);
+  color: white !important;
+}
+
+.pnm-list-control {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+  color: rgb(255 255 255 / 0.6);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.pnm-list-control select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.65rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.85rem;
+  background: rgb(0 0 0 / 0.34);
+  color: white;
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  line-height: 1.35;
+  outline: none;
+  padding: 0.68rem 0.8rem;
+  text-transform: none;
 }
 
 .pnm-application-list {
@@ -475,10 +544,79 @@ body {
   margin-top: 0.24rem;
 }
 
+.pnm-rating-row {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  margin-top: 0.72rem;
+  color: rgb(255 255 255 / 0.64);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.pnm-star-rating {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.08rem;
+}
+
+.pnm-star-rating .pnm-star-button {
+  display: inline-grid;
+  width: 1.55rem;
+  min-height: 1.55rem;
+  height: 1.55rem;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(255 255 255 / 0.32);
+  font-size: 1.18rem;
+  line-height: 1;
+  padding: 0;
+  transition: color 140ms ease, transform 140ms ease, text-shadow 140ms ease;
+}
+
+.pnm-star-rating .pnm-star-button:not(:disabled):hover {
+  color: var(--color-pikapp-gold);
+  transform: translateY(-1px) scale(1.06);
+}
+
+.pnm-star-rating .pnm-star-button-active {
+  color: var(--color-pikapp-gold);
+  text-shadow: 0 0 14px rgb(212 175 55 / 0.28);
+}
+
+.pnm-star-rating .pnm-star-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
 .pnm-row-vote {
   display: grid;
   min-width: 0;
   gap: 0.62rem;
+}
+
+.pnm-rating-control {
+  display: grid;
+  min-width: 0;
+  gap: 0.3rem;
+  border: 1px solid rgb(212 175 55 / 0.15);
+  border-radius: 0.85rem;
+  background: rgb(212 175 55 / 0.055);
+  padding: 0.72rem 0.8rem;
+}
+
+.pnm-rating-control > span {
+  color: rgb(255 255 255 / 0.66);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
 .pnm-row-vote label {
@@ -604,6 +742,14 @@ body {
   gap: 0.55rem;
 }
 
+.pnm-rating-detail {
+  display: grid;
+  gap: 0.4rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.72rem;
+}
+
 .pnm-submission-panel p,
 .pnm-response-item p {
   overflow-wrap: anywhere;
@@ -705,9 +851,18 @@ body {
   }
 
   .pnm-list-heading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pnm-list-heading-main {
     flex-direction: row;
     align-items: end;
     justify-content: space-between;
+  }
+
+  .pnm-list-actions {
+    grid-template-columns: minmax(12rem, 0.8fr) minmax(10rem, 0.55fr) minmax(14rem, 1fr);
+    align-items: end;
   }
 
   .pnm-row-main {

@@ -6,6 +6,9 @@ import { supabase } from '@/lib/supabase';
 type MemberStatus = 'pending' | 'approved' | 'admin' | 'denied';
 type GateState = 'loading' | 'signed-out' | 'pending' | 'denied' | 'approved';
 type VoteStatus = 'interested' | 'neutral' | 'not_interested' | 'need_more_info';
+type ListMode = 'all' | 'mine';
+type RatingFilter = 'all' | '5' | '4' | '3' | '2' | '1' | 'unrated';
+type SortMode = 'recent' | 'average_desc' | 'average_asc' | 'my_desc';
 
 type MemberProfile = {
   user_id: string;
@@ -45,6 +48,15 @@ type PnmVote = {
   updated_at: string | null;
 };
 
+type PnmRating = {
+  id: string;
+  pnm_id: string;
+  admin_id: string;
+  rating: number;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
 const approvedStatuses = new Set<MemberStatus>(['approved', 'admin']);
 
 const voteOptions: { value: VoteStatus; label: string }[] = [
@@ -63,6 +75,23 @@ const voteLabels = voteOptions.reduce<Record<VoteStatus, string>>(
     need_more_info: 'Need more info',
   }
 );
+
+const ratingFilters: { value: RatingFilter; label: string }[] = [
+  { value: 'all', label: 'All ratings' },
+  { value: '5', label: '5 Stars' },
+  { value: '4', label: '4 Stars' },
+  { value: '3', label: '3 Stars' },
+  { value: '2', label: '2 Stars' },
+  { value: '1', label: '1 Star' },
+  { value: 'unrated', label: 'Unrated' },
+];
+
+const sortOptions: { value: SortMode; label: string }[] = [
+  { value: 'recent', label: 'Recently submitted' },
+  { value: 'average_desc', label: 'Average rating high to low' },
+  { value: 'average_asc', label: 'Average rating low to high' },
+  { value: 'my_desc', label: 'My rating high to low' },
+];
 
 function applicationName(application: RushApplication) {
   return [application.first_name, application.last_name].filter(Boolean).join(' ').trim() || 'Unnamed PNM';
@@ -90,6 +119,40 @@ function compactText(value: string | null | undefined) {
   return value?.trim() || 'None listed';
 }
 
+function ratingSummaryText(average: number, count: number) {
+  if (!count) return 'Not rated yet';
+  return `Average rating: ${average.toFixed(1)} / 5 · ${count} admin${count === 1 ? '' : 's'}`;
+}
+
+function StarRating({
+  value,
+  disabled,
+  onRate,
+  saving,
+}: {
+  value: number;
+  disabled?: boolean;
+  onRate?: (rating: number) => void;
+  saving?: boolean;
+}) {
+  return (
+    <div className="pnm-star-rating" aria-label={value ? `${value} out of 5 stars` : 'Not rated'}>
+      {[1, 2, 3, 4, 5].map((rating) => (
+        <button
+          type="button"
+          aria-label={`${rating} star${rating === 1 ? '' : 's'}`}
+          className={`pnm-star-button ${value >= rating ? 'pnm-star-button-active' : ''}`}
+          disabled={disabled || saving}
+          onClick={() => onRate?.(rating)}
+          key={rating}
+        >
+          ★
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export function MemberDashboard() {
   const [gate, setGate] = useState<GateState>('loading');
   const [userId, setUserId] = useState<string | null>(null);
@@ -97,10 +160,16 @@ export function MemberDashboard() {
   const [profile, setProfile] = useState<MemberProfile | null>(null);
   const [applications, setApplications] = useState<RushApplication[]>([]);
   const [votes, setVotes] = useState<PnmVote[]>([]);
+  const [ratings, setRatings] = useState<PnmRating[]>([]);
   const [profiles, setProfiles] = useState<MemberProfile[]>([]);
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
+  const [listMode, setListMode] = useState<ListMode>('all');
+  const [ratingFilter, setRatingFilter] = useState<RatingFilter>('all');
+  const [sortMode, setSortMode] = useState<SortMode>('recent');
   const [savingId, setSavingId] = useState<string | null>(null);
   const [savedId, setSavedId] = useState<string | null>(null);
+  const [ratingSavingId, setRatingSavingId] = useState<string | null>(null);
+  const [ratingSavedId, setRatingSavedId] = useState<string | null>(null);
   const [message, setMessage] = useState('');
 
   const isAdmin = profile?.status === 'admin';
@@ -155,12 +224,13 @@ export function MemberDashboard() {
         return;
       }
 
-      const [applicationsResult, votesResult, profilesResult] = await Promise.all([
+      const [applicationsResult, votesResult, ratingsResult, profilesResult] = await Promise.all([
         supabase
           .from('rush_applications')
           .select('id,created_at,first_name,last_name,phone,email,major,graduation_year,hometown,sports,clubs,leadership_positions,instagram,linkedin,status')
           .order('created_at', { ascending: false }),
         supabase.from('pnm_votes').select('*').order('updated_at', { ascending: false }),
+        supabase.from('pnm_ratings').select('*').order('updated_at', { ascending: false }),
         supabase
           .from('member_profiles')
           .select('user_id,email,display_name,status,created_at,approved_at')
@@ -169,11 +239,13 @@ export function MemberDashboard() {
 
       if (applicationsResult.error) throw applicationsResult.error;
       if (votesResult.error) throw votesResult.error;
+      if (ratingsResult.error) throw ratingsResult.error;
       if (profilesResult.error) throw profilesResult.error;
 
       const loadedVotes = (votesResult.data || []) as PnmVote[];
       setApplications((applicationsResult.data || []) as RushApplication[]);
       setVotes(loadedVotes);
+      setRatings((ratingsResult.data || []) as PnmRating[]);
       setProfiles((profilesResult.data || []) as MemberProfile[]);
       setNoteDrafts(
         loadedVotes
@@ -212,6 +284,50 @@ export function MemberDashboard() {
     }, {});
   }, [profiles]);
 
+  const myRatings = useMemo(() => {
+    return ratings.reduce<Record<string, PnmRating>>((map, rating) => {
+      if (rating.admin_id === userId) map[rating.pnm_id] = rating;
+      return map;
+    }, {});
+  }, [ratings, userId]);
+
+  const ratingStatsByPnm = useMemo(() => {
+    return ratings.reduce<Record<string, { average: number; count: number; total: number }>>((map, rating) => {
+      const current = map[rating.pnm_id] || { average: 0, count: 0, total: 0 };
+      const total = current.total + rating.rating;
+      const count = current.count + 1;
+      map[rating.pnm_id] = { total, count, average: total / count };
+      return map;
+    }, {});
+  }, [ratings]);
+
+  const displayedApplications = useMemo(() => {
+    const filtered = applications.filter((application) => {
+      const myRating = myRatings[application.id]?.rating || 0;
+
+      if (ratingFilter === 'unrated') return myRating === 0;
+      if (ratingFilter !== 'all') return myRating === Number(ratingFilter);
+      if (listMode === 'mine') return myRating > 0;
+
+      return true;
+    });
+
+    return [...filtered].sort((a, b) => {
+      const aMine = myRatings[a.id]?.rating || 0;
+      const bMine = myRatings[b.id]?.rating || 0;
+      const aAverage = ratingStatsByPnm[a.id]?.average ?? -1;
+      const bAverage = ratingStatsByPnm[b.id]?.average ?? -1;
+      const aDate = a.created_at || '';
+      const bDate = b.created_at || '';
+
+      if (sortMode === 'average_desc') return bAverage - aAverage || bDate.localeCompare(aDate);
+      if (sortMode === 'average_asc') return aAverage - bAverage || bDate.localeCompare(aDate);
+      if (sortMode === 'my_desc') return bMine - aMine || bAverage - aAverage || bDate.localeCompare(aDate);
+
+      return bDate.localeCompare(aDate);
+    });
+  }, [applications, listMode, myRatings, ratingFilter, ratingStatsByPnm, sortMode]);
+
   async function saveVote(application: RushApplication, voteStatus: VoteStatus) {
     if (!userId) return;
 
@@ -243,6 +359,38 @@ export function MemberDashboard() {
       setMessage(error instanceof Error ? error.message : 'Unable to update vote.');
     } finally {
       setSavingId(null);
+    }
+  }
+
+  async function saveRating(application: RushApplication, rating: number) {
+    if (!userId || !isAdmin) return;
+
+    setRatingSavingId(application.id);
+    setRatingSavedId(null);
+    setMessage('');
+
+    try {
+      const payload = {
+        pnm_id: application.id,
+        admin_id: userId,
+        rating,
+      };
+
+      const { data, error } = await supabase
+        .from('pnm_ratings')
+        .upsert(payload, { onConflict: 'pnm_id,admin_id' })
+        .select('*')
+        .single();
+
+      if (error) throw error;
+
+      setRatings((current) => [data as PnmRating, ...current.filter((existing) => existing.id !== data.id)]);
+      setRatingSavedId(application.id);
+      setMessage('Rating updated.');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Unable to update rating.');
+    } finally {
+      setRatingSavingId(null);
     }
   }
 
@@ -352,17 +500,66 @@ export function MemberDashboard() {
 
       <div className="member-panel pnm-list-shell mt-8 p-4 md:p-5">
         <div className="pnm-list-heading">
-          <div>
-            <p className="section-kicker">Potential New Members</p>
-            <h2>All submitted PNMs</h2>
+          <div className="pnm-list-heading-main">
+            <div>
+              <p className="section-kicker">Potential New Members</p>
+              <h2>{listMode === 'mine' ? 'My PNM list' : 'All submitted PNMs'}</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <span className="member-pill">{applications.length} applications</span>
+              <span className="member-pill">{displayedApplications.length} shown</span>
+            </div>
           </div>
-          <span className="member-pill">{applications.length} applications</span>
+          {isAdmin ? (
+            <div className="pnm-list-actions">
+              <div className="pnm-view-toggle" aria-label="PNM list view">
+                <button
+                  type="button"
+                  className={listMode === 'all' ? 'pnm-view-toggle-active' : ''}
+                  onClick={() => setListMode('all')}
+                >
+                  All PNMs
+                </button>
+                <button
+                  type="button"
+                  className={listMode === 'mine' ? 'pnm-view-toggle-active' : ''}
+                  onClick={() => {
+                    setListMode('mine');
+                    setSortMode('my_desc');
+                    setRatingFilter('all');
+                  }}
+                >
+                  My List
+                </button>
+              </div>
+
+              <label className="pnm-list-control">
+                <span>Rating</span>
+                <select value={ratingFilter} onChange={(event) => setRatingFilter(event.target.value as RatingFilter)}>
+                  {ratingFilters.map((option) => (
+                    <option value={option.value} key={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="pnm-list-control">
+                <span>Sort</span>
+                <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
+                  {sortOptions.map((option) => (
+                    <option value={option.value} key={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          ) : null}
         </div>
 
         {applications.length ? (
           <div className="pnm-application-list">
-            {applications.map((application) => {
+            {displayedApplications.length ? displayedApplications.map((application) => {
               const myVote = myVotes[application.id];
+              const myRating = myRatings[application.id]?.rating || 0;
+              const ratingStats = ratingStatsByPnm[application.id] || { average: 0, count: 0, total: 0 };
               const rowVotes = votesByPnm[application.id] || [];
               const otherVotes = rowVotes.filter((vote) => vote.member_id !== userId);
               const selectedStatus = myVote?.vote_status || '';
@@ -375,13 +572,29 @@ export function MemberDashboard() {
                         <span className="member-pill">{submittedDate(application.created_at)}</span>
                         {application.status ? <span className="member-pill">{application.status}</span> : null}
                         {savedId === application.id ? <span className="member-pill pnm-saved-pill">Saved</span> : null}
+                        {ratingSavedId === application.id ? <span className="member-pill pnm-saved-pill">Rating saved</span> : null}
                       </div>
                       <h3>{applicationName(application)}</h3>
                       <p>{applicationContact(application)}</p>
                       <p>{applicationMeta(application)}</p>
+                      <div className="pnm-rating-row">
+                        <StarRating value={Math.round(ratingStats.average)} disabled />
+                        <span>{ratingSummaryText(ratingStats.average, ratingStats.count)}</span>
+                      </div>
                     </div>
 
                     <div className="pnm-row-vote">
+                      {isAdmin ? (
+                        <div className="pnm-rating-control">
+                          <span>My star rating</span>
+                          <StarRating
+                            value={myRating}
+                            saving={ratingSavingId === application.id}
+                            onRate={(rating) => void saveRating(application, rating)}
+                          />
+                        </div>
+                      ) : null}
+
                       <label>
                         <span>Your status</span>
                         <select
@@ -427,6 +640,11 @@ export function MemberDashboard() {
 
                     <div className="pnm-expanded-grid">
                       <div className="pnm-submission-panel">
+                        <div className="pnm-rating-detail">
+                          <p><span>Average rating:</span> {ratingStats.count ? `${ratingStats.average.toFixed(1)} / 5` : 'Not rated yet'}</p>
+                          <p><span>Rated by:</span> {ratingStats.count ? `${ratingStats.count} admin${ratingStats.count === 1 ? '' : 's'}` : 'No admin ratings yet'}</p>
+                          {isAdmin ? <p><span>My rating:</span> {myRating ? `${myRating} / 5` : 'Unrated'}</p> : null}
+                        </div>
                         <p><span>Sports:</span> {compactText(application.sports)}</p>
                         <p><span>Clubs:</span> {compactText(application.clubs)}</p>
                         <p><span>Leadership:</span> {compactText(application.leadership_positions)}</p>
@@ -462,7 +680,11 @@ export function MemberDashboard() {
                   </details>
                 </article>
               );
-            })}
+            }) : (
+              <div className="pnm-empty-state">
+                <p>No PNMs match this rating view.</p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="pnm-empty-state">
