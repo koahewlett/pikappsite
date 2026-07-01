@@ -93,7 +93,6 @@ const pnmViewFilters: { value: PnmViewFilter; label: string }[] = [
   { value: '3', label: '3 Stars' },
   { value: '2', label: '2 Stars' },
   { value: '1', label: '1 Star' },
-  { value: 'unrated', label: 'Unrated' },
 ];
 
 const sortOptions: { value: SortMode; label: string }[] = [
@@ -113,7 +112,7 @@ function applicationContact(application: RushApplication) {
 }
 
 function applicationMeta(application: RushApplication) {
-  return [application.major, application.graduation_year, application.instagram].filter(Boolean).join(' · ') || 'No ASU details listed';
+  return [application.major, application.graduation_year].filter(Boolean).join(' · ') || 'No ASU details listed';
 }
 
 function submittedDate(value: string | null) {
@@ -128,6 +127,40 @@ function submittedDate(value: string | null) {
 
 function compactText(value: string | null | undefined) {
   return value?.trim() || 'None listed';
+}
+
+function instagramProfile(value: string | null | undefined) {
+  const rawValue = value?.trim();
+  if (!rawValue) return null;
+
+  const urlValue = /^https?:\/\//i.test(rawValue)
+    ? rawValue
+    : /^(www\.)?instagram\.com\//i.test(rawValue)
+      ? `https://${rawValue.replace(/^www\./i, '')}`
+      : null;
+
+  if (urlValue) {
+    try {
+      const url = new URL(urlValue);
+      if (!/(^|\.)instagram\.com$/i.test(url.hostname)) return null;
+
+      const username = decodeURIComponent(url.pathname.split('/').filter(Boolean)[0] || '').replace(/^@+/, '');
+      return {
+        href: urlValue,
+        label: username ? `@${username}` : 'Instagram profile',
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  const username = rawValue.replace(/^@+/, '').replace(/^\/+/, '').split(/[/?#]/)[0];
+  if (!username) return null;
+
+  return {
+    href: `https://instagram.com/${encodeURIComponent(username)}`,
+    label: `@${username}`,
+  };
 }
 
 function ratingSummaryText(average: number, count: number) {
@@ -673,6 +706,7 @@ export function MemberDashboard() {
               const rowVotes = votesByPnm[application.id] || [];
               const otherVotes = rowVotes.filter((vote) => vote.member_id !== userId);
               const selectedStatus = myVote?.vote_status || '';
+              const instagram = instagramProfile(application.instagram);
 
               return (
                 <article className="pnm-application-row" key={application.id}>
@@ -688,6 +722,16 @@ export function MemberDashboard() {
                       <h3>{applicationName(application)}</h3>
                       <p>{applicationContact(application)}</p>
                       <p>{applicationMeta(application)}</p>
+                      {instagram ? (
+                        <a
+                          className="pnm-instagram-link pnm-instagram-card-link"
+                          href={instagram.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Instagram {instagram.label}
+                        </a>
+                      ) : null}
                       <div className="pnm-rating-row">
                         <StarRating value={Math.round(ratingStats.average)} disabled />
                         <span>{ratingSummaryText(ratingStats.average, ratingStats.count)}</span>
@@ -771,6 +815,19 @@ export function MemberDashboard() {
                           <p><span>My rating:</span> {myRating ? `${myRating} / 5` : 'Unrated'}</p>
                           <p><span>My Studs:</span> {myFavorite ? `Added ${submittedDate(myFavorite.created_at)}` : 'Not in My Studs'}</p>
                         </div>
+                        <p>
+                          <span>Instagram:</span>{' '}
+                          {instagram ? (
+                            <a
+                              className="pnm-instagram-link"
+                              href={instagram.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {instagram.label}
+                            </a>
+                          ) : 'No Instagram listed'}
+                        </p>
                         <p><span>Sports:</span> {compactText(application.sports)}</p>
                         <p><span>Clubs:</span> {compactText(application.clubs)}</p>
                         <p><span>Leadership:</span> {compactText(application.leadership_positions)}</p>

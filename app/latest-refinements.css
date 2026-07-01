@@ -549,6 +549,27 @@ body {
   margin-top: 0.24rem;
 }
 
+.pnm-instagram-link {
+  color: var(--color-pikapp-blue);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  text-shadow: 0 0 18px rgb(58 95 205 / 0.18);
+  transition: color 160ms ease, text-shadow 160ms ease;
+}
+
+.pnm-instagram-link:hover {
+  color: rgb(117 154 255);
+  text-shadow: 0 0 24px rgb(58 95 205 / 0.32);
+}
+
+.pnm-instagram-card-link {
+  display: inline-flex;
+  margin-top: 0.45rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
 .pnm-rating-row {
   display: flex;
   min-width: 0;
