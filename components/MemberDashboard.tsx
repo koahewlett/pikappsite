@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 
 type MemberStatus = 'pending' | 'approved' | 'admin' | 'denied';
 type GateState = 'loading' | 'signed-out' | 'pending' | 'denied' | 'approved';
-type VoteValue = 'yes' | 'maybe' | 'no';
+type VoteStatus = 'interested' | 'neutral' | 'not_interested' | 'need_more_info';
 
 type MemberProfile = {
   user_id: string;
@@ -31,144 +31,76 @@ type RushApplication = {
   leadership_positions: string | null;
   instagram: string | null;
   linkedin: string | null;
-  normalized_email: string | null;
-  normalized_phone: string | null;
+  status: string | null;
 };
 
-type RushRsvp = {
+type PnmVote = {
   id: string;
-  created_at: string | null;
-  full_name: string | null;
-  email: string | null;
-  phone: string | null;
-  instagram: string | null;
-  message: string | null;
-  normalized_email: string | null;
-  normalized_phone: string | null;
-  matched_rush_application_id: string | null;
-  has_full_application: boolean | null;
-};
-
-type RushVote = {
-  id: string;
-  prospect_key: string;
-  source_application_id: string | null;
-  source_rsvp_id: string | null;
-  voter_id: string;
-  vote: VoteValue;
-  note: string | null;
+  pnm_id: string;
+  member_id: string;
+  member_email: string | null;
+  vote_status: VoteStatus;
+  notes: string | null;
   created_at: string | null;
   updated_at: string | null;
 };
 
-type Prospect = {
-  key: string;
-  application: RushApplication | null;
-  rsvp: RushRsvp | null;
-};
-
 const approvedStatuses = new Set<MemberStatus>(['approved', 'admin']);
 
-function normalizeEmail(email?: string | null) {
-  return email?.trim().toLowerCase() || '';
+const voteOptions: { value: VoteStatus; label: string }[] = [
+  { value: 'interested', label: 'Interested' },
+  { value: 'neutral', label: 'Neutral' },
+  { value: 'not_interested', label: 'Not interested' },
+  { value: 'need_more_info', label: 'Need more info' },
+];
+
+const voteLabels = voteOptions.reduce<Record<VoteStatus, string>>(
+  (labels, option) => ({ ...labels, [option.value]: option.label }),
+  {
+    interested: 'Interested',
+    neutral: 'Neutral',
+    not_interested: 'Not interested',
+    need_more_info: 'Need more info',
+  }
+);
+
+function applicationName(application: RushApplication) {
+  return [application.first_name, application.last_name].filter(Boolean).join(' ').trim() || 'Unnamed PNM';
 }
 
-function normalizePhone(phone?: string | null) {
-  return phone?.replace(/\D/g, '') || '';
+function applicationContact(application: RushApplication) {
+  return [application.email, application.phone, application.hometown].filter(Boolean).join(' · ') || 'No contact details listed';
 }
 
-function applicationKey(application: RushApplication) {
-  const email = normalizeEmail(application.normalized_email || application.email);
-  const phone = normalizePhone(application.normalized_phone || application.phone);
-
-  if (email) return `email:${email}`;
-  if (phone) return `phone:${phone}`;
-  return `application:${application.id}`;
+function applicationMeta(application: RushApplication) {
+  return [application.major, application.graduation_year, application.instagram].filter(Boolean).join(' · ') || 'No ASU details listed';
 }
 
-function rsvpKey(rsvp: RushRsvp) {
-  const email = normalizeEmail(rsvp.normalized_email || rsvp.email);
-  const phone = normalizePhone(rsvp.normalized_phone || rsvp.phone);
+function submittedDate(value: string | null) {
+  if (!value) return 'No date';
 
-  if (email) return `email:${email}`;
-  if (phone) return `phone:${phone}`;
-  return `rsvp:${rsvp.id}`;
+  return new Intl.DateTimeFormat('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(value));
 }
 
-function mergeProspects(applications: RushApplication[], rsvps: RushRsvp[]) {
-  const prospects = new Map<string, Prospect>();
-  const applicationIds = new Map<string, string>();
-
-  applications.forEach((application) => {
-    const key = applicationKey(application);
-    prospects.set(key, { key, application, rsvp: null });
-    applicationIds.set(application.id, key);
-  });
-
-  rsvps.forEach((rsvp) => {
-    const key = rsvp.matched_rush_application_id && applicationIds.has(rsvp.matched_rush_application_id)
-      ? applicationIds.get(rsvp.matched_rush_application_id)!
-      : rsvpKey(rsvp);
-
-    const existing = prospects.get(key);
-    prospects.set(key, {
-      key,
-      application: existing?.application ?? null,
-      rsvp,
-    });
-  });
-
-  return Array.from(prospects.values()).sort((a, b) => {
-    const aDate = a.application?.created_at || a.rsvp?.created_at || '';
-    const bDate = b.application?.created_at || b.rsvp?.created_at || '';
-    return bDate.localeCompare(aDate);
-  });
-}
-
-function prospectName(prospect: Prospect) {
-  const applicationName = [prospect.application?.first_name, prospect.application?.last_name]
-    .filter(Boolean)
-    .join(' ')
-    .trim();
-
-  return applicationName || prospect.rsvp?.full_name || 'Unnamed potential member';
-}
-
-function prospectSource(prospect: Prospect) {
-  if (prospect.application && prospect.rsvp) return 'Both';
-  if (prospect.application) return 'Rush form only';
-  return 'RSVP only';
-}
-
-function prospectContact(prospect: Prospect) {
-  return [
-    prospect.application?.email || prospect.rsvp?.email,
-    prospect.application?.phone || prospect.rsvp?.phone,
-    prospect.application?.hometown,
-  ]
-    .filter(Boolean)
-    .join(' · ') || 'No contact details available';
-}
-
-function voteTotals(votes: RushVote[], prospectKey: string) {
-  return votes
-    .filter((vote) => vote.prospect_key === prospectKey)
-    .reduce<Record<VoteValue, number>>(
-      (totals, vote) => ({ ...totals, [vote.vote]: totals[vote.vote] + 1 }),
-      { yes: 0, maybe: 0, no: 0 }
-    );
+function compactText(value: string | null | undefined) {
+  return value?.trim() || 'None listed';
 }
 
 export function MemberDashboard() {
   const [gate, setGate] = useState<GateState>('loading');
   const [userId, setUserId] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [profile, setProfile] = useState<MemberProfile | null>(null);
-  const [prospects, setProspects] = useState<Prospect[]>([]);
-  const [votes, setVotes] = useState<RushVote[]>([]);
+  const [applications, setApplications] = useState<RushApplication[]>([]);
+  const [votes, setVotes] = useState<PnmVote[]>([]);
   const [profiles, setProfiles] = useState<MemberProfile[]>([]);
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
-  const [savingKey, setSavingKey] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [savingId, setSavingId] = useState<string | null>(null);
+  const [savedId, setSavedId] = useState<string | null>(null);
   const [message, setMessage] = useState('');
 
   const isAdmin = profile?.status === 'admin';
@@ -188,6 +120,7 @@ export function MemberDashboard() {
       }
 
       setUserId(user.id);
+      setUserEmail(user.email ?? null);
 
       const { data: memberProfile, error: profileError } = await supabase
         .from('member_profiles')
@@ -222,39 +155,31 @@ export function MemberDashboard() {
         return;
       }
 
-      const [applicationsResult, rsvpsResult, votesResult] = await Promise.all([
-        supabase.from('rush_applications').select('*').order('created_at', { ascending: false }),
-        supabase.from('rush_rsvps').select('*').order('created_at', { ascending: false }),
-        supabase.from('rush_votes').select('*').order('updated_at', { ascending: false }),
+      const [applicationsResult, votesResult, profilesResult] = await Promise.all([
+        supabase
+          .from('rush_applications')
+          .select('id,created_at,first_name,last_name,phone,email,major,graduation_year,hometown,sports,clubs,leadership_positions,instagram,linkedin,status')
+          .order('created_at', { ascending: false }),
+        supabase.from('pnm_votes').select('*').order('updated_at', { ascending: false }),
+        supabase
+          .from('member_profiles')
+          .select('user_id,email,display_name,status,created_at,approved_at')
+          .order('created_at', { ascending: false }),
       ]);
 
       if (applicationsResult.error) throw applicationsResult.error;
-      if (rsvpsResult.error) throw rsvpsResult.error;
       if (votesResult.error) throw votesResult.error;
+      if (profilesResult.error) throw profilesResult.error;
 
-      const loadedVotes = (votesResult.data || []) as RushVote[];
-      const loadedProspects = mergeProspects((applicationsResult.data || []) as RushApplication[], (rsvpsResult.data || []) as RushRsvp[]);
-      setProspects(loadedProspects);
-      setCurrentIndex(0);
+      const loadedVotes = (votesResult.data || []) as PnmVote[];
+      setApplications((applicationsResult.data || []) as RushApplication[]);
       setVotes(loadedVotes);
+      setProfiles((profilesResult.data || []) as MemberProfile[]);
       setNoteDrafts(
         loadedVotes
-          .filter((vote) => vote.voter_id === user.id)
-          .reduce<Record<string, string>>((drafts, vote) => ({ ...drafts, [vote.prospect_key]: vote.note || '' }), {})
+          .filter((vote) => vote.member_id === user.id)
+          .reduce<Record<string, string>>((drafts, vote) => ({ ...drafts, [vote.pnm_id]: vote.notes || '' }), {})
       );
-
-      if (currentProfile.status === 'admin') {
-        const { data: memberProfiles, error: profilesError } = await supabase
-          .from('member_profiles')
-          .select('user_id,email,display_name,status,created_at,approved_at')
-          .order('created_at', { ascending: false });
-
-        if (profilesError) throw profilesError;
-        setProfiles((memberProfiles || []) as MemberProfile[]);
-      } else {
-        setProfiles([]);
-      }
-
       setGate('approved');
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Unable to load the member dashboard.');
@@ -266,16 +191,19 @@ export function MemberDashboard() {
     void loadDashboard();
   }, [loadDashboard]);
 
-  useEffect(() => {
-    setCurrentIndex((index) => Math.min(index, Math.max(prospects.length - 1, 0)));
-  }, [prospects.length]);
-
   const myVotes = useMemo(() => {
-    return votes.reduce<Record<string, RushVote>>((map, vote) => {
-      if (vote.voter_id === userId) map[vote.prospect_key] = vote;
+    return votes.reduce<Record<string, PnmVote>>((map, vote) => {
+      if (vote.member_id === userId) map[vote.pnm_id] = vote;
       return map;
     }, {});
   }, [userId, votes]);
+
+  const votesByPnm = useMemo(() => {
+    return votes.reduce<Record<string, PnmVote[]>>((map, vote) => {
+      map[vote.pnm_id] = [...(map[vote.pnm_id] || []), vote];
+      return map;
+    }, {});
+  }, [votes]);
 
   const memberNameById = useMemo(() => {
     return profiles.reduce<Record<string, string>>((map, member) => {
@@ -284,40 +212,37 @@ export function MemberDashboard() {
     }, {});
   }, [profiles]);
 
-  async function saveVote(prospect: Prospect, vote: VoteValue) {
+  async function saveVote(application: RushApplication, voteStatus: VoteStatus) {
     if (!userId) return;
 
-    setSavingKey(prospect.key);
+    setSavingId(application.id);
+    setSavedId(null);
     setMessage('');
 
     try {
       const payload = {
-        prospect_key: prospect.key,
-        source_application_id: prospect.application?.id ?? null,
-        source_rsvp_id: prospect.rsvp?.id ?? null,
-        voter_id: userId,
-        vote,
-        note: noteDrafts[prospect.key]?.trim() || null,
+        pnm_id: application.id,
+        member_id: userId,
+        member_email: userEmail,
+        vote_status: voteStatus,
+        notes: noteDrafts[application.id]?.trim() || null,
       };
 
       const { data, error } = await supabase
-        .from('rush_votes')
-        .upsert(payload, { onConflict: 'prospect_key,voter_id' })
+        .from('pnm_votes')
+        .upsert(payload, { onConflict: 'pnm_id,member_id' })
         .select('*')
         .single();
 
       if (error) throw error;
 
-      setVotes((current) => [
-        data as RushVote,
-        ...current.filter((existing) => existing.id !== data.id),
-      ]);
-      setMessage('Vote saved.');
-      setCurrentIndex((index) => Math.min(index + 1, Math.max(prospects.length - 1, 0)));
+      setVotes((current) => [data as PnmVote, ...current.filter((existing) => existing.id !== data.id)]);
+      setSavedId(application.id);
+      setMessage('Vote updated.');
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Unable to save vote.');
+      setMessage(error instanceof Error ? error.message : 'Unable to update vote.');
     } finally {
-      setSavingKey(null);
+      setSavingId(null);
     }
   }
 
@@ -379,13 +304,6 @@ export function MemberDashboard() {
     );
   }
 
-  const activeProspect = prospects[currentIndex] ?? null;
-  const activeVote = activeProspect ? myVotes[activeProspect.key] : null;
-  const activeTotals = activeProspect && isAdmin ? voteTotals(votes, activeProspect.key) : null;
-  const activeNotes = activeProspect && isAdmin
-    ? votes.filter((vote) => vote.prospect_key === activeProspect.key && vote.note)
-    : [];
-
   return (
     <section className="mx-auto max-w-7xl">
       <div className="member-dashboard-header">
@@ -393,7 +311,7 @@ export function MemberDashboard() {
           <p className="section-kicker">Rush Committee</p>
           <h1 className="mt-2 text-5xl font-black md:text-6xl">P.N.M Dashboard</h1>
           <p className="mt-4 max-w-2xl text-white/58">
-            Review potential new members from rush forms and RSVPs, then record your vote for the rush committee.
+            Scan every submitted rush application, record your status, and expand a row only when you need the full vote history.
           </p>
         </div>
         <button type="button" onClick={logout} className="premium-button premium-button-secondary w-full md:w-auto">Log out</button>
@@ -432,95 +350,124 @@ export function MemberDashboard() {
         </div>
       ) : null}
 
-      <div className="mt-8">
-        {activeProspect ? (
-          <article className="member-panel pnm-card-shell p-5 md:p-6">
-            <div className="pnm-progress-row">
-              <span className="member-pill">{currentIndex + 1} of {prospects.length}</span>
-              <div className="pnm-progress-track" aria-hidden="true">
-                <span style={{ width: `${((currentIndex + 1) / prospects.length) * 100}%` }} />
-              </div>
-              <span className="member-pill">{activeVote ? `Your vote: ${activeVote.vote}` : 'Not voted'}</span>
-            </div>
+      <div className="member-panel pnm-list-shell mt-8 p-4 md:p-5">
+        <div className="pnm-list-heading">
+          <div>
+            <p className="section-kicker">Potential New Members</p>
+            <h2>All submitted PNMs</h2>
+          </div>
+          <span className="member-pill">{applications.length} applications</span>
+        </div>
 
-            <div className="pnm-card-layout">
-              <div className="pnm-prospect-copy">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="member-pill">{prospectSource(activeProspect)}</span>
-                  {activeProspect.application?.major ? <span className="member-pill">{activeProspect.application.major}</span> : null}
-                  {activeProspect.application?.graduation_year ? <span className="member-pill">{activeProspect.application.graduation_year}</span> : null}
-                </div>
+        {applications.length ? (
+          <div className="pnm-application-list">
+            {applications.map((application) => {
+              const myVote = myVotes[application.id];
+              const rowVotes = votesByPnm[application.id] || [];
+              const otherVotes = rowVotes.filter((vote) => vote.member_id !== userId);
+              const selectedStatus = myVote?.vote_status || '';
 
-                <h2>{prospectName(activeProspect)}</h2>
-                <p className="pnm-contact-line">{prospectContact(activeProspect)}</p>
-
-                {activeProspect.application ? (
-                  <div className="pnm-detail-grid">
-                    <p><span>Sports:</span> {activeProspect.application.sports || 'None listed'}</p>
-                    <p><span>Clubs:</span> {activeProspect.application.clubs || 'None listed'}</p>
-                    <p><span>Leadership:</span> {activeProspect.application.leadership_positions || 'None listed'}</p>
-                    <p><span>Instagram:</span> {activeProspect.application.instagram || activeProspect.rsvp?.instagram || 'None listed'}</p>
-                  </div>
-                ) : null}
-
-                {activeProspect.rsvp?.message ? <p className="pnm-message">{activeProspect.rsvp.message}</p> : null}
-              </div>
-
-              <div className="pnm-vote-panel">
-                {isAdmin && activeTotals ? (
-                  <div className="pnm-vote-totals">
-                    <div><p>{activeTotals.yes}</p><span>Yes</span></div>
-                    <div><p>{activeTotals.maybe}</p><span>Maybe</span></div>
-                    <div><p>{activeTotals.no}</p><span>No</span></div>
-                  </div>
-                ) : null}
-
-                <textarea
-                  className="member-field min-h-28 resize-none text-sm"
-                  placeholder="Reason, story, interaction, or experience with this PNM…"
-                  value={noteDrafts[activeProspect.key] || ''}
-                  onChange={(event) => setNoteDrafts((drafts) => ({ ...drafts, [activeProspect.key]: event.target.value }))}
-                />
-
-                <div className="mt-4 grid grid-cols-3 gap-2">
-                  {(['yes', 'maybe', 'no'] as VoteValue[]).map((vote) => (
-                    <button
-                      type="button"
-                      onClick={() => saveVote(activeProspect, vote)}
-                      disabled={savingKey === activeProspect.key}
-                      className={`member-vote-button ${activeVote?.vote === vote ? 'member-vote-button-active' : ''}`}
-                      key={vote}
-                    >
-                      {savingKey === activeProspect.key ? 'Saving' : vote}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="pnm-card-controls">
-                  <button type="button" onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))} disabled={currentIndex === 0}>
-                    Previous
-                  </button>
-                  <button type="button" onClick={() => setCurrentIndex((index) => Math.min(index + 1, prospects.length - 1))} disabled={currentIndex === prospects.length - 1}>
-                    Next
-                  </button>
-                </div>
-
-                {isAdmin ? (
-                  <div className="pnm-note-list">
-                    <p className="section-kicker">Admin Notes</p>
-                    {activeNotes.length ? activeNotes.map((vote) => (
-                      <div key={vote.id}>
-                        <strong>{memberNameById[vote.voter_id] || 'Approved member'} · {vote.vote}</strong>
-                        <p>{vote.note}</p>
+              return (
+                <article className="pnm-application-row" key={application.id}>
+                  <div className="pnm-row-main">
+                    <div className="pnm-row-copy">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="member-pill">{submittedDate(application.created_at)}</span>
+                        {application.status ? <span className="member-pill">{application.status}</span> : null}
+                        {savedId === application.id ? <span className="member-pill pnm-saved-pill">Saved</span> : null}
                       </div>
-                    )) : <p>No notes yet.</p>}
+                      <h3>{applicationName(application)}</h3>
+                      <p>{applicationContact(application)}</p>
+                      <p>{applicationMeta(application)}</p>
+                    </div>
+
+                    <div className="pnm-row-vote">
+                      <label>
+                        <span>Your status</span>
+                        <select
+                          value={selectedStatus}
+                          disabled={savingId === application.id}
+                          onChange={(event) => {
+                            const nextStatus = event.target.value as VoteStatus;
+                            if (nextStatus) void saveVote(application, nextStatus);
+                          }}
+                        >
+                          <option value="">Not voted</option>
+                          {voteOptions.map((option) => (
+                            <option value={option.value} key={option.value}>{option.label}</option>
+                          ))}
+                        </select>
+                      </label>
+
+                      <label>
+                        <span>Notes</span>
+                        <textarea
+                          value={noteDrafts[application.id] ?? myVote?.notes ?? ''}
+                          onChange={(event) => setNoteDrafts((drafts) => ({ ...drafts, [application.id]: event.target.value }))}
+                          placeholder="Optional short note"
+                          rows={2}
+                        />
+                      </label>
+
+                      <button
+                        type="button"
+                        disabled={savingId === application.id}
+                        onClick={() => void saveVote(application, myVote?.vote_status || 'need_more_info')}
+                      >
+                        {savingId === application.id ? 'Saving...' : 'Save note'}
+                      </button>
+                    </div>
                   </div>
-                ) : null}
-              </div>
-            </div>
-          </article>
+
+                  <details className="pnm-response-details">
+                    <summary>
+                      <span>Submitted info and member responses</span>
+                      <span>{rowVotes.length} total</span>
+                    </summary>
+
+                    <div className="pnm-expanded-grid">
+                      <div className="pnm-submission-panel">
+                        <p><span>Sports:</span> {compactText(application.sports)}</p>
+                        <p><span>Clubs:</span> {compactText(application.clubs)}</p>
+                        <p><span>Leadership:</span> {compactText(application.leadership_positions)}</p>
+                        <p><span>LinkedIn:</span> {compactText(application.linkedin)}</p>
+                      </div>
+
+                      <div className="pnm-response-list">
+                        {myVote ? (
+                          <div className="pnm-response-item pnm-response-item-own">
+                            <strong>You · {voteLabels[myVote.vote_status]}</strong>
+                            <p>{myVote.notes || 'No note added.'}</p>
+                          </div>
+                        ) : (
+                          <div className="pnm-response-item pnm-response-item-own">
+                            <strong>Your response</strong>
+                            <p>No vote recorded yet.</p>
+                          </div>
+                        )}
+
+                        {otherVotes.length ? otherVotes.map((vote) => (
+                          <div className="pnm-response-item" key={vote.id}>
+                            <strong>{memberNameById[vote.member_id] || vote.member_email || 'Approved member'} · {voteLabels[vote.vote_status]}</strong>
+                            <p>{vote.notes || 'No note added.'}</p>
+                          </div>
+                        )) : (
+                          <div className="pnm-response-item">
+                            <strong>Other members</strong>
+                            <p>No other member responses yet.</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </details>
+                </article>
+              );
+            })}
+          </div>
         ) : (
-          <div className="member-panel p-8 text-white/58">No rush forms or RSVPs are available yet.</div>
+          <div className="pnm-empty-state">
+            <p>No rush applications are available yet.</p>
+          </div>
         )}
       </div>
     </section>

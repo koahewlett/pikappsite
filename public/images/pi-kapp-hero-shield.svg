@@ -27,18 +27,18 @@
   </style>
   <defs>
     <linearGradient id="shieldBlueMetal" x1="72" y1="31" x2="420" y2="424" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0E669F"/>
-      <stop offset="0.12" stop-color="#005596"/>
-      <stop offset="0.34" stop-color="#003F73"/>
-      <stop offset="0.52" stop-color="#004B84"/>
-      <stop offset="0.7" stop-color="#002E54"/>
-      <stop offset="0.88" stop-color="#005596"/>
-      <stop offset="1" stop-color="#003F73"/>
+      <stop offset="0" stop-color="#0A3A63"/>
+      <stop offset="0.12" stop-color="#07345C"/>
+      <stop offset="0.34" stop-color="#062A4C"/>
+      <stop offset="0.52" stop-color="#082F55"/>
+      <stop offset="0.7" stop-color="#031D35"/>
+      <stop offset="0.88" stop-color="#07345C"/>
+      <stop offset="1" stop-color="#052846"/>
     </linearGradient>
     <radialGradient id="shieldBlueHighlight" cx="32%" cy="18%" r="66%">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
-      <stop offset="0.18" stop-color="#8CC6EC" stop-opacity="0.1"/>
-      <stop offset="0.5" stop-color="#005596" stop-opacity="0.02"/>
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="0.18" stop-color="#6E92B8" stop-opacity="0.07"/>
+      <stop offset="0.5" stop-color="#07345C" stop-opacity="0.015"/>
       <stop offset="1" stop-color="#001B33" stop-opacity="0.36"/>
     </radialGradient>
     <linearGradient id="shieldEdgeShadow" x1="55" y1="72" x2="453" y2="425" gradientUnits="userSpaceOnUse">
@@ -71,8 +71,8 @@
     <path id="goldShape" d="M 183.04 326.26 C164.47,340.35 163.00,341.40 163.00,340.57 C163.00,340.28 163.65,338.34 164.45,336.27 C165.25,334.20 170.25,320.35 175.57,305.50 C188.03,270.68 191.98,259.74 196.42,247.57 C198.41,242.11 199.70,237.34 199.27,236.97 C198.85,236.60 189.95,230.52 179.50,223.45 C169.05,216.39 158.02,208.87 155.00,206.74 C151.98,204.62 140.95,197.03 130.50,189.88 C120.05,182.73 110.84,176.24 110.04,175.44 C108.76,174.19 115.52,174.00 162.67,174.00 L 216.76,174.00 L 231.94,127.75 C240.29,102.31 247.63,80.18 248.26,78.57 C249.49,75.39 250.63,78.57 272.97,147.77 L 281.44,174.00 L 335.72,174.00 C365.57,174.00 389.98,174.34 389.96,174.75 C389.94,175.16 380.60,181.77 369.21,189.42 C314.27,226.36 299.81,236.32 299.33,237.59 C298.73,239.14 299.95,242.74 314.73,283.00 C320.48,298.67 326.69,315.77 328.52,321.00 C330.35,326.23 332.74,332.86 333.84,335.75 C334.93,338.64 335.52,341.00 335.15,341.00 C334.77,341.00 332.22,339.13 329.48,336.85 C324.80,332.96 308.15,319.50 268.57,287.62 C253.76,275.69 251.43,274.15 249.89,275.24 C248.93,275.94 243.94,279.72 238.82,283.66 C219.33,298.64 199.89,313.49 183.04,326.26 Z"/>
   </defs>
   <g filter="url(#crestDepth)">
-    <use href="#blueShape" fill="url(#shieldBlueMetal)"/>
-    <use href="#blueShape" fill="url(#shieldBlueHighlight)" opacity="0.48"/>
+    <use href="#blueShape" fill="url(#shieldBlueMetal)" opacity="0.9"/>
+    <use href="#blueShape" fill="url(#shieldBlueHighlight)" opacity="0.36"/>
     <use href="#blueShape" fill="none" stroke="url(#shieldEdgeShadow)" stroke-width="6" stroke-linejoin="round" opacity="0.32"/>
     <use href="#goldShape" fill="url(#goldMetal)"/>
     <use href="#goldShape" class="gold-glimmer" fill="url(#goldShimmer)"/>

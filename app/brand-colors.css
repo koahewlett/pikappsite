@@ -67,7 +67,7 @@ body {
 }
 
 html[data-intro-complete="true"] .hero-crest-right {
-  opacity: 0.58;
+  opacity: 0.48;
 }
 
 .pi-kapp-hero-shield {
@@ -76,7 +76,7 @@ html[data-intro-complete="true"] .hero-crest-right {
   filter:
     drop-shadow(0 1px 0 rgba(255, 255, 255, 0.14))
     drop-shadow(0 14px 28px rgba(0, 0, 0, 0.36))
-    drop-shadow(0 0 16px rgba(var(--pi-kapp-blue-rgb), 0.1))
+    drop-shadow(0 0 14px rgba(4, 31, 58, 0.16))
     drop-shadow(0 0 12px rgba(var(--pi-kapp-gold-rgb), 0.1));
 }
 
@@ -306,25 +306,86 @@ select:focus-visible {
   overflow: hidden;
 }
 
-.rose-coat-of-arms {
-  pointer-events: none;
-  position: absolute;
-  left: clamp(0.75rem, 5vw, 4rem);
-  top: 50%;
-  z-index: 0;
-  width: clamp(8.5rem, 18vw, 16rem);
-  height: auto;
-  opacity: 0.18;
-  transform: translate3d(0, -50%, 0);
-  filter:
-    drop-shadow(0 14px 26px rgba(0, 0, 0, 0.34))
-    drop-shadow(0 0 20px rgba(var(--pi-kapp-blue-rgb), 0.14));
-  animation: roseCoatFloat 5.8s ease-in-out infinite alternate;
+.crest-showcase-section {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: clamp(27rem, 72svh, 48rem);
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(2.5rem, 7vw, 5rem) var(--section-x, 1.25rem);
+  background:
+    radial-gradient(circle at 50% 48%, rgba(var(--pi-kapp-gold-rgb), 0.12), transparent 20rem),
+    radial-gradient(circle at 50% 54%, rgba(3, 24, 44, 0.86), transparent 31rem),
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 48%, transparent 100%);
 }
 
-html:not([data-intro-complete="true"]) .rose-coat-of-arms {
-  opacity: 0;
-  visibility: hidden;
+.crest-showcase-section::before,
+.crest-showcase-section::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+}
+
+.crest-showcase-section::before {
+  inset: 16% 18%;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 0 80px rgba(var(--pi-kapp-blue-rgb), 0.12),
+    inset 0 0 90px rgba(var(--pi-kapp-gold-rgb), 0.045);
+}
+
+.crest-showcase-section::after {
+  width: min(56rem, 92vw);
+  height: min(56rem, 92vw);
+  background:
+    radial-gradient(circle, rgba(var(--pi-kapp-gold-rgb), 0.11), transparent 58%),
+    radial-gradient(circle, rgba(var(--pi-kapp-blue-rgb), 0.11), transparent 70%);
+  filter: blur(18px);
+  opacity: 0.56;
+}
+
+.crest-showcase-orbit {
+  position: relative;
+  z-index: 1;
+  width: min(31rem, 78vw);
+  max-height: min(36rem, 68svh);
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+}
+
+.crest-showcase-orbit::after {
+  content: "";
+  position: absolute;
+  inset: -18% -10%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 33%,
+    rgba(255, 255, 255, 0.0) 39%,
+    rgba(255, 244, 188, 0.46) 47%,
+    rgba(255, 255, 255, 0.28) 52%,
+    transparent 63%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  transform: translateY(-72%);
+  animation: crestVerticalGlimmer 4.8s ease-in-out infinite;
+}
+
+.crest-showcase-image {
+  width: 100%;
+  height: auto;
+  max-height: min(36rem, 68svh);
+  object-fit: contain;
+  filter:
+    drop-shadow(0 22px 40px rgba(0, 0, 0, 0.46))
+    drop-shadow(0 0 26px rgba(var(--pi-kapp-gold-rgb), 0.12))
+    drop-shadow(0 0 34px rgba(var(--pi-kapp-blue-rgb), 0.12));
 }
 
 .mvv-section {
@@ -364,13 +425,21 @@ html:not([data-intro-complete="true"]) .rose-coat-of-arms {
   line-height: 1.56;
 }
 
-@keyframes roseCoatFloat {
-  from {
-    transform: translate3d(-0.6rem, calc(-50% - 0.22rem), 0) scale(0.985);
+@keyframes crestVerticalGlimmer {
+  0%,
+  38%,
+  100% {
+    opacity: 0;
+    transform: translateY(-72%);
   }
 
-  to {
-    transform: translate3d(0.6rem, calc(-50% + 0.22rem), 0) scale(1.015);
+  52% {
+    opacity: 0.74;
+  }
+
+  72% {
+    opacity: 0;
+    transform: translateY(72%);
   }
 }
 
@@ -383,7 +452,7 @@ html:not([data-intro-complete="true"]) .rose-coat-of-arms {
   }
 
   html[data-intro-complete="true"] .hero-crest-right {
-    opacity: 0.46;
+    opacity: 0.36;
   }
 
   .pi-kapp-hero-shield {
@@ -393,10 +462,22 @@ html:not([data-intro-complete="true"]) .rose-coat-of-arms {
       drop-shadow(0 0 13px rgba(var(--pi-kapp-blue-rgb), 0.1));
   }
 
-  .rose-coat-of-arms {
-    left: -1.5rem;
-    width: clamp(7.8rem, 34vw, 11rem);
-    opacity: 0.13;
+  .crest-showcase-section {
+    min-height: clamp(25rem, 58svh, 34rem);
+    padding-block: 2.5rem;
+  }
+
+  .crest-showcase-section::before {
+    inset: 18% 4%;
+  }
+
+  .crest-showcase-orbit {
+    width: min(25rem, 88vw);
+    max-height: 26rem;
+  }
+
+  .crest-showcase-image {
+    max-height: min(26rem, 54svh);
   }
 
   .mvv-section {
@@ -406,7 +487,7 @@ html:not([data-intro-complete="true"]) .rose-coat-of-arms {
 
 @media (prefers-reduced-motion: reduce) {
   .pi-kapp-hero-shield,
-  .rose-coat-of-arms {
+  .crest-showcase-orbit::after {
     animation: none !important;
     transition: none !important;
   }
