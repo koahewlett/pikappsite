@@ -44,6 +44,7 @@ type PnmVote = {
   member_email: string | null;
   vote_status: VoteStatus;
   notes: string | null;
+  submitted_at: string | null;
   created_at: string | null;
   updated_at: string | null;
 };
@@ -207,7 +208,9 @@ export function MemberDashboard() {
   const [ratings, setRatings] = useState<PnmRating[]>([]);
   const [favorites, setFavorites] = useState<PnmFavorite[]>([]);
   const [profiles, setProfiles] = useState<MemberProfile[]>([]);
+  const [voteDrafts, setVoteDrafts] = useState<Record<string, VoteStatus | ''>>({});
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
+  const [ratingDrafts, setRatingDrafts] = useState<Record<string, number>>({});
   const [listMode, setListMode] = useState<ListMode>('all');
   const [viewFilter, setViewFilter] = useState<PnmViewFilter>('all');
   const [sortMode, setSortMode] = useState<SortMode>('recent');
@@ -293,15 +296,26 @@ export function MemberDashboard() {
       if (profilesResult.error) throw profilesResult.error;
 
       const loadedVotes = (votesResult.data || []) as PnmVote[];
+      const loadedRatings = (ratingsResult.data || []) as PnmRating[];
       setApplications((applicationsResult.data || []) as RushApplication[]);
       setVotes(loadedVotes);
-      setRatings((ratingsResult.data || []) as PnmRating[]);
+      setRatings(loadedRatings);
       setFavorites((favoritesResult.data || []) as PnmFavorite[]);
       setProfiles((profilesResult.data || []) as MemberProfile[]);
+      setVoteDrafts(
+        loadedVotes
+          .filter((vote) => vote.member_id === user.id)
+          .reduce<Record<string, VoteStatus | ''>>((drafts, vote) => ({ ...drafts, [vote.pnm_id]: vote.vote_status }), {})
+      );
       setNoteDrafts(
         loadedVotes
           .filter((vote) => vote.member_id === user.id)
           .reduce<Record<string, string>>((drafts, vote) => ({ ...drafts, [vote.pnm_id]: vote.notes || '' }), {})
+      );
+      setRatingDrafts(
+        loadedRatings
+          .filter((rating) => rating.user_id === user.id)
+          .reduce<Record<string, number>>((drafts, rating) => ({ ...drafts, [rating.pnm_id]: rating.rating }), {})
       );
       setGate('approved');
     } catch (error) {
@@ -327,6 +341,13 @@ export function MemberDashboard() {
       return map;
     }, {});
   }, [votes]);
+
+  const mySubmittedVotes = useMemo(() => {
+    return votes.reduce<Record<string, PnmVote>>((map, vote) => {
+      if (vote.member_id === userId && vote.submitted_at) map[vote.pnm_id] = vote;
+      return map;
+    }, {});
+  }, [userId, votes]);
 
   const memberNameById = useMemo(() => {
     return profiles.reduce<Record<string, string>>((map, member) => {
@@ -364,6 +385,7 @@ export function MemberDashboard() {
 
     const filtered = applications.filter((application) => {
       const myRating = myRatings[application.id]?.rating || 0;
+      const hasSubmittedVote = Boolean(mySubmittedVotes[application.id]);
       const isFavorite = Boolean(myFavorites[application.id]);
       const searchable = [
         applicationName(application),
@@ -381,8 +403,8 @@ export function MemberDashboard() {
       if (normalizedSearch && !searchable.includes(normalizedSearch)) return false;
       if (listMode === 'studs' && !isFavorite) return false;
       if (viewFilter === 'studs') return isFavorite;
-      if (viewFilter === 'rated') return myRating > 0;
-      if (viewFilter === 'unrated') return myRating === 0;
+      if (viewFilter === 'rated') return hasSubmittedVote;
+      if (viewFilter === 'unrated') return !hasSubmittedVote;
       if (viewFilter !== 'all') return myRating === Number(viewFilter);
 
       return true;
@@ -405,13 +427,22 @@ export function MemberDashboard() {
 
       return bDate.localeCompare(aDate);
     });
-  }, [applications, listMode, myFavorites, myRatings, ratingStatsByPnm, searchQuery, sortMode, viewFilter]);
+  }, [applications, listMode, myFavorites, myRatings, mySubmittedVotes, ratingStatsByPnm, searchQuery, sortMode, viewFilter]);
 
-  async function saveVote(application: RushApplication, voteStatus: VoteStatus) {
+  async function saveVote(application: RushApplication, fallbackStatus?: VoteStatus) {
     if (!userId) return;
 
+    const existingVote = myVotes[application.id];
+    const nextStatus = voteDrafts[application.id] || existingVote?.vote_status || fallbackStatus || 'need_more_info';
+    const nextRating = ratingDrafts[application.id] || 0;
+    const existingRating = myRatings[application.id]?.rating || 0;
+    const shouldSaveRating = nextRating > 0 && nextRating !== existingRating;
+    const submittedAt = new Date().toISOString();
+
     setSavingId(application.id);
+    if (shouldSaveRating) setRatingSavingId(application.id);
     setSavedId(null);
+    setRatingSavedId(null);
     setMessage('');
 
     try {
@@ -419,8 +450,9 @@ export function MemberDashboard() {
         pnm_id: application.id,
         member_id: userId,
         member_email: userEmail,
-        vote_status: voteStatus,
+        vote_status: nextStatus,
         notes: noteDrafts[application.id]?.trim() || null,
+        submitted_at: submittedAt,
       };
 
       const { data, error } = await supabase
@@ -432,44 +464,28 @@ export function MemberDashboard() {
       if (error) throw error;
 
       setVotes((current) => [data as PnmVote, ...current.filter((existing) => existing.id !== data.id)]);
+      setVoteDrafts((drafts) => ({ ...drafts, [application.id]: (data as PnmVote).vote_status }));
       setSavedId(application.id);
-      setMessage('Vote updated.');
+
+      if (nextRating > 0) {
+        const { data: ratingData, error: ratingError } = await supabase
+          .from('pnm_ratings')
+          .upsert({ pnm_id: application.id, user_id: userId, rating: nextRating }, { onConflict: 'pnm_id,user_id' })
+          .select('*')
+          .single();
+
+        if (ratingError) throw ratingError;
+
+        setRatings((current) => [ratingData as PnmRating, ...current.filter((existing) => existing.id !== ratingData.id)]);
+        setRatingDrafts((drafts) => ({ ...drafts, [application.id]: (ratingData as PnmRating).rating }));
+        setRatingSavedId(application.id);
+      }
+
+      setMessage(nextRating > 0 ? 'Vote and rating saved.' : 'Vote saved.');
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Unable to update vote.');
+      setMessage(error instanceof Error ? error.message : 'Unable to save vote.');
     } finally {
       setSavingId(null);
-    }
-  }
-
-  async function saveRating(application: RushApplication, rating: number) {
-    if (!userId) return;
-
-    setRatingSavingId(application.id);
-    setRatingSavedId(null);
-    setFavoriteSavedId(null);
-    setMessage('');
-
-    try {
-      const payload = {
-        pnm_id: application.id,
-        user_id: userId,
-        rating,
-      };
-
-      const { data, error } = await supabase
-        .from('pnm_ratings')
-        .upsert(payload, { onConflict: 'pnm_id,user_id' })
-        .select('*')
-        .single();
-
-      if (error) throw error;
-
-      setRatings((current) => [data as PnmRating, ...current.filter((existing) => existing.id !== data.id)]);
-      setRatingSavedId(application.id);
-      setMessage('Rating updated.');
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Unable to update rating.');
-    } finally {
       setRatingSavingId(null);
     }
   }
@@ -701,11 +717,13 @@ export function MemberDashboard() {
             {displayedApplications.length ? displayedApplications.map((application) => {
               const myVote = myVotes[application.id];
               const myRating = myRatings[application.id]?.rating || 0;
+              const draftRating = ratingDrafts[application.id] || myRating;
               const myFavorite = myFavorites[application.id];
               const ratingStats = ratingStatsByPnm[application.id] || { average: 0, count: 0, total: 0 };
-              const rowVotes = votesByPnm[application.id] || [];
+              const rowVotes = (votesByPnm[application.id] || []).filter((vote) => vote.submitted_at);
               const otherVotes = rowVotes.filter((vote) => vote.member_id !== userId);
-              const selectedStatus = myVote?.vote_status || '';
+              const submittedVote = mySubmittedVotes[application.id];
+              const selectedStatus = voteDrafts[application.id] ?? myVote?.vote_status ?? '';
               const instagram = instagramProfile(application.instagram);
 
               return (
@@ -742,12 +760,16 @@ export function MemberDashboard() {
                       <div className="pnm-rating-control">
                         <div className="pnm-rating-control-head">
                           <span>My rating</span>
-                          <strong>{myRating ? `${myRating} / 5` : 'Unrated'}</strong>
+                          <strong>{draftRating ? `${draftRating} / 5${draftRating !== myRating ? ' draft' : ''}` : 'Unrated'}</strong>
                         </div>
                         <StarRating
-                          value={myRating}
+                          value={draftRating}
                           saving={ratingSavingId === application.id}
-                          onRate={(rating) => void saveRating(application, rating)}
+                          onRate={(rating) => {
+                            setRatingSavedId(null);
+                            setFavoriteSavedId(null);
+                            setRatingDrafts((drafts) => ({ ...drafts, [application.id]: rating }));
+                          }}
                         />
                       </div>
 
@@ -771,7 +793,8 @@ export function MemberDashboard() {
                           disabled={savingId === application.id}
                           onChange={(event) => {
                             const nextStatus = event.target.value as VoteStatus;
-                            if (nextStatus) void saveVote(application, nextStatus);
+                            setSavedId(null);
+                            setVoteDrafts((drafts) => ({ ...drafts, [application.id]: nextStatus || '' }));
                           }}
                         >
                           <option value="">Not voted</option>
@@ -794,9 +817,9 @@ export function MemberDashboard() {
                       <button
                         type="button"
                         disabled={savingId === application.id}
-                        onClick={() => void saveVote(application, myVote?.vote_status || 'need_more_info')}
+                        onClick={() => void saveVote(application)}
                       >
-                        {savingId === application.id ? 'Saving...' : 'Save note'}
+                        {savingId === application.id ? 'Saving...' : 'Save Vote'}
                       </button>
                     </div>
                   </div>
@@ -835,10 +858,10 @@ export function MemberDashboard() {
                       </div>
 
                       <div className="pnm-response-list">
-                        {myVote ? (
+                        {submittedVote ? (
                           <div className="pnm-response-item pnm-response-item-own">
-                            <strong>You · {voteLabels[myVote.vote_status]}</strong>
-                            <p>{myVote.notes || 'No note added.'}</p>
+                            <strong>You · {voteLabels[submittedVote.vote_status]}</strong>
+                            <p>{submittedVote.notes || 'No note added.'}</p>
                           </div>
                         ) : (
                           <div className="pnm-response-item pnm-response-item-own">

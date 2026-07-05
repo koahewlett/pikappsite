@@ -22,9 +22,11 @@ alter table public.rush_applications enable row level security;
 drop policy if exists "Anyone can insert rush applications" on public.rush_applications;
 create policy "Anyone can insert rush applications" on public.rush_applications for insert with check (true);
 drop policy if exists "Authenticated members can view applications" on public.rush_applications;
-create policy "Authenticated members can view applications" on public.rush_applications for select using (auth.role() = 'authenticated');
 drop policy if exists "Authenticated members can update applications" on public.rush_applications;
-create policy "Authenticated members can update applications" on public.rush_applications for update using (auth.role() = 'authenticated');
+drop policy if exists "Approved members can view applications" on public.rush_applications;
+create policy "Approved members can view applications" on public.rush_applications for select to authenticated using (app_private.is_approved_member((select auth.uid())));
+drop policy if exists "Admins can update applications" on public.rush_applications;
+create policy "Admins can update applications" on public.rush_applications for update to authenticated using (app_private.is_rush_admin((select auth.uid()))) with check (app_private.is_rush_admin((select auth.uid())));
 
 -- Public signups table to store application form submissions
 create table if not exists public.signups (
@@ -51,9 +53,11 @@ alter table public.signups enable row level security;
 drop policy if exists "Anyone can insert signups" on public.signups;
 create policy "Anyone can insert signups" on public.signups for insert with check (true);
 drop policy if exists "Authenticated members can view signups" on public.signups;
-create policy "Authenticated members can view signups" on public.signups for select using (auth.role() = 'authenticated');
 drop policy if exists "Authenticated members can update signups" on public.signups;
-create policy "Authenticated members can update signups" on public.signups for update using (auth.role() = 'authenticated');
+drop policy if exists "Approved members can view signups" on public.signups;
+create policy "Approved members can view signups" on public.signups for select to authenticated using (app_private.is_approved_member((select auth.uid())));
+drop policy if exists "Admins can update signups" on public.signups;
+create policy "Admins can update signups" on public.signups for update to authenticated using (app_private.is_rush_admin((select auth.uid()))) with check (app_private.is_rush_admin((select auth.uid())));
 
 create table if not exists public.rush_rsvps (
   id uuid primary key default gen_random_uuid(),
@@ -74,9 +78,11 @@ alter table public.rush_rsvps enable row level security;
 drop policy if exists "Anyone can insert rush_rsvps" on public.rush_rsvps;
 create policy "Anyone can insert rush_rsvps" on public.rush_rsvps for insert with check (true);
 drop policy if exists "Authenticated members can view rush_rsvps" on public.rush_rsvps;
-create policy "Authenticated members can view rush_rsvps" on public.rush_rsvps for select using (auth.role() = 'authenticated');
 drop policy if exists "Authenticated members can update rush_rsvps" on public.rush_rsvps;
-create policy "Authenticated members can update rush_rsvps" on public.rush_rsvps for update using (auth.role() = 'authenticated');
+drop policy if exists "Approved members can view rush_rsvps" on public.rush_rsvps;
+create policy "Approved members can view rush_rsvps" on public.rush_rsvps for select to authenticated using (app_private.is_approved_member((select auth.uid())));
+drop policy if exists "Admins can update rush_rsvps" on public.rush_rsvps;
+create policy "Admins can update rush_rsvps" on public.rush_rsvps for update to authenticated using (app_private.is_rush_admin((select auth.uid()))) with check (app_private.is_rush_admin((select auth.uid())));
 
 create table if not exists public.pnm_votes (
   id uuid primary key default gen_random_uuid(),
@@ -85,6 +91,7 @@ create table if not exists public.pnm_votes (
   member_email text,
   vote_status text not null check (vote_status in ('interested', 'neutral', 'not_interested', 'need_more_info')),
   notes text,
+  submitted_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (pnm_id, member_id)
@@ -92,6 +99,7 @@ create table if not exists public.pnm_votes (
 create index if not exists pnm_votes_pnm_id_idx on public.pnm_votes(pnm_id);
 create index if not exists pnm_votes_member_id_idx on public.pnm_votes(member_id);
 create index if not exists pnm_votes_vote_status_idx on public.pnm_votes(vote_status);
+create index if not exists pnm_votes_submitted_at_idx on public.pnm_votes(submitted_at);
 alter table public.pnm_votes enable row level security;
 grant select, insert, update, delete on public.pnm_votes to authenticated;
 drop policy if exists "Approved members can read pnm votes" on public.pnm_votes;
@@ -148,3 +156,5 @@ drop policy if exists "Approved members can create own pnm favorites" on public.
 create policy "Approved members can create own pnm favorites" on public.pnm_favorites for insert to authenticated with check (app_private.is_approved_member((select auth.uid())) and user_id = (select auth.uid()));
 drop policy if exists "Approved members can delete own pnm favorites" on public.pnm_favorites;
 create policy "Approved members can delete own pnm favorites" on public.pnm_favorites for delete to authenticated using (app_private.is_approved_member((select auth.uid())) and user_id = (select auth.uid()));
+
+alter view public.rush_leads set (security_invoker = true);

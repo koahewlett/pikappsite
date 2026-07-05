@@ -1,11 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
+import { supabaseAnonKey, supabaseUrl, warnIfSupabaseEnvMissing } from './supabase-config';
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || 'https://kjkrjsslaonxfvxzxjac.supabase.co';
-const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || 'sb_publishable_IU2GQjW2kumQWWDJbkVceA_iXU18dKR';
+warnIfSupabaseEnvMissing();
 
-if (typeof window !== 'undefined' && (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)) {
-	// eslint-disable-next-line no-console
-	console.warn('Supabase client: NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY is not set. Using defaults.');
-}
-
-export const supabase = createClient(url, anon);
+export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
