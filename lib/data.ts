@@ -55,7 +55,7 @@ export const rushChairmen = [
     image: '/images/rush-chairman-1.jpg',
     initials: 'BE',
     bio: 'Short contact and bio placeholder for the rush chairman.',
-    contact: '@instagram_handle / phone placeholder'
+    contact: '@bodeestabrook / (760)-994-8768)'
   },
   {
     id: 'tanner-smith',
@@ -64,7 +64,7 @@ export const rushChairmen = [
     image: '/images/rush-chairman-2.jpg',
     initials: 'TS',
     bio: 'Short contact and bio placeholder for the vice rush chairman.',
-    contact: '@instagram_handle / phone placeholder'
+    contact: '@tanner.jsmith / (916)-705-8813)'
   }
 ] as const;
 // Put headshots at:
@@ -74,12 +74,12 @@ export const rushChairmen = [
 export const executiveBoardMembers = [
   {
     id: 'archon-president',
-    name: 'Name Placeholder',
+    name: 'Isaiah Mason',
     role: 'Archon / President',
     initials: 'AP',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@_isaiahmason_',
+    phone: '(224)-716-1959'
   },
   {
     id: 'vice-archon-vice-president',
@@ -92,12 +92,12 @@ export const executiveBoardMembers = [
   },
   {
     id: 'treasurer',
-    name: 'Name Placeholder',
+    name: 'Monte Krkuti',
     role: 'Treasurer',
     initials: 'TR',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@montekrkuti',
+    phone: '(917)-654-1089'
   },
   {
     id: 'secretary',
@@ -110,12 +110,12 @@ export const executiveBoardMembers = [
   },
   {
     id: 'warden',
-    name: 'Name Placeholder',
+    name: 'Jimmy Panos',
     role: 'Warden',
     initials: 'WD',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@jimmy.panos',
+    phone: '(224-330-9632'
   },
   {
     id: 'standards-chair',
@@ -137,21 +137,21 @@ export const executiveBoardMembers = [
   },
   {
     id: 'rush-chairman',
-    name: 'Name Placeholder',
+    name: 'Bode Estabrook',
     role: 'Rush Chairman',
     initials: 'RC',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@bodeestabrook',
+    phone: '(760)-994-8768'
   },
   {
     id: 'vice-rush-chairman',
-    name: 'Name Placeholder',
+    name: 'Tanner Smith',
     role: 'Vice Rush Chairman',
     initials: 'VR',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@tanner.jsmith',
+    phone: '(916)-705-8813'
   },
   {
     id: 'ability-experience-philanthropy-chair',
@@ -163,13 +163,22 @@ export const executiveBoardMembers = [
     phone: 'phone placeholder'
   },
   {
-    id: 'social-chair',
-    name: 'Name Placeholder',
+    id: 'social-chair-1',
+    name: 'Tyler Jay',
     role: 'Social Chair',
     initials: 'SO',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@tyler.jjay',
+    phone: '(978)-500-3614'
+  },
+  {
+    id: 'social-chair-2',
+    name: 'Finn Cissel',
+    role: 'Social Chair',
+    initials: 'SO',
+    image: '',
+    instagram: '@finn_cissel',
+    phone: '(206)-941-4186'
   },
   {
     id: 'historian',
