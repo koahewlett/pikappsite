@@ -108,15 +108,7 @@ export const executiveBoardMembers = [
     instagram: '@instagram_handle',
     phone: 'phone placeholder'
   },
-  {
-    id: 'warden',
-    name: 'N/A',
-    role: 'Warden',
-    initials: 'WD',
-    image: '',
-    instagram: '@n/a',
-    phone: 'n/a'
-  },
+
   {
     id: 'standards-chair',
     name: 'Name Placeholder',
@@ -189,15 +181,7 @@ export const executiveBoardMembers = [
     instagram: '@ryanthompson687',
     phone: '(602)-920-0449'
   },
-  {
-    id: 'chaplain',
-    name: 'N/A',
-    role: 'Chaplain',
-    initials: 'CH',
-    image: '',
-    instagram: '@n/a',
-    phone: 'n/a'
-  }
+ 
 ] as const;
 // Add executive board photos later by setting each image value to a file in public/images/.
 
