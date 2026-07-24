@@ -83,12 +83,12 @@ export const executiveBoardMembers = [
   },
   {
     id: 'vice-archon-vice-president',
-    name: 'Name Placeholder',
+    name: 'Koa Hewlett',
     role: 'Vice Archon / Vice President',
     initials: 'VP',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@koahewlett',
+    phone: '(720)-243-9091'
   },
   {
     id: 'treasurer',
@@ -110,12 +110,12 @@ export const executiveBoardMembers = [
   },
   {
     id: 'warden',
-    name: 'Jimmy Panos',
+    name: 'N/A',
     role: 'Warden',
     initials: 'WD',
     image: '',
-    instagram: '@jimmy.panos',
-    phone: '(224-330-9632'
+    instagram: '@n/a',
+    phone: 'n/a'
   },
   {
     id: 'standards-chair',
@@ -128,7 +128,7 @@ export const executiveBoardMembers = [
   },
   {
     id: 'risk-manager',
-    name: 'Name Placeholder',
+    name: 'Jimmy Scibetta',
     role: 'Risk Manager',
     initials: 'RM',
     image: '',
@@ -155,11 +155,11 @@ export const executiveBoardMembers = [
   },
   {
     id: 'ability-experience-philanthropy-chair',
-    name: 'Name Placeholder',
+    name: 'Blaysen Steinhauer',
     role: 'Ability Experience / Philanthropy Chair',
     initials: 'AE',
     image: '',
-    instagram: '@instagram_handle',
+    instagram: '@blaysen18',
     phone: 'phone placeholder'
   },
   {
@@ -182,21 +182,21 @@ export const executiveBoardMembers = [
   },
   {
     id: 'historian',
-    name: 'Name Placeholder',
+    name: 'Ryan Thompson',
     role: 'Historian',
     initials: 'HS',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@ryanthompson687',
+    phone: '(602)-920-0449'
   },
   {
     id: 'chaplain',
-    name: 'Name Placeholder',
+    name: 'N/A',
     role: 'Chaplain',
     initials: 'CH',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@n/a',
+    phone: 'n/a'
   }
 ] as const;
 // Add executive board photos later by setting each image value to a file in public/images/.
