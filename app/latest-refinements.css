@@ -170,6 +170,8 @@ body {
 
 .exec-headshot-placeholder,
 .ability-photo-placeholder {
+  position: relative;
+  overflow: hidden;
   display: grid;
   place-items: center;
   min-height: 18rem;
@@ -183,6 +185,15 @@ body {
   font-weight: 900;
   line-height: 1.1;
   text-align: center;
+}
+
+.exec-headshot-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.exec-headshot-placeholder.has-image {
+  background: transparent;
 }
 
 .exec-card-body {

@@ -24,14 +24,16 @@ export function RushChairmen({ chairmen }: RushChairmenProps) {
     <div className="rush-chairmen-grid">
       {chairmen.map((chairman) => (
         <article className="rush-chairman-card" key={chairman.id}>
-          <div className="rush-chairman-photo">
-            <div className="rush-chairman-placeholder" aria-hidden="true">
-              {chairman.initials}
-            </div>
-            {!failedImages[chairman.id] && (
+          <div className={`rush-chairman-photo${chairman.image ? ' has-image' : ''}`}>
+            {(!chairman.image || failedImages[chairman.id]) && (
+              <div className="rush-chairman-placeholder" aria-hidden="true">
+                {chairman.initials}
+              </div>
+            )}
+            {!failedImages[chairman.id] && chairman.image && (
               <Image
                 src={chairman.image}
-                alt={`${chairman.name} headshot`}
+                alt={`${chairman.name}, ${chairman.title}`}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="rush-chairman-image"

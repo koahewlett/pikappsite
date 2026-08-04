@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Nav } from '@/components/Nav';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -23,8 +24,19 @@ export default function ExecutiveBoardPage() {
           {executiveBoardMembers.map((member, index) => (
             <ScrollReveal key={member.id} delay={index * 0.04}>
               <article className="exec-card">
-                <div className="exec-headshot-placeholder" aria-label={`${member.role} photo placeholder`}>
-                  {member.initials}
+                <div className={`exec-headshot-placeholder${member.image ? ' has-image' : ''}`} aria-hidden="true">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={`${member.name}, ${member.role}`}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="exec-headshot-image"
+                      priority={member.id === 'vice-archon-vice-president'}
+                    />
+                  ) : (
+                    member.initials
+                  )}
                 </div>
                 <div className="exec-card-body">
                   <p className="section-kicker">{member.role}</p>

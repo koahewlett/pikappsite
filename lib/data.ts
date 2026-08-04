@@ -52,7 +52,7 @@ export const rushChairmen = [
     id: 'bode-estabrook',
     name: 'Bode Estabrook',
     title: 'Rush Chairman',
-    image: '/images/rush-chairman-1.jpg',
+    image: '/Headshots/bode.headshot.png',
     initials: 'BE',
     bio: 'Short contact and bio placeholder for the rush chairman.',
     contact: '@bodeestabrook / (760)-994-8768)'
@@ -61,15 +61,15 @@ export const rushChairmen = [
     id: 'tanner-smith',
     name: 'Tanner Smith',
     title: 'Vice Rush Chairman',
-    image: '/images/rush-chairman-2.jpg',
+    image: '/Headshots/tanner.headshot.png',
     initials: 'TS',
     bio: 'Short contact and bio placeholder for the vice rush chairman.',
     contact: '@tanner.jsmith / (916)-705-8813)'
   }
 ] as const;
 // Put headshots at:
-// public/images/rush-chairman-1.jpg
-// public/images/rush-chairman-2.jpg
+// public/Headshots/bode.headshot.png
+// public/Headshots/tanner.headshot.png
 
 export const executiveBoardMembers = [
   {
@@ -86,7 +86,7 @@ export const executiveBoardMembers = [
     name: 'Koa Hewlett',
     role: 'Vice Archon / Vice President',
     initials: 'VP',
-    image: '',
+    image: '/Headshots/koa.headshot.png',
     instagram: '@koahewlett',
     phone: '(720)-243-9091'
   },
@@ -101,22 +101,22 @@ export const executiveBoardMembers = [
   },
   {
     id: 'secretary',
-    name: 'Name Placeholder',
+    name: 'Mitch Lontchar',
     role: 'Secretary',
     initials: 'SC',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@mitch.lontchar',
+    phone: '(215)-850-0998'
   },
 
   {
     id: 'standards-chair',
-    name: 'Name Placeholder',
+    name: 'Owen Cross',
     role: 'Standards Chair',
     initials: 'ST',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@owen.st.cross',
+    phone: '(360)-220-9796'
   },
   {
     id: 'risk-manager',
@@ -124,8 +124,8 @@ export const executiveBoardMembers = [
     role: 'Risk Manager',
     initials: 'RM',
     image: '',
-    instagram: '@instagram_handle',
-    phone: 'phone placeholder'
+    instagram: '@jimmy.scibetta',
+    phone: '(669)-268-4128'
   },
   {
     id: 'rush-chairman',

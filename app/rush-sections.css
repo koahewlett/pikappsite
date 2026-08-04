@@ -355,6 +355,11 @@
 
 .rush-chairman-image {
   object-fit: cover;
+  object-position: center;
+}
+
+.rush-chairman-photo.has-image {
+  background: transparent;
 }
 
 .rush-chairman-placeholder {
