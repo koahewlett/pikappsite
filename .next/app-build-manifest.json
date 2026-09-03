@@ -12,8 +12,8 @@
       "static/chunks/4bd1b696-db5e62bc1ca48995.js",
       "static/chunks/517-d357244d60ff46bf.js",
       "static/chunks/main-app-4d68d191035aab5a.js",
-      "static/css/378ba36ee51087e1.css",
-      "static/css/fa93f448439c3800.css",
+      "static/css/e98717ef95e89ec8.css",
+      "static/css/cec7dc58f88375f2.css",
       "static/chunks/app/layout-46d612b3f9456953.js"
     ],
     "/ability-experience/page": [
@@ -69,6 +69,15 @@
       "static/chunks/600-cb4cc68443fb47df.js",
       "static/chunks/app/login/page-483b8aec0387332d.js"
     ],
+    "/update-password/page": [
+      "static/chunks/webpack-f5fffce0d79ac741.js",
+      "static/chunks/4bd1b696-db5e62bc1ca48995.js",
+      "static/chunks/517-d357244d60ff46bf.js",
+      "static/chunks/main-app-4d68d191035aab5a.js",
+      "static/chunks/463-8a64b74fdfeb2085.js",
+      "static/chunks/600-cb4cc68443fb47df.js",
+      "static/chunks/app/update-password/page-1a3ceefe60cca105.js"
+    ],
     "/page": [
       "static/chunks/webpack-f5fffce0d79ac741.js",
       "static/chunks/4bd1b696-db5e62bc1ca48995.js",
@@ -79,15 +88,6 @@
       "static/chunks/970-ce06b8a1a19ce1af.js",
       "static/chunks/726-6012dfb526c30fb2.js",
       "static/chunks/app/page-2faea49c887489ea.js"
-    ],
-    "/update-password/page": [
-      "static/chunks/webpack-f5fffce0d79ac741.js",
-      "static/chunks/4bd1b696-db5e62bc1ca48995.js",
-      "static/chunks/517-d357244d60ff46bf.js",
-      "static/chunks/main-app-4d68d191035aab5a.js",
-      "static/chunks/463-8a64b74fdfeb2085.js",
-      "static/chunks/600-cb4cc68443fb47df.js",
-      "static/chunks/app/update-password/page-1a3ceefe60cca105.js"
     ]
   }
 }
