@@ -71,7 +71,17 @@ export const rushChairmen = [
 // public/Headshots/bode.headshot.png
 // public/Headshots/tanner.headshot.png
 
-export const executiveBoardMembers = [
+type ExecutiveBoardMember = {
+  id: string;
+  name: string;
+  role: string;
+  initials: string;
+  image: string;
+  instagram?: string;
+  phone?: string;
+};
+
+export const executiveBoardMembers: readonly ExecutiveBoardMember[] = [
   {
     id: 'archon-president',
     name: 'Isaiah Mason',
@@ -164,15 +174,6 @@ export const executiveBoardMembers = [
     phone: '(978)-500-3614'
   },
   {
-    id: 'social-chair-2',
-    name: 'Finn Cissel',
-    role: 'Social Chair',
-    initials: 'SO',
-    image: '',
-    instagram: '@finn_cissel',
-    phone: '(206)-941-4186'
-  },
-  {
     id: 'historian',
     name: 'Ryan Thompson',
     role: 'Historian',
@@ -181,7 +182,20 @@ export const executiveBoardMembers = [
     instagram: '@ryanthompson687',
     phone: '(602)-920-0449'
   },
- 
+  {
+    id: 'warden',
+    name: 'Jimmy Panos',
+    role: 'Warden',
+    initials: 'JP',
+    image: ''
+  },
+  {
+    id: 'chaplain',
+    name: 'Cairo Gilliam',
+    role: 'Chaplain',
+    initials: 'CG',
+    image: ''
+  }
 ] as const;
 // Add executive board photos later by setting each image value to a file in public/images/.
 
