@@ -54,7 +54,6 @@ export const rushChairmen = [
     title: 'Rush Chairman',
     image: '/Headshots/bode.headshot.png',
     initials: 'BE',
-    bio: 'Short contact and bio placeholder for the rush chairman.',
     contact: '@bodeestabrook / (760)-994-8768)'
   },
   {
@@ -63,7 +62,6 @@ export const rushChairmen = [
     title: 'Vice Rush Chairman',
     image: '/Headshots/tanner.headshot.png',
     initials: 'TS',
-    bio: 'Short contact and bio placeholder for the vice rush chairman.',
     contact: '@tanner.jsmith / (916)-705-8813)'
   }
 ] as const;
