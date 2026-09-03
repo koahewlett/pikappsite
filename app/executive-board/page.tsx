@@ -41,8 +41,8 @@ export default function ExecutiveBoardPage() {
                 <div className="exec-card-body">
                   <p className="section-kicker">{member.role}</p>
                   <h2>{member.name}</h2>
-                  <p>{member.instagram}</p>
-                  <p>{member.phone}</p>
+                  {member.instagram ? <p>{member.instagram}</p> : null}
+                  {member.phone ? <p>{member.phone}</p> : null}
                 </div>
               </article>
             </ScrollReveal>
